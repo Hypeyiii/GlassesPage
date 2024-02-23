@@ -4,7 +4,17 @@ import "./ProductItem.css";
 import NotificationAdded from "../Components/NotificationAdded.tsx";
 import { Link } from "react-router-dom";
 
-export default function ProductItem({
+export interface ProductItemProps {
+  brand: string;
+  price: number;
+  image: string;
+  description: string;
+  addedToCart: () => void;
+  id: number;
+  showDetails: () => void;
+}
+
+const ProductItem: React.FC<ProductItemProps> = ({
   brand,
   price,
   image,
@@ -12,7 +22,7 @@ export default function ProductItem({
   addedToCart,
   id,
   showDetails,
-}) {
+}) => {
   const [isHover, setIsHover] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [isAdded, setIsAdded] = useState(false);
@@ -91,7 +101,10 @@ export default function ProductItem({
             }`}
           />
         </div>
-        <div className="relative col-span-5 md:col-span-3 m-auto flex flex-col justify-center items-center gap-y-10 md:size-[300px]" onClick={showDetails}>
+        <div
+          className="relative col-span-5 md:col-span-3 m-auto flex flex-col justify-center items-center gap-y-10 md:size-[300px]"
+          onClick={showDetails}
+        >
           <Link to={`/ProductDetail/${id}`}>
             <img
               src={image}
@@ -146,4 +159,5 @@ export default function ProductItem({
       )}
     </>
   );
-}
+};
+export default ProductItem;

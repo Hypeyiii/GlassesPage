@@ -3,7 +3,27 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import BuyCartModal from "../Modals/BuyCartModal.tsx";
 
-export default function Cart({
+export interface Products{
+  id: number;
+  brand: string;
+  price: number;
+  image: string;
+  description: string;
+  quantity: number;
+
+}
+
+export interface CartProps {
+  allProducts: Products[];
+  deleteProduct: (product: Products) => void;
+  total: number;
+  addProduct: (product: Products) => void;
+  substractProduct: (product: Products) => void;
+  showDetails: (product: Products) => void;
+  id: number;
+}
+
+const Cart: React.FC<CartProps>=({
   allProducts,
   deleteProduct,
   total,
@@ -11,7 +31,7 @@ export default function Cart({
   substractProduct,
   showDetails,
   id,
-}) {
+}) =>{
   const [buyCart, setBuyCart] = useState(false);
   return (
     <>
@@ -108,3 +128,4 @@ export default function Cart({
     </>
   );
 }
+export default Cart;

@@ -1,6 +1,12 @@
 import { BsArrowLeft } from "react-icons/bs";
+import "./BuyCartModal.css";
 
-export default function BuyCartModal({ closeBuyCartModal, total }) {
+interface BuyCartModalProps {
+  closeBuyCartModal: () => void;
+  total: number;
+}
+
+const BuyCartModal: React.FC<BuyCartModalProps> = ({ closeBuyCartModal, total }) => {
   return (
     <>
       <div
@@ -8,7 +14,7 @@ export default function BuyCartModal({ closeBuyCartModal, total }) {
         onClick={closeBuyCartModal}
       ></div>
       <div
-        className="fixed bg-white items-center justify-center flex flex-col gap-10 z-50 size-[70%] top-0 right-0 left-0 bottom-0 m-auto 
+        className="scale-in-center fixed bg-white items-center justify-center flex flex-col gap-10 z-50 size-[70%] top-0 right-0 left-0 bottom-0 m-auto 
       rounded-lg"
       >
         <div
@@ -25,3 +31,5 @@ export default function BuyCartModal({ closeBuyCartModal, total }) {
     </>
   );
 }
+
+export default BuyCartModal;

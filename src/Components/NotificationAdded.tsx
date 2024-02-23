@@ -1,7 +1,12 @@
 import { BiCheckCircle } from "react-icons/bi";
 import "./NotificationAdded.css";
 
-export default function NotificationAdded({ isAdded, addedText }) {
+export interface NotificacionAddedProps {
+  isAdded: boolean;
+  addedText: string;
+}
+
+const NotificationAdded: React.FC<NotificacionAddedProps> = ({ isAdded, addedText }) => {
   return (
     <div className="fixed top-0 left-0 mt-[65px] z-40">
       <div
@@ -16,3 +21,4 @@ export default function NotificationAdded({ isAdded, addedText }) {
     </div>
   );
 }
+export default NotificationAdded;

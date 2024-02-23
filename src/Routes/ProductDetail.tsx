@@ -2,14 +2,23 @@ import { BsArrowLeft } from "react-icons/bs";
 import NotificationAdded from "../Components/NotificationAdded.tsx";
 import { AiFillHeart } from "react-icons/ai";
 
-export default function ProductDetail({
+interface ProductDetailProps {
+  description: string;
+  image: string;
+  brand: string;
+  price: number;
+  addToCart: () => void;
+  isAdded: boolean;
+}
+
+const ProductDetail: React.FC<ProductDetailProps> = ({
   description,
   image,
   brand,
   price,
   addToCart,
   isAdded,
-}) {
+}) => {
   const backUp = () => {
     window.history.back();
   };
@@ -58,4 +67,5 @@ export default function ProductDetail({
       )}
     </>
   );
-}
+};
+export default ProductDetail;

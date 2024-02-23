@@ -5,7 +5,11 @@ import { useState, useEffect } from "react";
 import "./Navbar.css";
 import { MdDarkMode, MdLightMode } from "react-icons/md";
 
-export default function Navbar({countProducts}) {
+export interface NavbarProps {
+  countProducts: number;
+}
+
+const Navbar: React.FC<NavbarProps> = ({ countProducts }) => {
   const [isSunGlassHover, setIsSunGlassHover] = useState(false);
   const [isVisionGlassHover, setIsVisionGlassHover] = useState(false);
   const [isDarkModeOn, setIsDarkModeOn] = useState(false);
@@ -236,4 +240,5 @@ export default function Navbar({countProducts}) {
       </div>
     </>
   );
-}
+};
+export default Navbar;
