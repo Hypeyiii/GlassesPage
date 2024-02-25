@@ -10,9 +10,9 @@ export interface NavbarProps {
 }
 
 const Navbar: React.FC<NavbarProps> = ({ countProducts }) => {
-  const [isSunGlassHover, setIsSunGlassHover] = useState(false);
-  const [isVisionGlassHover, setIsVisionGlassHover] = useState(false);
-  const [isDarkModeOn, setIsDarkModeOn] = useState(false);
+  const [isSunGlassHover, setIsSunGlassHover] = useState<boolean>(false);
+  const [isVisionGlassHover, setIsVisionGlassHover] = useState<boolean>(false);
+  const [isDarkModeOn, setIsDarkModeOn] = useState<boolean>(false);
 
   const toggleColorScheme = () => {
     document.querySelector("body")?.classList.toggle("dark");

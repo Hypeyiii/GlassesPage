@@ -53,13 +53,13 @@ const ProductItem: React.FC<ProductItemProps> = ({
 
   useEffect(() => {
     if (window.innerWidth < 768) {
-      setIsMobile(true);
+      setIsMobile(!isMobile);
       setIsHover(true);
     } else {
-      setIsMobile(false);
+      setIsMobile(!isMobile);
       setIsHover(false);
     }
-  }, []);
+  }, [isMobile]);
 
   useEffect(() => {
     let time: number;
