@@ -1,12 +1,8 @@
 import "./App.css";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Navbar from "./Components/Navbar";
 import Footer from "./Components/Footer";
-import {
-  BrowserRouter as Router,
-  Route,
-  Routes,
-} from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import VisionGlasses from "./Routes/Glasses-Vision";
 import SunGlasses from "./Routes/Glasses-Sun";
 import HomePage from "./Routes/HomePage";
@@ -19,7 +15,7 @@ import WomenSunGlasses from "./Routes/Glasses-WomenSunGlasses";
 import ManSunGlasses from "./Routes/Glasses-ManSunGlasses";
 import ProductDetail from "./Routes/ProductDetail";
 
-export interface Sunglass {
+export interface Products {
   id: number;
   brand: string;
   price: number;
@@ -27,21 +23,24 @@ export interface Sunglass {
   description: string;
   quantity: number;
   total: number;
-  deleteProduct: (product: Sunglass) => void;
+  countProducts: number;
 }
-export interface SunglassProps {
-  allProducts: Sunglass[];
-  deleteProduct: (product: Sunglass) => void;
+interface CartProps {
+  deleteProduct: (product: Products) => Products[];
+  addToCart: (product: Products) => Products[];
+  showDetails: (product: Products) => void;
+  addProduct: (product: Products) => Products[];
+  substractProduct: (product: Products) => void;
+  allProducts: Products[];
 }
-
-const App: React.FC<SunglassProps>= () => {
-  const [allProducts, setAllProducts] = useState<Sunglass[]>([]);
+const App: React.FC<CartProps> = () => {
+  const [allProducts, setAllProducts] = useState<Products[]>([]);
   const [total, setTotal] = useState<number>(0);
   const [countProducts, setCountProducts] = useState<number>(0);
   const [isOnCart, setIsOnCart] = useState<boolean>(false);
-  const [selectedProduct, setSelectedProduct] = useState<Sunglass | null>(null);
+  const [selectedProduct, setSelectedProduct] = useState<Products | null>(null);
 
-  const addToCart = (product: Sunglass) => {
+  const addToCart = (product: Products): Products[] => {
     setIsOnCart(true);
     const existingProduct = allProducts.find((p) => p.id === product.id);
     if (existingProduct) {
@@ -59,16 +58,17 @@ const App: React.FC<SunglassProps>= () => {
       setTotal(total + product.price);
       setAllProducts([...allProducts, { ...product, quantity: 1 }]);
     }
+    return allProducts;
   };
-
-  const deleteProduct = (product: Sunglass) => {
+  const deleteProduct = (product: Products): Products[] => {
     const newProducts = allProducts.filter((p) => p.id !== product.id);
     setTotal(total - product.price * product.quantity);
     setCountProducts(countProducts - product.quantity);
     setAllProducts(newProducts);
+    return newProducts;
   };
 
-  const addProduct = (product: Sunglass) => {
+  const addProduct = (product: Products): Products[] => {
     const newProducts = allProducts.map((p) => {
       if (p.id === product.id) {
         return { ...p, quantity: p.quantity + 1 };
@@ -78,9 +78,10 @@ const App: React.FC<SunglassProps>= () => {
     setCountProducts(countProducts + 1);
     setTotal(total + product.price);
     setAllProducts(newProducts);
+    return newProducts;
   };
 
-  const substractProduct = (product: Sunglass) => {
+  const substractProduct = (product: Products): Products[] => {
     const newProducts = allProducts.map((p) => {
       if (p.id === product.id) {
         return { ...p, quantity: p.quantity - 1 };
@@ -93,10 +94,12 @@ const App: React.FC<SunglassProps>= () => {
     if (product.quantity === 1) {
       deleteProduct(product);
     }
+    return newProducts;
   };
 
-  const showProductDetails = (product: Sunglass) => {
+  const showProductDetails = (product: Products): Products[] => {
     setSelectedProduct(product);
+    return allProducts;
   };
 
   return (
@@ -114,8 +117,10 @@ const App: React.FC<SunglassProps>= () => {
                 total={total}
                 addProduct={addProduct}
                 substractProduct={substractProduct}
-                showDetails={showProductDetails}
-                id={selectedProduct?.id}
+                showDetails={() =>
+                  (selectedProduct as Products) &&
+                  showProductDetails(selectedProduct as Products)
+                }
               />
             }
           />
@@ -127,7 +132,7 @@ const App: React.FC<SunglassProps>= () => {
                 image={selectedProduct?.image || ""}
                 brand={selectedProduct?.brand || ""}
                 price={selectedProduct?.price || 0}
-                addToCart={() => addToCart(selectedProduct as Sunglass)}
+                addToCart={() => addToCart(selectedProduct as Products)}
                 isAdded={isOnCart}
               />
             }

@@ -3,35 +3,34 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import BuyCartModal from "../Modals/BuyCartModal.tsx";
 
-export interface Products{
+export interface Products {
   id: number;
   brand: string;
   price: number;
   image: string;
   description: string;
   quantity: number;
-
-}
-
-export interface CartProps {
-  allProducts: Products[];
-  deleteProduct: (product: Products) => void;
   total: number;
-  addProduct: (product: Products) => void;
-  substractProduct: (product: Products) => void;
-  showDetails: (product: Products) => void;
-  id: number;
+  countProducts: number;
 }
 
-const Cart: React.FC<CartProps>=({
+interface CartProps {
+  allProducts: Products[];
+  deleteProduct:(product: Products) => Products[];
+  total: number;
+  addProduct: (product: Products) => Products[];
+  substractProduct: (product:Products) => Products[];
+  showDetails: (product:Products) => Products[];
+}
+
+const Cart: React.FC<CartProps> = ({
   allProducts,
   deleteProduct,
   total,
   addProduct,
   substractProduct,
   showDetails,
-  id,
-}) =>{
+}) => {
   const [buyCart, setBuyCart] = useState(false);
   return (
     <>
@@ -56,7 +55,7 @@ const Cart: React.FC<CartProps>=({
           >
             <div
               className="absolute top-0 right-0 p-2 text-black dark:text-white hover:text-red-500 dark:hover:text-red-400"
-              onClick={() => deleteProduct(product)}
+              onClick={()=>deleteProduct(product as Products)}
             >
               <BiTrash className="size-3 md:size-4" />
             </div>
@@ -67,9 +66,9 @@ const Cart: React.FC<CartProps>=({
               />
             </div>
             <Link
-              to={`/ProductDetail/${id}`}
+              to={`/ProductDetail/${product.id}`}
               className="md:size-[250px] mx-auto flex items-center justify-center"
-              onClick={() => showDetails(product)}
+              onClick={() => showDetails(product as Products)}
             >
               <img
                 src={product.image}
@@ -89,7 +88,7 @@ const Cart: React.FC<CartProps>=({
               </p>
               <div className="flex flex-row gap-2 items-center justify-center text-base font-bold text-black dark:text-white">
                 <button
-                  onClick={() => substractProduct(product)}
+                  onClick={() => substractProduct(product as Products)}
                   className="bg-black/60 hover:bg-black text-white dark:bg-white/60 dark:hover:bg-white transition dark:text-black
                   rounded-full px-[7px] text-sm"
                 >
@@ -97,7 +96,7 @@ const Cart: React.FC<CartProps>=({
                 </button>
                 <p>{product.quantity}</p>
                 <button
-                  onClick={() => addProduct(product)}
+                  onClick={() => addProduct(product as Products)}
                   className="bg-black/60 hover:bg-black text-white dark:bg-white/60 dark:hover:bg-white transition dark:text-black
                    rounded-full px-[6px] text-sm"
                 >
@@ -127,5 +126,5 @@ const Cart: React.FC<CartProps>=({
       )}
     </>
   );
-}
+};
 export default Cart;

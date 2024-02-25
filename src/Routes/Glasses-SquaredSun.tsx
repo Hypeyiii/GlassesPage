@@ -1,16 +1,19 @@
 import ProductItem from "../Components/ProductItem.tsx";
 import { squaredSunGlasses } from "../Products/Products-SquaredSunGlasses.tsx";
-interface Sunglass {
+interface Products {
   id: number;
   brand: string;
   price: number;
   image: string;
   description: string;
+  quantity: number;
+  total: number;
+  countProducts: number;
 }
 
 interface SunGlassesProps {
-  addToCart: (sunglass: Sunglass) => void;
-  showDetails: (sunglass: Sunglass) => void;
+  addToCart: (product: Products) => Products[];
+  showDetails: (product: Products) => Products[];
 }
 
 const SunGlasses: React.FC<SunGlassesProps> = ({ addToCart, showDetails }) => {
@@ -19,17 +22,17 @@ const SunGlasses: React.FC<SunGlassesProps> = ({ addToCart, showDetails }) => {
       <p className="col-span-1 md:col-span-3 text-2xl text-black dark:text-white font-semibold">
         Lentes cuadrados de Sol
       </p>
-      {squaredSunGlasses.map((sunglass) => (
+      {squaredSunGlasses.map((product) => (
         <>
           <ProductItem
-            key={sunglass.id}
-            brand={sunglass.brand}
-            id={sunglass.id}
-            price={sunglass.price}
-            image={sunglass.image}
-            description={sunglass.description}
-            addedToCart={() => addToCart(sunglass)}
-            showDetails={() => showDetails(sunglass)}
+            key={product.id}
+            brand={product.brand}
+            id={product.id}
+            price={product.price}
+            image={product.image}
+            description={product.description}
+            addedToCart={() => addToCart(product as Products)}
+            showDetails={() => showDetails(product as Products)}
           />
         </>
       ))}
