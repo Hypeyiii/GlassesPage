@@ -25,16 +25,7 @@ export interface Products {
   total: number;
   countProducts: number;
 }
-interface CartProps {
-  deleteProduct: (product: Products) => Products[];
-  addToCart: (product: Products) => Products[]; // Agregar esta línea
-  showDetails: (product: Products) => void;
-  addProduct: (product: Products) => Products[];
-  substractProduct: (product: Products) => void;
-  allProducts: Products[];
-}
-
-const App: React.FC<CartProps> = () => {
+function App () {
   const [allProducts, setAllProducts] = useState<Products[]>([]);
   const [total, setTotal] = useState<number>(0);
   const [countProducts, setCountProducts] = useState<number>(0);
@@ -54,13 +45,16 @@ const App: React.FC<CartProps> = () => {
       setCountProducts(countProducts + 1);
       setTotal(total + product.price);
       setAllProducts(newProducts);
+      return newProducts;
     } else {
       setCountProducts(countProducts + 1);
       setTotal(total + product.price);
-      setAllProducts([...allProducts, { ...product, quantity: 1 }]);
+      const newProduct = { ...product, quantity: 1 };
+      setAllProducts([...allProducts, newProduct]);
+      return [...allProducts, newProduct];
     }
-    return allProducts;
   };
+
   const deleteProduct = (product: Products): Products[] => {
     const newProducts = allProducts.filter((p) => p.id !== product.id);
     setTotal(total - product.price * product.quantity);
@@ -119,10 +113,7 @@ const App: React.FC<CartProps> = () => {
                 total={total}
                 addProduct={addProduct}
                 substractProduct={substractProduct}
-                showDetails={() =>
-                  (selectedProduct as Products) &&
-                  showProductDetails(selectedProduct as Products)
-                }
+                showDetails={showProductDetails}
               />
             }
           />
@@ -208,6 +199,5 @@ const App: React.FC<CartProps> = () => {
       </Router>
     </div>
   );
-};
-
+}
 export default App;

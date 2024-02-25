@@ -53,10 +53,10 @@ const ProductItem: React.FC<ProductItemProps> = ({
 
   useEffect(() => {
     if (window.innerWidth < 768) {
-      setIsMobile(!isMobile);
+      setIsMobile(true);
       setIsHover(true);
     } else {
-      setIsMobile(!isMobile);
+      setIsMobile(false);
       setIsHover(false);
     }
   }, [isMobile]);
