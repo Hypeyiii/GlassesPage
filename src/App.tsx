@@ -27,12 +27,13 @@ export interface Products {
 }
 interface CartProps {
   deleteProduct: (product: Products) => Products[];
-  addToCart: (product: Products) => Products[];
+  addToCart: (product: Products) => Products[]; // Agregar esta línea
   showDetails: (product: Products) => void;
   addProduct: (product: Products) => Products[];
   substractProduct: (product: Products) => void;
   allProducts: Products[];
 }
+
 const App: React.FC<CartProps> = () => {
   const [allProducts, setAllProducts] = useState<Products[]>([]);
   const [total, setTotal] = useState<number>(0);
@@ -112,6 +113,7 @@ const App: React.FC<CartProps> = () => {
             path="/Cart"
             element={
               <Cart
+                addToCart={addToCart}
                 allProducts={allProducts}
                 deleteProduct={deleteProduct}
                 total={total}

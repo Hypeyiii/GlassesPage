@@ -21,7 +21,7 @@ interface CartProps {
   addProduct: (product: Products) => Products[];
   substractProduct: (product:Products) => Products[];
   showDetails: (product:Products) => Products[];
-  addToCart: (product:Products) => Products[];
+  addToCart: (product: Products) => Products[];
 }
 
 const Cart: React.FC<CartProps> = ({
