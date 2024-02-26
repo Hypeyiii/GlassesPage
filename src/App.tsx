@@ -1,5 +1,5 @@
 import "./App.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Navbar from "./Components/Navbar";
 import Footer from "./Components/Footer";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
@@ -97,6 +97,15 @@ function App () {
     return allProducts;
   };
 
+  useEffect(() => {
+    let timeout: number;
+    if (isOnCart) {
+      timeout = setTimeout(() => {
+        setIsOnCart(false);
+      }, 5000);
+    }
+    return () => clearTimeout(timeout);
+  } , [isOnCart]);
   return (
     <div className="absolute top-0 left-0 right-0 bottom-0 overflow-y-auto z-[-2] bg-white dark:bg-black">
       <Router>

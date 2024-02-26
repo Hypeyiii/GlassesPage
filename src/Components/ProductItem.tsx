@@ -103,18 +103,18 @@ const ProductItem: React.FC<ProductItemProps> = ({
         </div>
         <div
           className="relative col-span-5 md:col-span-3 m-auto flex flex-col justify-center items-center gap-y-10 md:size-[300px]"
-          onClick={showDetails}
         >
           <Link to={`/ProductDetail/${id}`}>
             <img
               src={image}
               alt={brand + " image"}
               className="transition scale-90"
+              onClick={showDetails}
             />
           </Link>
           {
             <div
-              className={`absolute bottom-0 border-[0.5px] border-black/60 dark:border-white/60 py-1 px-2 hover:bg-black
+              className={`md:absolute bottom-0 border-[0.5px] border-black/60 dark:border-white/60 py-1 px-2 hover:bg-black
                dark:hover:bg-white text-black/70 dark:text-white/80 hover:text-white dark:hover:text-black font-semibold text-xs mb-5 transition-all duration-500 ${
                  isHover ? "fade-in visible" : "fade-out invisible"
                }`}

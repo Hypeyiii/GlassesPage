@@ -16,11 +16,11 @@ export interface Products {
 
 interface CartProps {
   allProducts: Products[];
-  deleteProduct:(product: Products) => Products[];
+  deleteProduct: (product: Products) => Products[];
   total: number;
   addProduct: (product: Products) => Products[];
-  substractProduct: (product:Products) => Products[];
-  showDetails: (product:Products) => Products[];
+  substractProduct: (product: Products) => Products[];
+  showDetails: (product: Products) => Products[];
   addToCart: (product: Products) => Products[];
 }
 
@@ -35,17 +35,9 @@ const Cart: React.FC<CartProps> = ({
   const [buyCart, setBuyCart] = useState(false);
   return (
     <>
-      <div className="flex flex-row justify-between px-10 items-center border-b-[0.1px] border-b-black dark:border-white mt-40 md:mt-32 mb-10 ">
-        <p className="flex justify-center text-2xl text-black dark:text-white font-semibold">
-          {allProducts.length
-            ? "Carrito de compras"
-            : "No hay productos en el carrito"}
-        </p>
-        <p className="text-black dark:text-white text-2xl font-semibold">
-          Total: ${total}.00 mx
-        </p>
-      </div>
-      <div className="grid grid-cols-4 items-center justify-center w-[95%] gap-5 mx-auto">
+      {
+        allProducts.length ? (
+          <div className="grid grid-cols-4 items-center justify-center w-[95%] gap-5 mx-auto mt-32">
         {allProducts.map((product) => (
           <div
             key={product.id}
@@ -56,7 +48,7 @@ const Cart: React.FC<CartProps> = ({
           >
             <div
               className="absolute top-0 right-0 p-2 text-black dark:text-white hover:text-red-500 dark:hover:text-red-400"
-              onClick={()=>deleteProduct(product as Products)}
+              onClick={() => deleteProduct(product as Products)}
             >
               <BiTrash className="size-3 md:size-4" />
             </div>
@@ -69,12 +61,12 @@ const Cart: React.FC<CartProps> = ({
             <Link
               to={`/ProductDetail/${product.id}`}
               className="md:size-[250px] mx-auto flex items-center justify-center"
-              onClick={() => showDetails(product as Products)}
             >
               <img
                 src={product.image}
                 alt={product.description + "image"}
                 className="scale-90 transition"
+                onClick={() => showDetails(product as Products)}
               />
             </Link>
             <p className="text-black/60 dark:text-white/60 text-base font-semibold">
@@ -108,10 +100,18 @@ const Cart: React.FC<CartProps> = ({
           </div>
         ))}
       </div>
+        )
+        :
+        (
+          <div className="flex flex-col items-center justify-center w-full h-full">
+            <h1 className="text-xl md:text-5xl font-bold text-black dark:text-white mx-auto text-center">Carrito vacío</h1>
+          </div>
+        )
+      }
       <div className="flex justify-center items-center flex-col gap-y-4 mt-10">
         {allProducts.length && (
           <button
-            className="text-white dark:text-black font-semibold text-base hover:text-black hover:bg-white/20 border-[0.5px]
+            className="text-white dark:text-black font-semibold text-xs md:text-base hover:text-black hover:bg-white/20 border-[0.5px]
            dark:hover:text-white dark:hover:bg-black transition  rounded-full px-6 py-2 bg-black dark:bg-white"
             onClick={() => setBuyCart(true)}
           >
