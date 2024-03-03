@@ -1,6 +1,7 @@
 import circleSunGlasses from "../Products/Products-CircleSunGlasses";
 import ProductItem from "../Components/ProductItem";
 import React from "react";
+import { Link } from "react-router-dom";
 
 interface Products {
   id: number;
@@ -21,9 +22,19 @@ interface SunGlassesProps {
 const SunGlasses: React.FC<SunGlassesProps> = ({ addToCart, showDetails }) => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mt-32 relative w-[95%] mx-auto">
-      <p className="col-span-1 md:col-span-3 text-2xl text-black dark:text-white font-semibold">
-        Lentes circulares de Sol
-      </p>
+      <div className="col-span-1 md:col-span-3 text-base text-black dark:text-white font-semibold flex flex-row items-cemter justify-between w-full">
+        <div className="flex flex-row gap-x-1 justify-center items-center">
+          <Link to={"/"} className="font-light hover:underline">
+            Inicio
+          </Link>
+          <p>/</p>
+          <p>Circulares-Sol</p>
+        </div>
+        <div>
+          Mostrando <span className="text-yellow-500">{circleSunGlasses.length}</span>{" "}
+          productos
+        </div>
+      </div>
       {circleSunGlasses.map((product) => (
         <ProductItem
           key={product.id}

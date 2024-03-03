@@ -1,5 +1,6 @@
 import { manSunGlasses } from "../Products/Products-ManSunGlasses";
 import ProductItem from "../Components/ProductItem.tsx";
+import { Link } from "react-router-dom";
 
 interface Products {
   id: number;
@@ -20,9 +21,19 @@ interface SunGlassesProps {
 const SunGlasses: React.FC<SunGlassesProps> = ({ addToCart, showDetails }) => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mt-32 relative w-[95%] mx-auto">
-      <p className="col-span-1 md:col-span-3 text-2xl text-black dark:text-white font-semibold">
-        Lentes de hombre
-      </p>
+      <div className="col-span-1 md:col-span-3 text-base text-black dark:text-white font-semibold flex flex-row items-cemter justify-between w-full">
+        <div className="flex flex-row gap-x-1 justify-center items-center">
+          <Link to={"/"} className="font-light hover:underline">
+            Inicio
+          </Link>
+          <p>/</p>
+          <p>Hombre-Sol</p>
+        </div>
+        <div>
+          Mostrando <span className="text-yellow-500">{manSunGlasses.length}</span>{" "}
+          productos
+        </div>
+      </div>
       {manSunGlasses.map((product) => (
         <>
           <ProductItem

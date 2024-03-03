@@ -59,8 +59,8 @@ const Navbar: React.FC<NavbarProps> = ({ countProducts }) => {
   return (
     <>
       <div
-        className="fixed w-full z-50 flex flex-row h-fit justify-between items-center bg-white/90 dark:bg-black/85 text-black/80 dark:text-white/80 
-        border-b-[1px] border-b-black dark:border-b-white p-4 md:p-0 md:px-4 md:h-[65px]"
+        className={`${isMobile ? "fixed" : "absolute"} w-full z-50 flex flex-row h-fit justify-between items-center bg-white/90 dark:bg-black/85 text-black/80 dark:text-white/80 
+        border-b-[1px] border-b-black dark:border-b-white p-4 md:p-0 md:px-4 md:h-[65px]`}
       >
         {isMobile ? (
           <>
@@ -95,12 +95,12 @@ const Navbar: React.FC<NavbarProps> = ({ countProducts }) => {
             <div className="flex font-light h-full flex-row items-center justify-center">
               <Link
                 to={"/"}
-                className="flex h-full items-center justify-center hover:bg-black/10 dark:hover:bg-white/30 transition px-4"
+                className="flex h-full items-center justify-center hover:bg-black/10 dark:hover:bg-white/30 transition px-4 font-semibold"
               >
                 Inicio
               </Link>
               <Link
-                className="flex h-full items-center justify-center hover:bg-black/10 dark:hover:bg-white/30 transition px-4 cursor-pointer"
+                className="flex h-full items-center justify-center hover:bg-black/10 dark:hover:bg-white/30 transition px-4 cursor-pointer font-semibold"
                 onMouseEnter={() => setIsSunGlassHover(true)}
                 onMouseLeave={() => setIsSunGlassHover(false)}
                 onClick={() => setIsSunGlassHover(false)}
@@ -108,8 +108,8 @@ const Navbar: React.FC<NavbarProps> = ({ countProducts }) => {
               >
                 Lentes de Sol
                 <div
-                  className={`z-50 fixed left-0 top-[64px] bg-white dark:bg-black border-y-2 dark:border-y-white border-y-black flex 
-            items-center justify-center w-screen mx-auto text-black dark:text-white p-10 transition-all ${
+                  className={`fixed left-0 top-[64px] bg-white dark:bg-black border-y-2 dark:border-y-white border-y-black flex 
+            items-center justify-center w-screen mx-auto text-black dark:text-white p-10 transition-all duration-300 ${
               isSunGlassHover ? "fade-in visible" : "invisible fade-out"
             }`}
                   onClick={() => setIsSunGlassHover(false)}
@@ -125,7 +125,7 @@ const Navbar: React.FC<NavbarProps> = ({ countProducts }) => {
                         to={"/Sun-Glasses"}
                         className="text-xs font-light hover:underline"
                       >
-                        Lentes de sol
+                        lentes de sol
                       </Link>
                     </div>
                     <div className="col-span-2 flex flex-col gap-4 items-start justify-start">
@@ -137,7 +137,7 @@ const Navbar: React.FC<NavbarProps> = ({ countProducts }) => {
                         Hombre
                       </Link>
                       <Link
-                        to={"/Women-Sun-Glasses"}
+                        to={"/Woman-Sun-Glasses"}
                         className="text-xs font-light hover:underline"
                       >
                         Mujer
@@ -189,7 +189,7 @@ const Navbar: React.FC<NavbarProps> = ({ countProducts }) => {
               </Link>
               <Link
                 to={"/Vision-Glasses"}
-                className="relative flex h-full items-center justify-center hover:bg-black/10 dark:hover:bg-white/30 transition px-4"
+                className="relative flex h-full items-center justify-center hover:bg-black/10 dark:hover:bg-white/30 transition px-4 font-semibold"
                 onMouseEnter={() => setIsVisionGlassHover(true)}
                 onMouseLeave={() => setIsVisionGlassHover(false)}
                 onClick={() => setIsVisionGlassHover(false)}
@@ -299,7 +299,10 @@ const Navbar: React.FC<NavbarProps> = ({ countProducts }) => {
       </div>
       {isMobile && isMenu && (
         <>
-          <div className="fixed top-0 bottom-0 w-screen h-screen backdrop-blur-sm z-10" onClick={toggleMenu}></div>
+          <div
+            className="fixed top-0 bottom-0 w-screen h-screen backdrop-blur-sm z-10"
+            onClick={toggleMenu}
+          ></div>
           <div
             className="slide-in-left fixed flex flex-col w-full h-[70%] text-black dark:text-white justify-between items-center mt-32 z-50"
             onClick={toggleMenu}
@@ -316,39 +319,41 @@ const Navbar: React.FC<NavbarProps> = ({ countProducts }) => {
             >
               Lentes de Vision
             </Link>
-            <li className="hover:font-semibold list-none cursor-pointer hover:text-black dark:hover:text-white transition
-            flex flex-row items-center gap-x-1 text-base font-semibold">
-                <BiSearch className="size-6" />
-                <p>Buscar</p>
-              </li>
-              <Link
-                to={"/User"}
-                className="hover:font-semibold hover:text-black transition dark:hover:text-white flex flex-row items-center gap-x-1 text-base font-semibold"
-              >
-                <BiUser className="size-6" />
-                <p>Usuario</p>
-              </Link>
-              <Link
-                to={"/Favs"}
-                className="hover:font-semibold relative hover:text-black dark:hover:text-white [&>div]:hover:bg-white transition
+            <li
+              className="hover:font-semibold list-none cursor-pointer hover:text-black dark:hover:text-white transition
+            flex flex-row items-center gap-x-1 text-base font-semibold"
+            >
+              <BiSearch className="size-6" />
+              <p>Buscar</p>
+            </li>
+            <Link
+              to={"/User"}
+              className="hover:font-semibold hover:text-black transition dark:hover:text-white flex flex-row items-center gap-x-1 text-base font-semibold"
+            >
+              <BiUser className="size-6" />
+              <p>Usuario</p>
+            </Link>
+            <Link
+              to={"/Favs"}
+              className="hover:font-semibold relative hover:text-black dark:hover:text-white [&>div]:hover:bg-white transition
                 flex flex-row items-center gap-x-1 text-base font-semibold"
-              >
-                <HiHeart className="size-6" />
-                <p>Favoritos</p>
-                <div className="absolute text-xs text-black bg-white/80 rounded-full px-1 right-[70px] top-[15px]">
-                  0
-                </div>
-              </Link>
-              <li
-                className="hover:font-semibold list-none cursor-pointer hover:text-black dark:hover:text-white transition"
-                onClick={toggleColorScheme}
-              >
-                {isDarkModeOn ? (
-                  <MdDarkMode className="size-6 scale-in-center" />
-                ) : (
-                  <MdLightMode className="size-6 scale-in-center" />
-                )}
-              </li>
+            >
+              <HiHeart className="size-6" />
+              <p>Favoritos</p>
+              <div className="absolute text-xs text-black bg-white/80 rounded-full px-1 right-[70px] top-[15px]">
+                0
+              </div>
+            </Link>
+            <li
+              className="hover:font-semibold list-none cursor-pointer hover:text-black dark:hover:text-white transition"
+              onClick={toggleColorScheme}
+            >
+              {isDarkModeOn ? (
+                <MdDarkMode className="size-6 scale-in-center" />
+              ) : (
+                <MdLightMode className="size-6 scale-in-center" />
+              )}
+            </li>
           </div>
         </>
       )}

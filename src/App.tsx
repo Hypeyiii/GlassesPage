@@ -14,6 +14,7 @@ import HeartSunGlasses from "./Routes/Glasses-HeartSunGlasses";
 import WomenSunGlasses from "./Routes/Glasses-WomenSunGlasses";
 import ManSunGlasses from "./Routes/Glasses-ManSunGlasses";
 import ProductDetail from "./Routes/ProductDetail";
+import Loggin from './Routes/Loggin'
 
 export interface Products {
   id: number;
@@ -186,7 +187,7 @@ function App () {
             }
           />
           <Route
-            path="/Women-Sun-Glasses"
+            path="/Woman-Sun-Glasses"
             element={
               <WomenSunGlasses
                 addToCart={addToCart}
@@ -202,6 +203,10 @@ function App () {
                 showDetails={showProductDetails}
               />
             }
+          />
+          <Route
+          path="/User"
+          element={<Loggin/>}
           />
         </Routes>
         <Footer />
