@@ -59,7 +59,9 @@ const Navbar: React.FC<NavbarProps> = ({ countProducts }) => {
   return (
     <>
       <div
-        className={`${isMobile ? "fixed" : "absolute"} w-full z-50 flex flex-row h-fit justify-between items-center bg-white/90 dark:bg-black/85 text-black/80 dark:text-white/80 
+        className={`${
+          isMobile ? "fixed" : "absolute"
+        } w-full z-50 flex flex-row h-fit justify-between items-center bg-white/90 dark:bg-black/85 text-black/80 dark:text-white/80 
         border-b-[1px] border-b-black dark:border-b-white p-4 md:p-0 md:px-4 md:h-[65px]`}
       >
         {isMobile ? (
@@ -300,7 +302,7 @@ const Navbar: React.FC<NavbarProps> = ({ countProducts }) => {
       {isMobile && isMenu && (
         <>
           <div
-            className="fixed top-0 bottom-0 w-screen h-screen backdrop-blur-sm z-10"
+            className="fixed top-0 bottom-0 w-screen h-screen bg-white/80 dark:bg-black/95 z-10"
             onClick={toggleMenu}
           ></div>
           <div
@@ -309,13 +311,13 @@ const Navbar: React.FC<NavbarProps> = ({ countProducts }) => {
           >
             <Link
               to={"/Sun-Glasses"}
-              className="font-bold text-2xl hover:bg-black/10 dark:hover:bg-white/30 transition px-4 cursor-pointer"
+              className="font-bold text-base hover:bg-black/10 dark:hover:bg-white/30 transition px-4 cursor-pointer"
             >
               Lentes de Sol
             </Link>
             <Link
               to={"/Vision-Glasses"}
-              className="font-bold text-2xl hover:bg-black/10 dark:hover:bg-white/30 transition px-4"
+              className="font-bold text-base hover:bg-black/10 dark:hover:bg-white/30 transition px-4"
             >
               Lentes de Vision
             </Link>
@@ -349,9 +351,15 @@ const Navbar: React.FC<NavbarProps> = ({ countProducts }) => {
               onClick={toggleColorScheme}
             >
               {isDarkModeOn ? (
-                <MdDarkMode className="size-6 scale-in-center" />
+                <div className="flex flex-row gap-x-1">
+                  <MdDarkMode className="size-6 scale-in-center" />{" "}
+                  <p>DarkMode</p>
+                </div>
               ) : (
-                <MdLightMode className="size-6 scale-in-center" />
+                <div className="flex flex-row gap-x-1">
+                  <MdLightMode className="size-6 scale-in-center" />
+                  <p>LightMode</p>
+                </div>
               )}
             </li>
           </div>

@@ -41,17 +41,23 @@ const Cart: React.FC<CartProps> = ({
     <>
       {allProducts.length ? (
         <>
-        <div className="mt-32 mb-8 text-black dark:text-white text-xl font-medium flex items-center justify-center w-full">
-          <h1 className="text-lg">Costo del carrito : <span className="text-lg font-semibold">${total}.00 mx</span></h1>
-        </div>
+          <div className="mt-32 mb-8 text-black dark:text-white text-xl font-medium flex items-center justify-between w-[95%] mx-auto">
+            <h1 className="text-xs md:text-lg">
+              Costo del carrito :{" "}
+              <span className="text-xs md:text-lg font-semibold">${total}.00<span className="text-xs md:text-sm"> mx</span></span>
+            </h1>
+            <p className="text-xs md:text-lg">
+              Productos en el carrito: <span className="text-yellow-500">{allProducts.length}</span>
+            </p>
+          </div>
           <div className="grid grid-cols-4 items-center justify-center w-[95%] gap-5 mx-auto">
             {allProducts.map((product) => (
               <div
                 key={product.id}
                 className="text-white bg-[#f6f6f6] dark:bg-black/80 rounded-sm hover:shadow-2xl dark:hover:shadow-lg hover:shadow-black/40 
-          dark:hover:shadow-white/20 border-[0.5px] border-black/10 hover:border-black/25 dark:border-white/10 dark:hover:border-white/20 
-          ransition flex-flex-col col-span-4 md:col-span-1 relative [&>div>img]:hover:scale-100 p-5 [&>div>#description]:hover:font-bold cursor-pointer h-full w-full 
-          opacity-85 hover:opacity-100 transition"
+                dark:hover:shadow-white/20 border-[0.5px] border-black/10 hover:border-black/25 dark:border-white/10 dark:hover:border-white/20 
+                flex-flex-col col-span-4 md:col-span-1 relative [&>div>img]:hover:scale-100 p-5 [&>div>#description]:hover:font-bold cursor-pointer h-full w-full 
+                opacity-85 hover:opacity-100 transition"
               >
                 <div
                   className="absolute top-0 right-0 p-2 text-black dark:text-white hover:text-red-500 dark:hover:text-red-400"
@@ -62,7 +68,7 @@ const Cart: React.FC<CartProps> = ({
                 <div className="absolute top-0 flex w-full justify-center">
                   <div
                     className="left-0 h-[1px] animate-border-width rounded-full bg-gradient-to-r from-[rgba(245,245,245,0)] to-[rgba(245,245,245,0)  
-         dark:from-[rgba(17,17,17,0)] via-neutral-800 dark:via-white dark:to-[rgba(17,17,17,0)] transition-all duration-1000"
+                    dark:from-[rgba(17,17,17,0)] via-neutral-800 dark:via-white dark:to-[rgba(17,17,17,0)] transition-all duration-1000"
                   />
                 </div>
                 <Link
@@ -76,10 +82,10 @@ const Cart: React.FC<CartProps> = ({
                     onClick={() => showDetails(product as Products)}
                   />
                 </Link>
-                <p className="text-black/60 dark:text-white/60 text-base font-semibold">
+                <p className="text-black/60 dark:text-white/60 text-xs md:text-base font-semibold">
                   {product.brand}
                 </p>
-                <p className="text-black dark:text-white font-semibold text-lg">
+                <p className="text-black dark:text-white font-semibold text-sm md:text-lg">
                   {product.description}
                 </p>
                 <div className="flex flex-row justify-between items-center">
@@ -90,7 +96,7 @@ const Cart: React.FC<CartProps> = ({
                     <button
                       onClick={() => substractProduct(product as Products)}
                       className="bg-black/60 hover:bg-black text-white dark:bg-white/60 dark:hover:bg-white transition dark:text-black
-                rounded-full px-[7px] text-sm"
+                      rounded-full px-[7px] text-sm"
                     >
                       -
                     </button>
@@ -98,7 +104,7 @@ const Cart: React.FC<CartProps> = ({
                     <button
                       onClick={() => addProduct(product as Products)}
                       className="bg-black/60 hover:bg-black text-white dark:bg-white/60 dark:hover:bg-white transition dark:text-black
-                 rounded-full px-[6px] text-sm"
+                      rounded-full px-[6px] text-sm"
                     >
                       +
                     </button>

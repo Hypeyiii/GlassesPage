@@ -12,7 +12,7 @@ const NotificationAdded: React.FC<NotificacionAddedProps> = ({ isAdded, addedTex
       <div
         className={`${
         isAdded ? "slide-in-left visible" : "slide-out-left invisible"
-        } z-50 bg-black dark:bg-white text-white transition-all duration-300
+        } z-50 bg-black dark:bg-white text-white transition-all duration-500
              dark:text-black p-2 flex flex-row gap-x-2 items-center justify-center w-fit mx-auto`}
       >
         <BiCheckCircle className="size-5" />

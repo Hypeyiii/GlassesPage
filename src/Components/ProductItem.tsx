@@ -79,7 +79,7 @@ const ProductItem: React.FC<ProductItemProps> = ({
         onMouseLeave={handleHover}
       >
         <div
-          className="text-white bg-[#f6f6f6] dark:bg-black/80 rounded-sm hover:shadow-2xl dark:hover:shadow-lg hover:shadow-black/40 dark:hover:shadow-white/5 border-[0.5px]
+          className="text-white bg-[#f6f6f6] dark:bg-[#020202] rounded-sm hover:shadow-xl dark:hover:shadow-md hover:shadow-black/40 dark:hover:shadow-white/5 border-[0.5px]
      border-black/10 hover:border-black/25 dark:border-white/10 dark:hover:border-white/20 transition flex-flex-col col-span-1 relative [&>div>img]:hover:scale-100 p-5 [&>div>#description]:hover:font-bold cursor-pointer h-fit w-full 
       opacity-85 hover:opacity-100"
         >
@@ -146,34 +146,35 @@ const ProductItem: React.FC<ProductItemProps> = ({
             </p>
           </div>
         </div>
-        {isHover && (
-          <div className="text-black dark:text-white grid grid-cols-4 items-center justify-center gap-4">
-            <div
-              className="col-span-1 w-full h-24 border-[0.5px] border-black/60 hover:border-black dark:border-white/40 dark:hover:border-white/70 opacity-70 hover:opacity-100 transition-all duration-300
-             flex items-center justify-center p-2 cursor-pointer"
-            >
-              <img src={image} alt={name + " image"} />
-            </div>
-            <div
-              className="col-span-1 w-full h-24 border-[0.5px] border-black/60 hover:border-black dark:border-white/40 dark:hover:border-white/70 opacity-70 hover:opacity-100 transition-all duration-300
-             flex items-center justify-center p-2 cursor-pointer"
-            >
-              <img src={image} alt={name + " image"} />
-            </div>
-            <div
-              className="col-span-1 w-full h-24 border-[0.5px] border-black/60 hover:border-black dark:border-white/40 dark:hover:border-white/70 opacity-70 hover:opacity-100 transition-all duration-300
-             flex items-center justify-center p-2 cursor-pointer"
-            >
-              <img src={image} alt={name + " image"} />
-            </div>
-            <div
-              className="col-span-1 w-full h-24 border-[0.5px] border-black/60 hover:border-black dark:border-white/40 dark:hover:border-white/70 opacity-70 hover:opacity-100 transition-all duration-300
-             flex items-center justify-center p-2 cursor-pointer"
-            >
-              <img src={image} alt={name + " image"} />
-            </div>
+        <div
+          className={`text-black dark:text-white grid grid-cols-4 items-center justify-center gap-8 w-[75%] mx-auto
+          ${isHover ? "visible" : "invisible"}`}
+        >
+          <div
+            className="col-span-1 w-16 md:w-28 h-10 md:h-14 bg-[#f6f6f6] dark:bg-neutral-950 dark:hover:bg-neutral-800 opacity-70 hover:opacity-90 
+            transition-all duration-300 flex items-center justify-center p-2 cursor-pointer border-[0.5px] border-black/40 hover:border-black/60 dark:border-white/20 dark:hover:border-white/50"
+          >
+            <img src={image} alt={name + " image"} />
           </div>
-        )}
+          <div
+            className="col-span-1 w-16 md:w-28 h-10 md:h-14 bg-[#f6f6f6] dark:bg-neutral-950 dark:hover:bg-neutral-800 opacity-70 hover:opacity-90 
+            transition-all duration-300 flex items-center justify-center p-2 cursor-pointer border-[0.5px] border-black/40 hover:border-black/60 dark:border-white/20 dark:hover:border-white/50"
+          >
+            <img src={image} alt={name + " image"} />
+          </div>
+          <div
+            className="col-span-1 w-16 md:w-28 h-10 md:h-14 bg-[#f6f6f6] dark:bg-neutral-950 dark:hover:bg-neutral-800 opacity-70 hover:opacity-90 
+            transition-all duration-300 flex items-center justify-center p-2 cursor-pointer border-[0.5px] border-black/40 hover:border-black/60 dark:border-white/20 dark:hover:border-white/50"
+          >
+            <img src={image} alt={name + " image"} />
+          </div>
+          <div
+            className="col-span-1 w-16 md:w-28 h-10 md:h-14 bg-[#f6f6f6] dark:bg-neutral-950 dark:hover:bg-neutral-800 opacity-70 hover:opacity-90 
+            transition-all duration-300 flex items-center justify-center p-2 cursor-pointer border-[0.5px] border-black/40 hover:border-black/60 dark:border-white/20 dark:hover:border-white/50"
+          >
+            <img src={image} alt={name + " image"} />
+          </div>
+        </div>
       </div>
 
       <NotificationAdded
