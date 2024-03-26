@@ -8,11 +8,6 @@ import SunGlasses from "./Routes/Glasses-Sun";
 import HomePage from "./Routes/HomePage";
 import ErrorPage from "./Routes/ErrorPage";
 import Cart from "./Routes/Cart";
-import SquaredSunGlasses from "./Routes/Glasses-SquaredSun";
-import CircleSunGlasses from "./Routes/Glasses-CircleSunGlasses";
-import HeartSunGlasses from "./Routes/Glasses-HeartSunGlasses";
-import WomenSunGlasses from "./Routes/Glasses-WomenSunGlasses";
-import ManSunGlasses from "./Routes/Glasses-ManSunGlasses";
 import ProductDetail from "./Routes/ProductDetail";
 import Loggin from './Routes/Loggin'
 
