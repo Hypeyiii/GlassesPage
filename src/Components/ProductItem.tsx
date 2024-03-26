@@ -111,7 +111,7 @@ const ProductItem: React.FC<ProductItemProps> = ({
               <img
                 src={image}
                 alt={brand + " image"}
-                className="transition size-[65%] m-auto"
+                className="transition size-[65%] md:size-full m-auto"
                 onClick={showDetails}
               />
             </Link>
