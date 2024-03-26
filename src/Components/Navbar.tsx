@@ -4,14 +4,14 @@ import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import "./Navbar.css";
 import { MdDarkMode, MdLightMode } from "react-icons/md";
+import { FaAngleDown } from "react-icons/fa";
 
 export interface NavbarProps {
   countProducts: number;
 }
 
 const Navbar: React.FC<NavbarProps> = ({ countProducts }) => {
-  const [isSunGlassHover, setIsSunGlassHover] = useState<boolean>(false);
-  const [isVisionGlassHover, setIsVisionGlassHover] = useState<boolean>(false);
+  const [collection, setCollection] = useState<boolean>(false);
   const [isDarkModeOn, setIsDarkModeOn] = useState<boolean>(false);
   const [isMobile, setIsMobile] = useState<boolean>(false);
   const [isMenu, setIsMenu] = useState<boolean>(false);
@@ -60,7 +60,7 @@ const Navbar: React.FC<NavbarProps> = ({ countProducts }) => {
     <>
       <div
         className={`${
-          isMobile ? "fixed" : "absolute"
+          isMobile ? "absolute" : "absolute"
         } w-full z-50 flex flex-row h-fit justify-between items-center bg-white/90 dark:bg-black/85 text-black/80 dark:text-white/80 
         border-b-[1px] border-b-black dark:border-b-white p-4 md:p-0 md:px-4 md:h-[65px]`}
       >
@@ -94,168 +94,30 @@ const Navbar: React.FC<NavbarProps> = ({ countProducts }) => {
             >
               Glasses
             </Link>
-            <div className="flex font-light h-full flex-row items-center justify-center">
-              <Link
-                to={"/"}
-                className="flex h-full items-center justify-center hover:bg-black/10 dark:hover:bg-white/30 transition px-4 font-semibold"
-              >
-                Inicio
-              </Link>
-              <Link
-                className="flex h-full items-center justify-center hover:bg-black/10 dark:hover:bg-white/30 transition px-4 cursor-pointer font-semibold"
-                onMouseEnter={() => setIsSunGlassHover(true)}
-                onMouseLeave={() => setIsSunGlassHover(false)}
-                onClick={() => setIsSunGlassHover(false)}
-                to={"/Sun-Glasses"}
-              >
-                Lentes de Sol
-                <div
-                  className={`fixed left-0 top-[64px] bg-white dark:bg-black border-y-2 dark:border-y-white border-y-black flex 
-            items-center justify-center w-screen mx-auto text-black dark:text-white p-10 transition-all duration-300 ${
-              isSunGlassHover ? "fade-in visible" : "invisible fade-out"
-            }`}
-                  onClick={() => setIsSunGlassHover(false)}
-                >
-                  <div
-                    className={`grid grid-cols-12 mx-auto uppercase w-[70%] gap-5 ${
-                      isSunGlassHover ? "slide-in-top" : "slide-out-top"
-                    }`}
-                  >
-                    <div className="col-span-2 flex flex-col gap-4 items-start justify-start">
-                      <p className="text-sm font-semibold">Destacado</p>
-                      <Link
-                        to={"/Sun-Glasses"}
-                        className="text-xs font-light hover:underline"
-                      >
-                        lentes de sol
-                      </Link>
-                    </div>
-                    <div className="col-span-2 flex flex-col gap-4 items-start justify-start">
-                      <p className="text-sm font-semibold">Género</p>
-                      <Link
-                        to={"/Man-Sun-Glasses"}
-                        className="text-xs font-light hover:underline"
-                      >
-                        Hombre
-                      </Link>
-                      <Link
-                        to={"/Woman-Sun-Glasses"}
-                        className="text-xs font-light hover:underline"
-                      >
-                        Mujer
-                      </Link>
-                    </div>
-                    <div className="col-span-2 flex flex-col gap-4 items-start justify-start">
-                      <p className="text-sm font-semibold">Forma</p>
-                      <Link
-                        to={"/Squared-Sun-Glasses"}
-                        className="text-xs font-light hover:underline"
-                      >
-                        Cuadrado
-                      </Link>
-                      <Link
-                        to={"/Circle-Sun-Glasses"}
-                        className="text-xs font-light hover:underline"
-                      >
-                        Circular
-                      </Link>
-                      <Link
-                        to={"/Heart-Sun-Glasses"}
-                        className="text-xs font-light hover:underline"
-                      >
-                        Corazón
-                      </Link>
-                    </div>
-                    <div className="col-span-3 overflow-hidden flex flex-col gap-3 bg-cover items-start justify-start">
-                      <img
-                        src="https://m.media-amazon.com/images/I/4161HYLkB3L._AC_SY1000_.jpg"
-                        alt="glasses"
-                        className="transition duration-300 ease-in-out hover:scale-105 hover:shadow-2xl hover:shadow-white/20"
-                      />
-                      <p className="text-xs font-bold">
-                        Los mejores lentes para sol
-                      </p>
-                    </div>
-                    <div className="col-span-3 overflow-hidden bg-cover relative flex flex-col gap-3 items-center justify-center">
-                      <img
-                        src="https://babyin.mx/cdn/shop/products/image_bd46bbab-fc71-4606-9096-1cd242f89f61_1024x1024@2x.jpg?v=1596683809"
-                        alt="glasses"
-                        className="transition duration-300 ease-in-out hover:scale-105 hover:shadow-2xl hover:shadow-white/20"
-                      />
-                      <p className="text-xs font-bold">
-                        Los mejores lentes para sol
-                      </p>
-                    </div>
+            <div
+              className="relative flex flex-row gap-x-2 h-full items-center justify-center hover:bg-black/10 dark:hover:bg-white/30 transition px-4 font-semibold cursor-pointer"
+              onClick={() => setCollection(!collection)}
+            >
+              Colecciones
+              <FaAngleDown className="size-4"/>
+              {collection && (
+                <div className="absolute top-[65px]  bg-white dark:bg-black border-[1px] border-black dark:border-white rounded-md z-50 text-wrap w-[150px] ">
+                  <div className="flex flex-col text-xs md:text-sm">
+                    <Link
+                      to="/Sun-Glasses"
+                      className="dark:hover:bg-white dark:hover:text-black hover:bg-black hover:text-white px-4 py-2 rounded-t-md"
+                    >
+                      Lentes de Sol
+                    </Link>
+                    <Link
+                      to="/Vision-Glasses"
+                      className="dark:hover:bg-white dark:hover:text-black hover:bg-black hover:text-white px-4 py-2 rounded-b-md"
+                    >
+                      Lentes de Vista
+                    </Link>
                   </div>
                 </div>
-              </Link>
-              <Link
-                to={"/Vision-Glasses"}
-                className="relative flex h-full items-center justify-center hover:bg-black/10 dark:hover:bg-white/30 transition px-4 font-semibold"
-                onMouseEnter={() => setIsVisionGlassHover(true)}
-                onMouseLeave={() => setIsVisionGlassHover(false)}
-                onClick={() => setIsVisionGlassHover(false)}
-              >
-                Lentes de Vision
-                <div
-                  className={`z-50 fade-in fixed left-0 top-[64px] bg-white dark:bg-black border-y-2 dark:border-y-white border-y-black flex items-center justify-center
-            w-screen mx-auto text-black dark:text-white p-10 transition-all ${
-              isVisionGlassHover ? "visible" : "invisible fade-out"
-            }`}
-                  onClick={() => setIsVisionGlassHover(false)}
-                >
-                  <div
-                    className={`grid grid-cols-12 mx-auto uppercase w-[70%] gap-5 ${
-                      isVisionGlassHover ? "slide-in-top" : "slide-out-top"
-                    }`}
-                  >
-                    <div className="col-span-2 flex flex-col gap-4 items-start justify-start">
-                      <p className="text-sm font-semibold">Destacado</p>
-                      <p className="text-xs font-light hover:underline">
-                        Lentes de aumento
-                      </p>
-                    </div>
-                    <div className="col-span-2 flex flex-col gap-4 items-start justify-start">
-                      <p className="text-sm font-semibold">Género</p>
-                      <p className="text-xs font-light hover:underline">
-                        Hombre
-                      </p>
-                      <p className="text-xs font-light hover:underline">
-                        Mujer
-                      </p>
-                    </div>
-                    <div className="col-span-2 flex flex-col gap-4 items-start justify-start">
-                      <p className="text-sm font-semibold">Forma</p>
-                      <p className="text-xs font-light hover:underline">
-                        Cuadrado
-                      </p>
-                      <p className="text-xs font-light hover:underline">
-                        Circular
-                      </p>
-                    </div>
-                    <div className="col-span-3 flex flex-col gap-3 bg-cover overflow-hidden items-center justify-center">
-                      <img
-                        src="https://down-mx.img.susercontent.com/file/sg-11134201-23020-94iqsbiidunv61"
-                        alt="glasses"
-                        className="transition duration-300 ease-in-out hover:scale-105 hover:shadow-2xl hover:shadow-black/50"
-                      />
-                      <p className="text-xs font-bold">
-                        Los mejores lentes para la visión
-                      </p>
-                    </div>
-                    <div className="col-span-3 flex flex-col bg-cover overflow-hidden gap-3 items-center justify-center">
-                      <img
-                        src="https://media.gq.com.mx/photos/605e5ac940c44aa45469e115/4:3/w_2668,h_2001,c_limit/lentes-755650749.jpg"
-                        alt="glasses"
-                        className="transition duration-300 ease-in-out hover:scale-105 hover:shadow-2xl hover:shadow-black/50 h-full"
-                      />
-                      <p className="text-xs font-bold">
-                        Los mejores lentes para la visión
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </Link>
+              )}
             </div>
             <div className="flex flex-row gap-x-4">
               <li className="hover:font-semibold list-none cursor-pointer hover:text-black dark:hover:text-white transition">

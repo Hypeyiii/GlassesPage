@@ -111,7 +111,7 @@ const ProductItem: React.FC<ProductItemProps> = ({
               <img
                 src={image}
                 alt={brand + " image"}
-                className="transition scale-90"
+                className="transition size-[65%] m-auto"
                 onClick={showDetails}
               />
             </Link>
@@ -144,35 +144,6 @@ const ProductItem: React.FC<ProductItemProps> = ({
             <p className="font-extrabold text-black dark:text-white text-sm">
               ${price}.00 mx
             </p>
-          </div>
-        </div>
-        <div
-          className={`text-black dark:text-white grid grid-cols-4 items-center justify-center gap-8 w-[75%] mx-auto
-          ${isHover ? "visible" : "invisible"}`}
-        >
-          <div
-            className="col-span-1 w-16 md:w-28 h-10 md:h-14 bg-[#f6f6f6] dark:bg-neutral-950 dark:hover:bg-neutral-800 opacity-70 hover:opacity-90 
-            transition-all duration-300 flex items-center justify-center p-2 cursor-pointer border-[0.5px] border-black/40 hover:border-black/60 dark:border-white/20 dark:hover:border-white/50"
-          >
-            <img src={image} alt={name + " image"} />
-          </div>
-          <div
-            className="col-span-1 w-16 md:w-28 h-10 md:h-14 bg-[#f6f6f6] dark:bg-neutral-950 dark:hover:bg-neutral-800 opacity-70 hover:opacity-90 
-            transition-all duration-300 flex items-center justify-center p-2 cursor-pointer border-[0.5px] border-black/40 hover:border-black/60 dark:border-white/20 dark:hover:border-white/50"
-          >
-            <img src={image} alt={name + " image"} />
-          </div>
-          <div
-            className="col-span-1 w-16 md:w-28 h-10 md:h-14 bg-[#f6f6f6] dark:bg-neutral-950 dark:hover:bg-neutral-800 opacity-70 hover:opacity-90 
-            transition-all duration-300 flex items-center justify-center p-2 cursor-pointer border-[0.5px] border-black/40 hover:border-black/60 dark:border-white/20 dark:hover:border-white/50"
-          >
-            <img src={image} alt={name + " image"} />
-          </div>
-          <div
-            className="col-span-1 w-16 md:w-28 h-10 md:h-14 bg-[#f6f6f6] dark:bg-neutral-950 dark:hover:bg-neutral-800 opacity-70 hover:opacity-90 
-            transition-all duration-300 flex items-center justify-center p-2 cursor-pointer border-[0.5px] border-black/40 hover:border-black/60 dark:border-white/20 dark:hover:border-white/50"
-          >
-            <img src={image} alt={name + " image"} />
           </div>
         </div>
       </div>

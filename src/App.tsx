@@ -25,6 +25,9 @@ export interface Products {
   quantity: number;
   total: number;
   countProducts: number;
+  category: string;
+  genre: string;
+  shape: string;
 }
 function App () {
   const [allProducts, setAllProducts] = useState<Products[]>([]);
@@ -117,7 +120,7 @@ function App () {
             path="/Cart"
             element={
               <Cart
-                addToCart={addToCart}
+                addToCart = {addToCart}
                 allProducts={allProducts}
                 deleteProduct={deleteProduct}
                 total={total}
@@ -141,15 +144,6 @@ function App () {
             }
           />
           <Route
-            path="/Vision-Glasses"
-            element={
-              <VisionGlasses
-                addToCart={addToCart}
-                showDetails={showProductDetails}
-              />
-            }
-          />
-          <Route
             path="/Sun-Glasses"
             element={
               <SunGlasses
@@ -158,52 +152,16 @@ function App () {
               />
             }
           />
+          <Route
+            path="/Vision-Glasses"
+            element={
+              <VisionGlasses
+                addToCart={addToCart}
+                showDetails={showProductDetails}
+              />
+            }
+          />
           <Route path="*" element={<ErrorPage />} />
-          <Route
-            path="/Squared-Sun-Glasses"
-            element={
-              <SquaredSunGlasses
-                addToCart={addToCart}
-                showDetails={showProductDetails}
-              />
-            }
-          />
-          <Route
-            path="/Circle-Sun-Glasses"
-            element={
-              <CircleSunGlasses
-                addToCart={addToCart}
-                showDetails={showProductDetails}
-              />
-            }
-          />
-          <Route
-            path="/Heart-Sun-Glasses"
-            element={
-              <HeartSunGlasses
-                addToCart={addToCart}
-                showDetails={showProductDetails}
-              />
-            }
-          />
-          <Route
-            path="/Woman-Sun-Glasses"
-            element={
-              <WomenSunGlasses
-                addToCart={addToCart}
-                showDetails={showProductDetails}
-              />
-            }
-          />
-          <Route
-            path="/Man-Sun-Glasses"
-            element={
-              <ManSunGlasses
-                addToCart={addToCart}
-                showDetails={showProductDetails}
-              />
-            }
-          />
           <Route
           path="/User"
           element={<Loggin/>}

@@ -12,6 +12,9 @@ export interface Products {
   quantity: number;
   total: number;
   countProducts: number;
+  category: string;
+  genre: string;
+  shape: string;
 }
 
 interface CartProps {
