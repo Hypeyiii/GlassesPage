@@ -12,6 +12,8 @@ export interface ProductItemProps {
   addedToCart: () => void;
   id: number;
   showDetails: () => void;
+  addedToFav: () => void;
+  isFav: boolean; 
 }
 
 const ProductItem: React.FC<ProductItemProps> = ({
@@ -22,12 +24,13 @@ const ProductItem: React.FC<ProductItemProps> = ({
   addedToCart,
   id,
   showDetails,
+  addedToFav,
+  isFav,
 }) => {
   const [isHover, setIsHover] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [isAdded, setIsAdded] = useState(false);
   const [isAddedToFavs, setIsAddedToFavs] = useState(false);
-  const [isFav, setIsFav] = useState(false);
 
   const added = () => {
     setIsAdded(true);
@@ -41,11 +44,6 @@ const ProductItem: React.FC<ProductItemProps> = ({
     }
     return () => clearTimeout(timeout);
   }, [isAdded]);
-
-  const addedToFav = () => {
-    setIsAddedToFavs(!isAddedToFavs);
-    setIsFav(!isFav);
-  };
 
   const handleHover = () => {
     setIsHover(!isHover);
@@ -105,19 +103,19 @@ const ProductItem: React.FC<ProductItemProps> = ({
             />
           </div>
           <div
-            className={`relative col-span-5 md:col-span-3 m-auto flex flex-col justify-center items-center gap-y-10 md:size-[250px]`}
+            className="relative col-span-5 md:col-span-3 m-auto flex flex-col justify-center items-center gap-y-1 size-[150px] md:size-[250px]"
           >
             <Link to={`/ProductDetail/${id}`}>
               <img
                 src={image}
                 alt={brand + " image"}
-                className="transition size-[65%] md:size-full m-auto"
+                className="transition"
                 onClick={showDetails}
               />
             </Link>
             {
               <div
-                className={`md:absolute bottom-0 border-[0.5px] border-black/60 dark:border-white/60 py-1 px-2 hover:bg-black
+                className={`absolute bottom-0 border-[0.5px] border-black/60 dark:border-white/60 py-1 px-2 hover:bg-black
                dark:hover:bg-white text-black/70 dark:text-white/80 hover:text-white dark:hover:text-black font-semibold text-xs mb-5 transition-all duration-500 ${
                  isHover ? "fade-in visible" : "fade-out invisible"
                }`}

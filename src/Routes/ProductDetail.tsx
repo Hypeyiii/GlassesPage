@@ -1,12 +1,14 @@
 import { BsArrowLeft } from "react-icons/bs";
 import NotificationAdded from "../Components/NotificationAdded.tsx";
 import { AiFillHeart } from "react-icons/ai";
+import { Link } from "react-router-dom";
 
 interface ProductDetailProps {
   description: string;
   image: string;
   brand: string;
   price: number;
+  category: string;
   addToCart: () => void;
   isAdded: boolean;
 }
@@ -18,20 +20,34 @@ const ProductDetail: React.FC<ProductDetailProps> = ({
   price,
   addToCart,
   isAdded,
+  category,
 }) => {
   const backUp = () => {
     window.history.back();
   };
   return (
     <>
-      <div className="grid grid-cols-4 items-center justify-center mt-32 w-[95%] mx-auto relative">
-        <div
-          className="absolute top-0 left-0 p-3 text-black dark:text-white flex flex-row gap-2 items-center justify-center text-base cursor-pointer transition
-      font-semibold hover:underline"
-          onClick={backUp}
-        >
-          <BsArrowLeft />
-          <p>{brand}</p>
+      <div className="grid grid-cols-4 items-center justify-center mt-32 w-[90%] md:w-[70%] mx-auto relative">
+        <div className="col-span-4 text-black dark:text-white flex flex-row items-center justify-between text-base cursor-pointer transition">
+          <div>
+            <Link to={"/"} className="text-black/60 dark:text-white/60">
+              Inicio /
+            </Link>{" "}
+            <Link
+              to={`/${category}`}
+              className="text-black/60 dark:text-white/60"
+            >
+              {category} / {" "}
+            </Link>
+            {brand}
+          </div>
+          <div
+            className="flex flex-row gap-2 items-center cursor-pointer border-black hover:border-black dark:hover:border-white border-transparent border-b"
+            onClick={backUp}
+          >
+            <BsArrowLeft />
+            <p>Regresar</p>
+          </div>
         </div>
         <div className="size-[400px] md:size-[700px] flex mx-auto items-center justify-center col-span-4 md:col-span-3 cursor-zoom-in">
           <img src={image} alt="" />

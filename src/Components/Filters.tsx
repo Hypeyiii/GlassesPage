@@ -13,7 +13,7 @@ const Filters: React.FC<FiltersProps> = ({
 }) => {
   return (
     <>
-      <div className="mt-32 text-white w-[70%] m-auto flex flex-col md:flex-row gap-4 justify-start md:justify-between items-start">
+      <div className="mt-32 text-white w-[80%] md:w-[70%] m-auto flex flex-col md:flex-row gap-4 justify-start md:justify-between items-start">
         <div className="flex flex-row justify-start items-center gap-x-4 text-black dark:text-white text-xs md:text-base">
           <label htmlFor="price">Precio a partir de:</label>
           <input

@@ -1,7 +1,9 @@
-import { BiLeftArrowAlt, BiTrash } from "react-icons/bi";
+import { BiLeftArrowAlt } from "react-icons/bi";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import BuyCartModal from "../Modals/BuyCartModal.tsx";
+import { FaAngleDown, FaAngleUp } from "react-icons/fa";
+import { RxCross1 } from "react-icons/rx";
 
 export interface Products {
   id: number;
@@ -25,6 +27,7 @@ interface CartProps {
   substractProduct: (product: Products) => Products[];
   showDetails: (product: Products) => Products[];
   addToCart: (product: Products) => Products[];
+  isMobile: boolean;
 }
 
 const Cart: React.FC<CartProps> = ({
@@ -44,110 +47,145 @@ const Cart: React.FC<CartProps> = ({
     <>
       {allProducts.length ? (
         <>
-          <div className="mt-32 mb-8 text-black dark:text-white text-xl font-medium flex items-center justify-between w-[95%] mx-auto">
-            <h1 className="text-xs md:text-lg">
-              Costo del carrito :{" "}
-              <span className="text-xs md:text-lg font-semibold">${total}.00<span className="text-xs md:text-sm"> mx</span></span>
-            </h1>
-            <p className="text-xs md:text-lg">
-              Productos en el carrito: <span className="text-yellow-500">{allProducts.length}</span>
-            </p>
-          </div>
-          <div className="grid grid-cols-4 items-center justify-center w-[95%] gap-5 mx-auto">
-            {allProducts.map((product) => (
-              <div
-                key={product.id}
-                className="text-white bg-[#f6f6f6] dark:bg-black/80 rounded-sm hover:shadow-2xl dark:hover:shadow-lg hover:shadow-black/40 
-                dark:hover:shadow-white/20 border-[0.5px] border-black/10 hover:border-black/25 dark:border-white/10 dark:hover:border-white/20 
-                flex-flex-col col-span-4 md:col-span-1 relative [&>div>img]:hover:scale-100 p-5 [&>div>#description]:hover:font-bold cursor-pointer h-full w-full 
-                opacity-85 hover:opacity-100 transition"
-              >
-                <div
-                  className="absolute top-0 right-0 p-2 text-black dark:text-white hover:text-red-500 dark:hover:text-red-400"
-                  onClick={() => deleteProduct(product as Products)}
-                >
-                  <BiTrash className="size-3 md:size-4" />
-                </div>
-                <div className="absolute top-0 flex w-full justify-center">
-                  <div
-                    className="left-0 h-[1px] animate-border-width rounded-full bg-gradient-to-r from-[rgba(245,245,245,0)] to-[rgba(245,245,245,0)  
-                    dark:from-[rgba(17,17,17,0)] via-neutral-800 dark:via-white dark:to-[rgba(17,17,17,0)] transition-all duration-1000"
-                  />
-                </div>
+          <div className="grid grid-cols-4 gap-4 text-black dark:text-white w-[80%] md:w-[70%] m-auto mt-32">
+            <div className="col-span-4 flex flex-row items-center justify-between w-full">
+              <div>
+                <Link to={"/"} className="text-black/60 dark:text-white/60">
+                  Inicio /
+                </Link>{" "}
                 <Link
-                  to={`/ProductDetail/${product.id}`}
-                  className="md:size-[250px] mx-auto flex items-center justify-center"
+                  to={`/Cart`}
+                  className="text-black dark:text-white"
                 >
-                  <img
-                    src={product.image}
-                    alt={product.description + "image"}
-                    className="scale-90 transition"
-                    onClick={() => showDetails(product as Products)}
-                  />
+                  Cart
                 </Link>
-                <p className="text-black/60 dark:text-white/60 text-xs md:text-base font-semibold">
-                  {product.brand}
-                </p>
-                <p className="text-black dark:text-white font-semibold text-sm md:text-lg">
-                  {product.description}
-                </p>
-                <div className="flex flex-row justify-between items-center">
-                  <p className="text-sm font-extrabold text-black dark:text-white">
-                    ${product.price}.00 mx
-                  </p>
-                  <div className="flex flex-row gap-2 items-center justify-center text-base font-bold text-black dark:text-white">
-                    <button
-                      onClick={() => substractProduct(product as Products)}
-                      className="bg-black/60 hover:bg-black text-white dark:bg-white/60 dark:hover:bg-white transition dark:text-black
-                      rounded-full px-[7px] text-sm"
+              </div>
+              <div
+                className="flex flex-row gap-2 items-center text-sm border-b-[0.5px] border-transparent hover:border-black dark:hover:border-white cursor-pointer"
+                onClick={backUp}
+              >
+                <BiLeftArrowAlt className="size-4" />
+                Regresar
+              </div>
+            </div>
+            <div className="col-span-4 md:col-span-3 grid grid-cols-4 h-fit w-full">
+              <div className="col-span-4 grid grid-cols-4 mb-5 font-bold text-xs md:text-base">
+                <div className="col-span-1 grid justify-center">Product</div>
+                <div className="col-span-1 grid justify-center">Name</div>
+                <div className="col-span-1 grid justify-center">Quantity</div>
+                <div className="col-span-1 grid justify-center">Price</div>
+              </div>
+              {allProducts.map((product) => (
+                <>
+                  <div className="col-span-4 grid grid-cols-4 justify-center items-center border-t-[0.5px] border-black/10 dark:border-white/20 py-3 relative">
+                    <div
+                      key={product.id}
+                      className="col-span-1 flex flex-row justify-center items-center border-r border-black/10 dark:border-white/10 w-full h-auto"
                     >
-                      -
-                    </button>
-                    <p>{product.quantity}</p>
-                    <button
-                      onClick={() => addProduct(product as Products)}
-                      className="bg-black/60 hover:bg-black text-white dark:bg-white/60 dark:hover:bg-white transition dark:text-black
-                      rounded-full px-[6px] text-sm"
+                      <div className="w-full bg-cover flex flex-row justify-center items-center">
+                        <Link
+                          to={`/ProductDetail/${product.id}`}
+                          className="w-[60px] md:w-[100px] h-[40px] md:h-[80px] m-auto"
+                        >
+                          <img
+                            src={product.image}
+                            alt={product.description}
+                            className="cursor-pointer"
+                            onClick={() => showDetails(product as Products)}
+                          />
+                        </Link>
+                        <div className="absolute right-0 flex justify-center itesm-center">
+                          <RxCross1
+                            className="text-black dark:text-white cursor-pointer size-4"
+                            onClick={() => deleteProduct(product)}
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div className="col-span-1 text-center text-xs md:text-base">
+                      {product.brand}
+                    </div>
+                    <div
+                      className="col-span-1 flex flex-row gap-1 md:gap-3 justify-center items-center py-1 px-2 md:p-2 md:w-[75px] m-auto border-[0.5px] border-black dark:border-white 
+                    text-xs md:text-base"
                     >
-                      +
-                    </button>
+                      {product.quantity}
+                      <div className="flex flex-col">
+                        <FaAngleUp
+                          className="cursor-pointer"
+                          onClick={() => addProduct(product)}
+                        />
+                        <FaAngleDown
+                          className="cursor-pointer"
+                          onClick={() => substractProduct(product)}
+                        />
+                      </div>
+                    </div>
+                    <div className="col-span-1 text-center text-xs md:text-base">
+                      ${product.price}.00
+                    </div>
+                  </div>
+                </>
+              ))}
+            </div>
+            <div className="col-span-4 md:col-span-1 flex flex-col justify-center gap-4 text-black dark:text-white w-60 m-auto md:mt-10 md:mr-10 md:ml-auto">
+              <div className="border-[1px] rounded-md border-black dark:border-white/50 p-4">
+                <p className="flex justify-center border-b border-white/10 py-1 font-bold text-sm md:text-lg">
+                  Total de la orden
+                </p>
+                <div className="flex flex-col text-xs md:text-base">
+                  <div className="flex flex-row justify-between py-3 items-center border-b-[0.5px] border-black/30 dark:border-white/30">
+                    <p className="font-bold">Subotal:</p>
+                    <p>${total}.00</p>
+                  </div>
+                  <div className="flex flex-row justify-between py-3 items-center border-b-[0.5px] border-black/30 dark:border-white/30">
+                    <p className="font-bold">Shipping:</p>
+                    <p>{0}</p>
+                  </div>
+                  <div className="flex flex-row justify-between py-3 items-center border-b-[0.5px] border-black/30 dark:border-white/30">
+                    <p className="font-bold">Total:</p>
+                    <p>${total}.00</p>
                   </div>
                 </div>
               </div>
-            ))}
+              <button
+                className="py-2 px-5 border-[0.5px] border-black dark:border-white/50 hover:bg-black hover:text-white
+               dark:hover:bg-white dark:hover:text-black transition text-xs md:text-base"
+                onClick={() => setBuyCart(true)}
+              >
+                Proceder a pagar
+              </button>
+              <Link
+                to={"/"}
+                className="py-2 px-5 border-[0.5px] border-black dark:border-white/50 hover:bg-black hover:text-white
+               dark:hover:bg-white dark:hover:text-black transition flex justify-center text-xs md:text-base"
+                onClick={() => setBuyCart(true)}
+              >
+                Seguir comprando
+              </Link>
+            </div>
           </div>
         </>
       ) : (
         <div className="flex flex-col items-center justify-center w-full h-full">
-          <h1 className="text-xl md:text-5xl font-bold text-black dark:text-white mx-auto text-center">
+          <h1 className="text-xl font-bold text-black dark:text-white mx-auto text-center">
             Tu carrito está vacío :(
           </h1>
+          <Link
+            to={"/"}
+            className="py-2 px-5 border-[0.5px] border-black dark:border-white hover:bg-black hover:text-white
+            dark:hover:bg-white dark:hover:text-black dark:text-white transition flex justify-center mt-6 uppercase font-bold"
+          >
+            Seguir comprando
+          </Link>
         </div>
       )}
-      <div className="flex justify-center items-center flex-col gap-y-4 mt-10">
-        {allProducts.length && (
-          <button
-            className="text-xs md:text-base text-white dark:text-black py-1 px-10 bg-black dark:bg-white font-normal hover:bg-white dark:hover:bg-black
-            hover:text-black dark:hover:text-white hover:border-black border-2 dark:hover:border-white/20 border-black/20 transition-all duration-300 ease-in-out"
-            onClick={() => setBuyCart(true)}
-          >
-            Comprar carrito
-          </button>
-        )}
-      </div>
       {buyCart && (
         <BuyCartModal
           closeBuyCartModal={() => setBuyCart(false)}
           total={total}
         />
       )}
-      <div
-        className="text-black dark:text-white absolute top-0 mt-16 left-0 p-5 text-sm flex flex-row gap-x-1 items-center cursor-pointer"
-        onClick={backUp}
-      >
-        <BiLeftArrowAlt />
-        Atrás
-      </div>
     </>
   );
 };

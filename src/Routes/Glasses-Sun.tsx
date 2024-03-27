@@ -19,9 +19,11 @@ interface Products {
 
 interface SunGlassesProps {
   addToCart: (product: Products) => Products[];
+  addedToFav: (product: Products) => Products[];
   showDetails: (product: Products) => Products[];
+  isFav: boolean;
 }
-const SunGlasses: React.FC<SunGlassesProps> = ({ addToCart, showDetails }) => {
+const SunGlasses: React.FC<SunGlassesProps> = ({ addToCart, showDetails, addedToFav, isFav }) => {
   const [minPrice, setMinPrice] = useState(0);
 
   const handleChangeMinPrice = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -38,7 +40,7 @@ const SunGlasses: React.FC<SunGlassesProps> = ({ addToCart, showDetails }) => {
   };
 
   const [filters, setFilters] = useState({
-    category: "sunglasses",
+    category: "Sun-Glasses",
     minPrice: 0,
     genre: "all",
     shape: "all",
@@ -60,7 +62,7 @@ const SunGlasses: React.FC<SunGlassesProps> = ({ addToCart, showDetails }) => {
         handleChangeGenre={handleChangeGenre}
       />
       {filterProducts.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mt-32 relative w-[95%] mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mt-32 relative w-[80%] md:w-[70%] mx-auto">
           <div className="col-span-1 md:col-span-3 text-base text-black dark:text-white font-semibold flex flex-row items-cemter justify-between w-full">
             <div className="flex flex-row gap-x-1 justify-center items-center">
               <Link to={"/"} className="font-light hover:underline">
@@ -74,6 +76,7 @@ const SunGlasses: React.FC<SunGlassesProps> = ({ addToCart, showDetails }) => {
               <span className="text-yellow-500">{filterProducts.length}</span>{" "}
               productos
             </div>
+
           </div>
           {filterProducts.map((product) => (
             <ProductItem
@@ -84,7 +87,9 @@ const SunGlasses: React.FC<SunGlassesProps> = ({ addToCart, showDetails }) => {
               image={product.image}
               description={product.description}
               addedToCart={() => addToCart(product as Products)}
+              addedToFav={() => addedToFav(product as Products)}
               showDetails={() => showDetails(product as Products)}
+              isFav={isFav}
             />
           ))}
         </div>

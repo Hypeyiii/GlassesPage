@@ -8,8 +8,9 @@ import SunGlasses from "./Routes/Glasses-Sun";
 import HomePage from "./Routes/HomePage";
 import ErrorPage from "./Routes/ErrorPage";
 import Cart from "./Routes/Cart";
+import Wishlist from "./Routes/WishList";
 import ProductDetail from "./Routes/ProductDetail";
-import Loggin from './Routes/Loggin'
+import Loggin from "./Routes/Loggin";
 
 export interface Products {
   id: number;
@@ -24,12 +25,16 @@ export interface Products {
   genre: string;
   shape: string;
 }
-function App () {
+function App() {
   const [allProducts, setAllProducts] = useState<Products[]>([]);
+  const [allFavProducts, setAllFavProducts] = useState<Products[]>([]);
   const [total, setTotal] = useState<number>(0);
   const [countProducts, setCountProducts] = useState<number>(0);
+  const [countFavProducts, setCountFavProducts] = useState<number>(0);
   const [isOnCart, setIsOnCart] = useState<boolean>(false);
+  const [isFav, setIsFav] = useState<boolean>(false);
   const [selectedProduct, setSelectedProduct] = useState<Products | null>(null);
+  const [isMobile, setIsMobile] = useState<boolean>(false);
 
   const addToCart = (product: Products): Products[] => {
     setIsOnCart(true);
@@ -54,9 +59,31 @@ function App () {
     }
   };
 
+  const addToFav = (product: Products): Products[] => {
+    setIsFav(true);
+    const existingProduct = allFavProducts.find((p) => p.id === product.id);
+    if (existingProduct) {
+      const newProducts = allFavProducts.map((p) => {
+        if (p.id === product.id) {
+          return { ...p, quantity: p.quantity + 1 };
+        }
+        return p;
+      });
+      setTotal(total + product.price);
+      setAllFavProducts(newProducts);
+      return newProducts;
+    } else {
+      setCountFavProducts(countFavProducts + 1);
+      setTotal(total + product.price);
+      const newProduct = { ...product, quantity: 1 };
+      setAllFavProducts([...allFavProducts, newProduct]);
+      return [...allFavProducts, newProduct];
+    }
+  }
+
   const deleteProduct = (product: Products): Products[] => {
     const newProducts = allProducts.filter((p) => p.id !== product.id);
-    setTotal(total - product.price * product.quantity);
+    setTotal(total - product.price);
     setCountProducts(countProducts - product.quantity);
     setAllProducts(newProducts);
     return newProducts;
@@ -104,18 +131,27 @@ function App () {
       }, 5000);
     }
     return () => clearTimeout(timeout);
-  } , [isOnCart]);
+  }, [isOnCart]);
+
+  useEffect(() => {
+    if (window.innerWidth < 768) {
+      setIsMobile(true);
+    } else {
+      setIsMobile(false);
+    }
+  }, [isMobile]);
   return (
     <div className="absolute top-0 left-0 right-0 bottom-0 overflow-y-auto z-[-2] bg-white dark:bg-black">
       <Router>
-        <Navbar countProducts={countProducts} />
+        <Navbar countProducts={countProducts} countFavProducts={countFavProducts}/>
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route
             path="/Cart"
             element={
               <Cart
-                addToCart = {addToCart}
+                isMobile={isMobile}
+                addToCart={addToCart}
                 allProducts={allProducts}
                 deleteProduct={deleteProduct}
                 total={total}
@@ -126,9 +162,21 @@ function App () {
             }
           />
           <Route
+            path="/Wishlist"
+            element={
+              <Wishlist
+                allFavProducts={allFavProducts}
+                deleteProduct={deleteProduct}
+                showDetails={showProductDetails}
+                addToCart={addToCart}
+              />
+            }
+          />
+          <Route
             path="/ProductDetail/:id"
             element={
               <ProductDetail
+                category={selectedProduct?.category || ""}
                 description={selectedProduct?.description || ""}
                 image={selectedProduct?.image || ""}
                 brand={selectedProduct?.brand || ""}
@@ -142,6 +190,8 @@ function App () {
             path="/Sun-Glasses"
             element={
               <SunGlasses
+                isFav={isFav}
+                addedToFav={addToFav}
                 addToCart={addToCart}
                 showDetails={showProductDetails}
               />
@@ -151,16 +201,15 @@ function App () {
             path="/Vision-Glasses"
             element={
               <VisionGlasses
+                isFav={isFav}
+                addedToFav={addToFav}
                 addToCart={addToCart}
                 showDetails={showProductDetails}
               />
             }
           />
           <Route path="*" element={<ErrorPage />} />
-          <Route
-          path="/User"
-          element={<Loggin/>}
-          />
+          <Route path="/User" element={<Loggin />} />
         </Routes>
         <Footer />
       </Router>

@@ -1,5 +1,3 @@
-import { Link } from "react-router-dom";
-
 export const PromotionImage = () => {
   return (
     <div className="grid grid-cols-12 w-screen items-center justify-center">
@@ -10,12 +8,12 @@ export const PromotionImage = () => {
           className="h-[488px] w-full object-cover hover:scale-110 transition-all duration-1000"
         />
         <div className="absolute bottom-0 p-5">
-          <Link
-            to={"/Sun-Glasses"}
+          <a
+            href={"/Sun-Glasses"}
             className="uppercase text-lg border-2 py-2 px-4 border-black hover:border-transparent hover:bg-black hover:text-white transition-all duration-300"
           >
             Polarizadas
-          </Link>
+          </a>
         </div>
       </div>
       <div className="col-span-3 relative bg-cover overflow-hidden">
@@ -25,12 +23,12 @@ export const PromotionImage = () => {
           className="h-[488px] w-full object-cover hover:scale-110 transition-all duration-1000"
         />
         <div className="absolute bottom-0 p-5">
-          <Link
-            to={"/Woman-Sun-Glasses"}
+          <a
+            href={"/Sun-Glasses"}
             className="uppercase text-lg border-2 py-2 px-4 border-white text-white hover:border-transparent hover:bg-white hover:text-black transition-all duration-300"
           >
             Polarizadas
-          </Link>
+          </a>
         </div>
       </div>
       <div className="col-span-3 relative bg-cover overflow-hidden">
@@ -40,12 +38,12 @@ export const PromotionImage = () => {
           className="h-[488px] w-full object-cover hover:scale-110 transition-all duration-1000"
         />
         <div className="absolute bottom-0 p-5">
-          <Link
-            to={"/Sun-Glasses"}
+          <a
+            href={"/Sun-Glasses"}
             className="uppercase text-lg border-2 py-2 px-4 border-black hover:border-transparent hover:bg-black hover:text-white transition-all duration-300"
           >
             Polarizadas
-          </Link>
+          </a>
         </div>
       </div>
       <div className="col-span-3 relative bg-cover overflow-hidden">
@@ -55,12 +53,12 @@ export const PromotionImage = () => {
           className="h-[488px] w-full object-cover hover:scale-110 transition-all duration-1000"
         />
         <div className="absolute bottom-0 p-5">
-          <Link
-            to={"/Sun-Glasses"}
+          <a
+            href={"/Sun-Glasses"}
             className="uppercase text-lg border-2 py-2 px-4 border-black hover:border-transparent hover:bg-black hover:text-white transition-all duration-300"
           >
             Polarizadas
-          </Link>
+          </a>
         </div>
       </div>
     </div>
@@ -79,12 +77,12 @@ export const PromotionLoggin = () => {
         Registrate para acceder en exclusiva a las últimas tendencias, rebajas y
         ofertas especiales
       </p>
-      <Link
-        to="User"
+      <a
+        href="User"
         className="my-4 py-2 px-10 bg-black text-white dark:bg-white dark:text-black text-sm font-normal"
       >
         Regístrate
-      </Link>
+      </a>
     </div>
   );
 };
