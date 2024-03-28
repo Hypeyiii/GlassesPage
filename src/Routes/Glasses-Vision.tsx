@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
-import { useState } from "react";
 import ProductItem from "../Components/ProductItem.tsx";
-import sunglasses from "../Products/Products-SunGlasses.tsx";
 import Filters from "../Components/Filters.tsx";
+import { useFilters } from "../Hooks/useFilters.tsx";
+
 interface Products {
   id: number;
   brand: string;
@@ -23,47 +23,21 @@ interface SunGlassesProps {
   showDetails: (product: Products) => Products[];
   isFav: boolean;
 }
-const SunGlasses: React.FC<SunGlassesProps> = ({ addToCart, showDetails, addedToFav, isFav }) => {
-  const [minPrice, setMinPrice] = useState(0);
+const SunGlasses: React.FC<SunGlassesProps> = ({
+  addToCart,
+  showDetails,
+  addedToFav,
+  isFav,
+}) => {
 
-  const handleChangeMinPrice = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setMinPrice(Number(event.target.value));
-    setFilters({ ...filters, minPrice: Number(event.target.value) });
-  };
-
-  const handleChangeShape = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setFilters({ ...filters, shape: event.target.value });
-  };
-
-  const handleChangeGenre = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setFilters({ ...filters, genre: event.target.value });
-  };
-
-  const [filters, setFilters] = useState({
-    category: "Vision-Glasses",
-    minPrice: 0,
-    genre: "all",
-    shape: "all",
-  });
-
-  const filterProducts = sunglasses.filter(
-    (product) =>
-      product.category === filters.category &&
-      product.price >= filters.minPrice &&
-      (filters.genre === "all" || product.genre === filters.genre) &&
-      (filters.shape === "all" || product.shape === filters.shape)
-  );
+  const {filterVisionGlasses} = useFilters();
   return (
     <>
       <Filters
-        minPrice={minPrice}
-        handleChangeMinPrice={handleChangeMinPrice}
-        handleChangeShape={handleChangeShape}
-        handleChangeGenre={handleChangeGenre}
       />
-      {filterProducts.length > 0 ? (
+      {filterVisionGlasses.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mt-32 relative w-[80%] md:w-[70%] mx-auto">
-          <div className="col-span-1 md:col-span-3 text-base text-black dark:text-white font-semibold flex flex-row items-cemter justify-between w-full">
+          <div className="col-span-1 md:col-span-3 text-black dark:text-white font-semibold flex flex-row items-cemter justify-between w-full text-sm md:text-base">
             <div className="flex flex-row gap-x-1 justify-center items-center">
               <Link to={"/"} className="font-light hover:underline">
                 Inicio
@@ -73,12 +47,11 @@ const SunGlasses: React.FC<SunGlassesProps> = ({ addToCart, showDetails, addedTo
             </div>
             <div>
               Mostrando{" "}
-              <span className="text-yellow-500">{filterProducts.length}</span>{" "}
+              <span className="text-yellow-500">{filterVisionGlasses.length}</span>{" "}
               productos
             </div>
-
           </div>
-          {filterProducts.map((product) => (
+          {filterVisionGlasses.map((product) => (
             <ProductItem
               key={product.id}
               id={product.id}

@@ -28,7 +28,7 @@ const ProductDetail: React.FC<ProductDetailProps> = ({
   return (
     <>
       <div className="grid grid-cols-4 items-center justify-center mt-32 w-[90%] md:w-[70%] mx-auto relative">
-        <div className="col-span-4 text-black dark:text-white flex flex-row items-center justify-between text-base cursor-pointer transition">
+        <div className="col-span-4 text-black dark:text-white flex flex-row items-center justify-between text-sm md:text-base cursor-pointer transition">
           <div>
             <Link to={"/"} className="text-black/60 dark:text-white/60">
               Inicio /

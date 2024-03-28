@@ -27,7 +27,6 @@ interface CartProps {
   substractProduct: (product: Products) => Products[];
   showDetails: (product: Products) => Products[];
   addToCart: (product: Products) => Products[];
-  isMobile: boolean;
 }
 
 const Cart: React.FC<CartProps> = ({
@@ -48,7 +47,7 @@ const Cart: React.FC<CartProps> = ({
       {allProducts.length ? (
         <>
           <div className="grid grid-cols-4 gap-4 text-black dark:text-white w-[80%] md:w-[70%] m-auto mt-32">
-            <div className="col-span-4 flex flex-row items-center justify-between w-full">
+            <div className="col-span-4 flex flex-row items-center justify-between w-full text-xs md:text-base">
               <div>
                 <Link to={"/"} className="text-black/60 dark:text-white/60">
                   Inicio /
@@ -61,11 +60,11 @@ const Cart: React.FC<CartProps> = ({
                 </Link>
               </div>
               <div
-                className="flex flex-row gap-2 items-center text-sm border-b-[0.5px] border-transparent hover:border-black dark:hover:border-white cursor-pointer"
+                className="flex flex-row gap-1 items-center text-xs md:text-base border-b-[0.5px] border-transparent hover:border-black dark:hover:border-white cursor-pointer"
                 onClick={backUp}
               >
                 <BiLeftArrowAlt className="size-4" />
-                Regresar
+                <p>Regresar</p>
               </div>
             </div>
             <div className="col-span-4 md:col-span-3 grid grid-cols-4 h-fit w-full">
