@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import "./Navbar.css";
 import { MdDarkMode, MdLightMode } from "react-icons/md";
 import { FaAngleDown } from "react-icons/fa";
+import { useSetMobile } from "../Hooks/useSetMobile";
 
 export interface NavbarProps {
   countProducts: number;
@@ -14,7 +15,6 @@ export interface NavbarProps {
 const Navbar: React.FC<NavbarProps> = ({ countProducts, countFavProducts }) => {
   const [collection, setCollection] = useState<boolean>(false);
   const [isDarkModeOn, setIsDarkModeOn] = useState<boolean>(false);
-  const [isMobile, setIsMobile] = useState<boolean>(false);
   const [isMenu, setIsMenu] = useState<boolean>(false);
 
   const toggleColorScheme = () => {
@@ -34,20 +34,7 @@ const Navbar: React.FC<NavbarProps> = ({ countProducts, countFavProducts }) => {
     }
   }, [setIsDarkModeOn]);
 
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth < 768) {
-        setIsMobile(true);
-      } else {
-        setIsMobile(false);
-      }
-    };
-    window.addEventListener("resize", handleResize);
-    handleResize();
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, [setIsMobile]);
+  const {isMobile} = useSetMobile();
 
   const toggleMenu = () => {
     setIsMenu(!isMenu);
