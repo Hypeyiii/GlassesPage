@@ -3,6 +3,7 @@ import { BsHeartFill } from "react-icons/bs";
 import "./ProductItem.css";
 import NotificationAdded from "../Components/NotificationAdded.tsx";
 import { Link } from "react-router-dom";
+import { useSetMobile } from "../Hooks/useSetMobile.tsx";
 
 export interface ProductItemProps {
   brand: string;
@@ -28,9 +29,17 @@ const ProductItem: React.FC<ProductItemProps> = ({
   isFav,
 }) => {
   const [isHover, setIsHover] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
   const [isAdded, setIsAdded] = useState(false);
   const [isAddedToFavs, setIsAddedToFavs] = useState(false);
+  const {isMobile} = useSetMobile();
+
+  useEffect(() => {
+    if(isMobile){
+      setIsHover(true);
+    } else {
+      setIsHover(false);
+    }
+  }, [isMobile]);
 
   const added = () => {
     setIsAdded(true);
@@ -44,20 +53,6 @@ const ProductItem: React.FC<ProductItemProps> = ({
     }
     return () => clearTimeout(timeout);
   }, [isAdded]);
-
-  const handleHover = () => {
-    setIsHover(!isHover);
-  };
-
-  useEffect(() => {
-    if (window.innerWidth < 768) {
-      setIsMobile(true);
-      setIsHover(true);
-    } else {
-      setIsMobile(false);
-      setIsHover(false);
-    }
-  }, [isMobile]);
 
   useEffect(() => {
     let time: number;
@@ -73,12 +68,12 @@ const ProductItem: React.FC<ProductItemProps> = ({
     <>
       <div
         className="flex flex-col gap-y-4"
-        onMouseEnter={handleHover}
-        onMouseLeave={handleHover}
+        onMouseEnter={()=> setIsHover(true)}
+        onMouseLeave={()=> setIsHover(false)}
       >
         <div
           className="text-white bg-[#f6f6f6] dark:bg-[#020202] rounded-sm hover:shadow-xl dark:hover:shadow-md hover:shadow-black/40 dark:hover:shadow-white/5 border-[0.5px]
-     border-black/10 hover:border-black/25 dark:border-white/10 dark:hover:border-white/20 transition flex-flex-col col-span-1 relative [&>div>img]:hover:scale-100 p-5 [&>div>#description]:hover:font-bold cursor-pointer h-fit w-full 
+     border-black/10 hover:border-black/25 dark:border-white/10 dark:hover:border-white/20 transition flex flex-col col-span-1 relative [&>div>img]:hover:scale-100 p-5 [&>div>#description]:hover:font-bold cursor-pointer h-fit w-full 
       opacity-85 hover:opacity-100"
         >
           <div className="absolute top-0 flex w-full justify-center">
