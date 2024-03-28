@@ -1,16 +1,24 @@
+import { useState, useContext } from "react";
+import { FiltersContext } from "../Context/filtersContext.tsx";
 export interface FiltersProps {
-  minPrice: number;
-  handleChangeMinPrice: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  handleChangeShape: (event: React.ChangeEvent<HTMLSelectElement>) => void;
-  handleChangeGenre: (event: React.ChangeEvent<HTMLSelectElement>) => void;
 }
 
-const Filters: React.FC<FiltersProps> = ({
-  handleChangeMinPrice,
-  minPrice,
-  handleChangeShape,
-  handleChangeGenre,
-}) => {
+const Filters: React.FC<FiltersProps> = () => {
+  const [minPrice, setMinPrice] = useState(0);
+
+  const handleChangeMinPrice = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setMinPrice(Number(event.target.value));
+    setFilters({ ...filters, minPrice: Number(event.target.value) });
+  };
+
+  const handleChangeShape = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setFilters({ ...filters, shape: event.target.value });
+  };
+
+  const handleChangeGenre = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setFilters({ ...filters, genre: event.target.value });
+  };
+  const {filters, setFilters} = useContext(FiltersContext);
   return (
     <>
       <div className="mt-32 text-white w-[80%] md:w-[70%] m-auto flex flex-col md:flex-row gap-4 justify-start md:justify-between items-start">
@@ -28,7 +36,10 @@ const Filters: React.FC<FiltersProps> = ({
           <span>${minPrice}</span>
         </div>
         <div className="flex flex-row gap-x-2 justify-center items-center text-black dark:text-white">
-          <label htmlFor="genre" className="text-sm md:text-xl w-[50px] md:w-auto">
+          <label
+            htmlFor="genre"
+            className="text-sm md:text-xl w-[50px] md:w-auto"
+          >
             Género
           </label>
           <select
@@ -46,7 +57,10 @@ const Filters: React.FC<FiltersProps> = ({
           </select>
         </div>
         <div className="flex flex-row gap-x-2 justify-center items-center text-black dark:text-white">
-          <label htmlFor="shape" className="text-sm md:text-xl w-[50px] md:w-auto">
+          <label
+            htmlFor="shape"
+            className="text-sm md:text-xl w-[50px] md:w-auto"
+          >
             Forma
           </label>
           <select
