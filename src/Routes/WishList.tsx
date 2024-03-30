@@ -14,6 +14,8 @@ export interface Products {
   category: string;
   genre: string;
   shape: string;
+  color: string;
+  stock: number;
 }
 
 interface WishlistProps {

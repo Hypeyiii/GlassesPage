@@ -13,6 +13,8 @@ interface Products {
   category: string;
   genre: string;
   shape: string;
+  color: string;
+  stock: number;
 }
 
 export function useCart() {
