@@ -1,86 +1,255 @@
 import { useState, useContext } from "react";
 import { FiltersContext } from "../Context/filtersContext.tsx";
-export interface FiltersProps {
-}
 
-const Filters: React.FC<FiltersProps> = () => {
-  const [minPrice, setMinPrice] = useState(0);
+const Filters = () => {
+  const [showColors, setShowColors] = useState(false);
+  const [showShapes, setShowShapes] = useState(false);
 
-  const handleChangeMinPrice = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setMinPrice(Number(event.target.value));
-    setFilters({ ...filters, minPrice: Number(event.target.value) });
+  const handleChangeShape = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.checked) {
+      setFilters({ ...filters, shape: event.target.value });
+    } else {
+      setFilters({ ...filters, shape: "all" });
+    }
   };
 
-  const handleChangeShape = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setFilters({ ...filters, shape: event.target.value });
+  const handleChangeColor = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.checked) {
+      setFilters({ ...filters, color: event.target.value });
+    } else {
+      setFilters({ ...filters, color: "all" });
+    }
   };
 
-  const handleChangeGenre = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setFilters({ ...filters, genre: event.target.value });
+  const { filters, setFilters } = useContext(FiltersContext);
+
+  const toggleColorMenu = () => {
+    setShowColors(!showColors);
+    setShowShapes(false);
   };
-  const {filters, setFilters} = useContext(FiltersContext);
+
+  if (showColors == true) {
+    document.querySelector("#button-color")?.classList.remove("opacity-30");
+  } else {
+    document.querySelector("#button-color")?.classList.add("opacity-30");
+  }
+
+  const toggleShapeMenu = () => {
+    setShowShapes(!showShapes);
+    setShowColors(false);
+  };
+
+  if (showShapes == true) {
+    document.querySelector("#button-shape")?.classList.remove("opacity-30");
+  } else {
+    document.querySelector("#button-shape")?.classList.add("opacity-30");
+  }
+
   return (
     <>
-      <div className="mt-32 text-white w-[80%] md:w-[70%] m-auto flex flex-col md:flex-row gap-4 justify-start md:justify-between items-start">
-        <div className="flex flex-row justify-start items-center gap-x-4 text-black dark:text-white text-xs md:text-base">
-          <label htmlFor="price">Precio a partir de:</label>
-          <input
-            type="range"
-            name="price"
-            id="price"
-            min="0"
-            max="500"
-            step="10"
-            onChange={handleChangeMinPrice}
-          />
-          <span>${minPrice}</span>
-        </div>
-        <div className="flex flex-row gap-x-2 justify-center items-center text-black dark:text-white">
-          <label
-            htmlFor="genre"
-            className="text-sm md:text-xl w-[50px] md:w-auto"
+      <div
+        className="mt-32 text-white w-[70%] m-auto flex flex-row gap-4 justify-center items-start gap-x-14
+       relative pt-10 mb-5 border-t-[1px] border-black/20 dark:border-white/20"
+      >
+        <div className="text-black dark:text-white flex justify-center items-center flex-col">
+          <button
+            className="text-sm md:text-2xl opacity-30 hover:opacity-100"
+            id="button-color"
+            onClick={toggleColorMenu}
           >
-            Género
-          </label>
-          <select
-            id="genre"
-            onChange={handleChangeGenre}
-            className="text-xs md:text-base px-4 py-2 w-[100px] text-black dark:text-white bg-white dark:bg-black border-[0.5text-xs md:text-base border-[0.5px] rounded-sm dark:border-white border-black"
-          >
-            <option value="all" className="">
-              Todos
-            </option>
-            <option value="man" className="">
-              Hombre
-            </option>
-            <option value="woman">Mujer</option>
-          </select>
+            Color
+          </button>
         </div>
-        <div className="flex flex-row gap-x-2 justify-center items-center text-black dark:text-white">
-          <label
-            htmlFor="shape"
-            className="text-sm md:text-xl w-[50px] md:w-auto"
+        <div className="text-black dark:text-white flex justify-center items-center flex-col">
+          <button
+            className="text-sm md:text-2xl opacity-30 hover:opacity-100"
+            id="button-shape"
+            onClick={toggleShapeMenu}
           >
             Forma
-          </label>
-          <select
-            id="shape"
-            onChange={handleChangeShape}
-            className="text-xs md:text-base px-4 py-2 w-[100px] text-black dark:text-white bg-white dark:bg-black border-[0.5text-xs md:text-base border-[0.5px] rounded-sm dark:border-white border-black"
-          >
-            <option value="all" className="">
-              Todos
-            </option>
-            <option value="squared" className="">
-              Cuadrados
-            </option>
-            <option value="circle">Circulares</option>
-            <option value="aviator">Aviador</option>
-            <option value="cat-eye">Cat-Eye</option>
-            <option value="heart">Corazón</option>
-          </select>
+          </button>
         </div>
       </div>
+      <div
+        id="menu-color"
+        className={`text-black dark:text-white  mx-auto p-2 max-w-fit grid-cols-3 md:grid-cols-4 justify-center items-center gap-2 md:gap-5 mb-5 
+          ${showColors ? "grid" : "hidden"}`}
+      >
+        <label
+          htmlFor="color"
+          className="flex flex-row  gap-x-2 text-xs md:text-sm lg:text-base"
+        >
+          <input
+            type="checkbox"
+            id="color-black"
+            value="black"
+            onChange={handleChangeColor}
+            className="size-3 md:size-5 rounded-full active:bg-white"
+            style={{ backgroundColor: "black" }}
+          />
+          <span>Negro</span>
+        </label>
+        <label
+          htmlFor="color"
+          className="flex flex-row  gap-x-2 text-xs md:text-sm lg:text-base"
+        >
+          <input
+            type="checkbox"
+            id="color-brown"
+            value="brown"
+            onChange={handleChangeColor}
+            className="size-3 md:size-5 rounded-full"
+            style={{ backgroundColor: "brown" }}
+          />
+          <span>Marrón</span>
+        </label>
+        <label
+          htmlFor="color"
+          className="flex flex-row  gap-x-2 text-xs md:text-sm lg:text-base"
+        >
+          <input
+            type="checkbox"
+            id="color-red"
+            value="red"
+            onChange={handleChangeColor}
+            className="size-3 md:size-5 rounded-full"
+            style={{ backgroundColor: "red" }}
+          />
+          <span>Rojo</span>
+        </label>
+        <label
+          htmlFor="color"
+          className="flex flex-row  gap-x-2 text-xs md:text-sm lg:text-base"
+        >
+          <input
+            type="checkbox"
+            id="color-pink"
+            value="pink"
+            onChange={handleChangeColor}
+            className="size-3 md:size-5 rounded-full"
+            style={{ backgroundColor: "pink" }}
+          />
+          <span>Rosa</span>
+        </label>
+        <label
+          htmlFor="color"
+          className="flex flex-row  gap-x-2 text-xs md:text-sm lg:text-base"
+        >
+          <input
+            type="checkbox"
+            id="color-gold"
+            value="gold"
+            onChange={handleChangeColor}
+            className="size-3 md:size-5 rounded-full"
+            style={{ backgroundColor: "gold" }}
+          />
+          <span>Oro</span>
+        </label>
+        <label
+          htmlFor="color"
+          className="flex flex-row  gap-x-2 text-xs md:text-sm lg:text-base"
+        >
+          <input
+            type="checkbox"
+            id="color-tornasol"
+            value="tornasol"
+            onChange={handleChangeColor}
+            className="size-3 md:size-5 rounded-full"
+            style={{ backgroundColor: "tornasol" }}
+          />
+          <span>Tornasol</span>
+        </label>
+        <label
+          htmlFor="color"
+          className="flex flex-row  gap-x-2 text-xs md:text-sm lg:text-base"
+        >
+          <input
+            type="checkbox"
+            id="color-blue"
+            value="blue"
+            onChange={handleChangeColor}
+            className="size-3 md:size-5 rounded-full"
+            style={{ backgroundColor: "blue" }}
+          />
+          <span>Azul</span>
+        </label>
+      </div>
+      <div
+            id="menu-color"
+            className={`text-black dark:text-white  mx-auto p-2 max-w-fit grid-cols-3 md:grid-cols-4 justify-center items-center gap-5 mb-5 
+          ${showShapes ? "grid" : "hidden"}`}
+          >
+            <label
+              htmlFor="shape"
+              className="flex flex-row  gap-x-2 text-xs md:text-sm lg:text-base"
+            >
+              <input
+                type="checkbox"
+                id="shape-square"
+                value="squared"
+                onChange={handleChangeShape}
+                className="size-3 md:size-5 rounded-full"
+                style={{ backgroundColor: "black" }}
+              />
+              <span>Cuadrados</span>
+            </label>
+            <label
+              htmlFor="shape"
+              className="flex flex-row  gap-x-2 text-xs md:text-sm lg:text-base"
+            >
+              <input
+                type="checkbox"
+                id="shape-round"
+                value="circle"
+                onChange={handleChangeShape}
+                className="size-3 md:size-5 rounded-full"
+                style={{ backgroundColor: "brown" }}
+              />
+              <span>Circulares</span>
+            </label>
+            <label
+              htmlFor="shape"
+              className="flex flex-row  gap-x-2 text-xs md:text-sm lg:text-base"
+            >
+              <input
+                type="checkbox"
+                id="shape-aviator"
+                value="aviator"
+                onChange={handleChangeShape}
+                className="size-3 md:size-5 rounded-full"
+                style={{ backgroundColor: "red" }}
+              />
+              <span>Aviador</span>
+            </label>
+            <label
+              htmlFor="shape"
+              className="flex flex-row  gap-x-2 text-xs md:text-sm lg:text-base"
+            >
+              <input
+                type="checkbox"
+                id="shape-cat-eye"
+                value="cat-eye"
+                onChange={handleChangeShape}
+                className="size-3 md:size-5 rounded-full"
+                style={{ backgroundColor: "pink" }}
+              />
+              <span>Cat-eye</span>
+            </label>
+            <label
+              htmlFor="shape"
+              className="flex flex-row  gap-x-2 text-xs md:text-sm lg:text-base"
+            >
+              <input
+                type="checkbox"
+                id="shape-heart"
+                value="heart"
+                onChange={handleChangeShape}
+                className="size-3 md:size-5 rounded-full"
+                style={{ backgroundColor: "gold" }}
+              />
+              <span>Corazón</span>
+            </label>
+          </div>
     </>
   );
 };
