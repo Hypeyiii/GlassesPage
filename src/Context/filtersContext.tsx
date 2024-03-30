@@ -9,6 +9,7 @@ export const FiltersContext = createContext({
     minPrice: 0,
     genre: "all",
     shape: "all",
+    color: "all",
   },
   setFilters: (filters: any) => {filters},
 });
@@ -18,6 +19,7 @@ export function FiltersProvider({ children }: Filters) {
     minPrice: 0,
     genre: "all",
     shape: "all",
+    color: "all",
   });
   return (
     <FiltersContext.Provider
