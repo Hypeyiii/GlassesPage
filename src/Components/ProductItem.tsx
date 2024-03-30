@@ -4,17 +4,19 @@ import "./ProductItem.css";
 import NotificationAdded from "../Components/NotificationAdded.tsx";
 import { Link } from "react-router-dom";
 import { useSetMobile } from "../Hooks/useSetMobile.tsx";
+import TextAnimated from "./TextAnimated.tsx";
 
 export interface ProductItemProps {
   brand: string;
   price: number;
   image: string;
   description: string;
+  stock: number;
   addedToCart: () => void;
   id: number;
   showDetails: () => void;
   addedToFav: () => void;
-  isFav: boolean; 
+  isFav: boolean;
 }
 
 const ProductItem: React.FC<ProductItemProps> = ({
@@ -22,6 +24,7 @@ const ProductItem: React.FC<ProductItemProps> = ({
   price,
   image,
   description,
+  stock,
   addedToCart,
   id,
   showDetails,
@@ -31,10 +34,10 @@ const ProductItem: React.FC<ProductItemProps> = ({
   const [isHover, setIsHover] = useState(false);
   const [isAdded, setIsAdded] = useState(false);
   const [isAddedToFavs, setIsAddedToFavs] = useState(false);
-  const {isMobile} = useSetMobile();
+  const { isMobile } = useSetMobile();
 
   useEffect(() => {
-    if(isMobile){
+    if (isMobile) {
       setIsHover(true);
     } else {
       setIsHover(false);
@@ -67,14 +70,14 @@ const ProductItem: React.FC<ProductItemProps> = ({
   return (
     <>
       <div
-        className="flex flex-col gap-y-4"
-        onMouseEnter={()=> setIsHover(true)}
-        onMouseLeave={()=> setIsHover(false)}
+        className={`flex flex-col gap-y-4 relative`}
+        onMouseEnter={stock === 0 ? () => setIsHover(false) : () => setIsHover(true)}
+        onMouseLeave={() => setIsHover(false)}
       >
         <div
-          className="text-white bg-[#f6f6f6] dark:bg-[#020202] rounded-sm hover:shadow-xl dark:hover:shadow-md hover:shadow-black/40 dark:hover:shadow-white/5 border-[0.5px]
-     border-black/10 hover:border-black/25 dark:border-white/10 dark:hover:border-white/20 transition flex flex-col col-span-1 relative [&>div>img]:hover:scale-100 p-5 [&>div>#description]:hover:font-bold cursor-pointer h-fit w-full 
-      opacity-85 hover:opacity-100"
+          className={`text-white bg-[#f6f6f6] dark:bg-[#020202] rounded-sm ${stock === 0 ? "opacity-30" : "hover:shadow-xl dark:hover:shadow-md hover:shadow-black/40 dark:hover:shadow-white/5 border-[0.5px] border-black/10 hover:border-black/25 dark:border-white/10 dark:hover:border-white/20"} 
+          transition flex flex-col col-span-1 relative [&>div>img]:hover:scale-100 p-5 [&>div>#description]:hover:font-bold cursor-pointer h-fit w-full 
+          opacity-85 hover:opacity-100`}
         >
           <div className="absolute top-0 flex w-full justify-center">
             <div
@@ -97,9 +100,7 @@ const ProductItem: React.FC<ProductItemProps> = ({
               }`}
             />
           </div>
-          <div
-            className="relative col-span-5 md:col-span-3 m-auto flex flex-col justify-center items-center gap-y-1 size-[150px] md:size-[250px]"
-          >
+          <div className="relative col-span-5 md:col-span-3 m-auto flex flex-col justify-center items-center gap-y-1 size-[150px] md:size-[250px]">
             <Link to={`/ProductDetail/${id}`}>
               <img
                 src={image}
@@ -139,6 +140,13 @@ const ProductItem: React.FC<ProductItemProps> = ({
             </p>
           </div>
         </div>
+        {stock === 0 ? (
+          <div className="text-white dark:text-white absolute inset-0 m-auto flex justify-center items-center">
+            <TextAnimated text={"Agotado:("}/>
+          </div>
+        ) : (
+          ""
+        )}
       </div>
 
       <NotificationAdded
