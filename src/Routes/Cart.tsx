@@ -17,6 +17,8 @@ export interface Products {
   category: string;
   genre: string;
   shape: string;
+  color: string;
+  stock: number;
 }
 
 interface CartProps {
@@ -52,10 +54,7 @@ const Cart: React.FC<CartProps> = ({
                 <Link to={"/"} className="text-black/60 dark:text-white/60">
                   Inicio /
                 </Link>{" "}
-                <Link
-                  to={`/Cart`}
-                  className="text-black dark:text-white"
-                >
+                <Link to={`/Cart`} className="text-black dark:text-white">
                   Cart
                 </Link>
               </div>

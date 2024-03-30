@@ -27,6 +27,8 @@ interface Products {
   category: string;
   genre: string;
   shape: string;
+  color: string;
+  stock: number;
 }
 function App() {
   const {

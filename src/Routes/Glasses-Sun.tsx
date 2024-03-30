@@ -15,6 +15,8 @@ interface Products {
   category: string;
   genre: string;
   shape: string;
+  color: string;
+  stock: number;
 }
 
 interface SunGlassesProps {
@@ -36,7 +38,7 @@ const SunGlasses: React.FC<SunGlassesProps> = ({
       <Filters
       />
       {filterSunGlasses.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mt-32 relative w-[80%] md:w-[70%] mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 relative w-[80%] md:w-[70%] mx-auto">
           <div className="col-span-1 md:col-span-3 text-black dark:text-white font-semibold flex flex-row items-cemter justify-between w-full text-sm md:text-base">
             <div className="flex flex-row gap-x-1 justify-center items-center">
               <Link to={"/"} className="font-light hover:underline">
@@ -58,6 +60,7 @@ const SunGlasses: React.FC<SunGlassesProps> = ({
               brand={product.brand}
               price={product.price}
               image={product.image}
+              stock={product.stock}
               description={product.description}
               addedToCart={() => addToCart(product as Products)}
               addedToFav={() => addedToFav(product as Products)}
