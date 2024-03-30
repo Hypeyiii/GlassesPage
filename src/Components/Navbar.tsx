@@ -6,6 +6,7 @@ import "./Navbar.css";
 import { MdDarkMode, MdLightMode } from "react-icons/md";
 import { FaAngleDown } from "react-icons/fa";
 import { useSetMobile } from "../Hooks/useSetMobile";
+import TextAnimated from "./TextAnimated";
 
 export interface NavbarProps {
   countProducts: number;
@@ -34,7 +35,7 @@ const Navbar: React.FC<NavbarProps> = ({ countProducts, countFavProducts }) => {
     }
   }, [setIsDarkModeOn]);
 
-  const {isMobile} = useSetMobile();
+  const { isMobile } = useSetMobile();
 
   const toggleMenu = () => {
     setIsMenu(!isMenu);
@@ -54,12 +55,8 @@ const Navbar: React.FC<NavbarProps> = ({ countProducts, countFavProducts }) => {
         {isMobile ? (
           <>
             <BiMenu className="size-6" onClick={toggleMenu} />
-            <Link
-              to={"/"}
-              className="font-thin inline-flex text-3xl
-      animate-background-shine bg-[linear-gradient(110deg,#939393,45%,#1e293b,55%,#939393)] bg-[length:250%_100%] bg-clip-text text-transparent"
-            >
-              Glasses
+            <Link to={"/"}>
+              <TextAnimated text={"Glasses"} />
             </Link>
             <Link
               to={"/Cart"}
@@ -86,7 +83,7 @@ const Navbar: React.FC<NavbarProps> = ({ countProducts, countFavProducts }) => {
               onClick={() => setCollection(!collection)}
             >
               Colecciones
-              <FaAngleDown className="size-4"/>
+              <FaAngleDown className="size-4" />
               {collection && (
                 <div className="absolute top-[75px]  bg-white dark:bg-black border-[1px] border-black dark:border-white z-50 text-wrap w-[150px] ">
                   <div className="flex flex-col text-xs md:text-sm">
