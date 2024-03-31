@@ -71,11 +71,11 @@ const ProductItem: React.FC<ProductItemProps> = ({
     <>
       <div
         className={`flex flex-col gap-y-4 relative`}
-        onMouseEnter={stock === 0 ? () => setIsHover(false) : () => setIsHover(true)}
+        onMouseEnter={stock < 1 ? () => setIsHover(false) : () => setIsHover(true)}
         onMouseLeave={() => setIsHover(false)}
       >
         <div
-          className={`text-white bg-[#f6f6f6] dark:bg-[#020202] rounded-sm ${stock === 0 ? "opacity-30" : "hover:shadow-xl dark:hover:shadow-md hover:shadow-black/40 dark:hover:shadow-white/5 border-[0.5px] border-black/10 hover:border-black/25 dark:border-white/10 dark:hover:border-white/20"} 
+          className={`text-white bg-[#f6f6f6] dark:bg-[#020202] rounded-sm ${stock < 1 ? "opacity-30" : "hover:shadow-xl dark:hover:shadow-md hover:shadow-black/40 dark:hover:shadow-white/5 border-[0.5px] border-black/10 hover:border-black/25 dark:border-white/10 dark:hover:border-white/20"} 
           transition flex flex-col col-span-1 relative [&>div>img]:hover:scale-100 p-5 [&>div>#description]:hover:font-bold cursor-pointer h-fit w-full 
           opacity-85 hover:opacity-100`}
         >
@@ -140,9 +140,9 @@ const ProductItem: React.FC<ProductItemProps> = ({
             </p>
           </div>
         </div>
-        {stock === 0 ? (
-          <div className="text-white dark:text-white absolute inset-0 m-auto flex justify-center items-center">
-            <TextAnimated text={"Agotado:("}/>
+        {stock < 1 ? (
+          <div className="text-white dark:text-white absolute inset-0 m-auto flex justify-center items-center text-center text-wrap">
+            <TextAnimated text={"Agotado por el momento"}/>
           </div>
         ) : (
           ""

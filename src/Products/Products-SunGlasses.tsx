@@ -81,7 +81,7 @@ export const sunglasses = [
     image:
       "https://i0.wp.com/opticajuan23.com/wp-content/uploads/2023/12/WM2605.png?fit=900%2C900&ssl=1",
     quantity: 1,
-    stock: 0,
+    stock: 1,
   },
   {
     id: 21,
@@ -145,7 +145,7 @@ export const sunglasses = [
     image:
       "https://cdnx.jumpseller.com/buyitnowchile/image/22731426/resize/740/400?1647471998",
     quantity: 1,
-    stock: 10,
+    stock: 0,
   },
   {
     id: 44,
@@ -184,6 +184,7 @@ export const sunglasses = [
     price: 100,
     image: "https://assets2.oakley.com/cdn-record-files-pi/2f997b67-6a62-4d13-997d-aafb011af6ae/61ce491d-3011-49fc-be29-ae940031d61b/0OO9460__946002__P21__shad__qt.png",
     quantity:1,
+    stock: 10,
   },
   {
     id: 101,
