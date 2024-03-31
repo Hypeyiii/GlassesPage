@@ -75,7 +75,7 @@ const ProductItem: React.FC<ProductItemProps> = ({
         onMouseLeave={() => setIsHover(false)}
       >
         <div
-          className={`text-white bg-[#f6f6f6] dark:bg-[#020202] rounded-sm ${stock < 1 ? "opacity-30" : "hover:shadow-xl dark:hover:shadow-md hover:shadow-black/40 dark:hover:shadow-white/5 border-[0.5px] border-black/10 hover:border-black/25 dark:border-white/10 dark:hover:border-white/20"} 
+          className={`text-white bg-[#f6f6f6] dark:bg-[#020202] rounded-sm ${stock < 1 ? "opacity-30" : "hover:shadow-xl dark:hover:shadow md:hover:shadow-black/40 dark:hover:shadow-white/5 border-[0.5px] border-black/10 hover:border-black/25 dark:border-white/10 dark:hover:border-white/20"} 
           transition flex flex-col col-span-1 relative [&>div>img]:hover:scale-100 p-5 [&>div>#description]:hover:font-bold cursor-pointer h-fit w-full 
           opacity-85 hover:opacity-100`}
         >
