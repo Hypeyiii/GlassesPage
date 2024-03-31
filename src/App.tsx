@@ -14,6 +14,7 @@ import { useCart } from "./Hooks/useCart";
 import { useFav } from "./Hooks/useFav";
 import { FiltersProvider } from "./Context/filtersContext";
 import { useShowDetails } from "./Hooks/useShowDetails";
+import RoutesToTop from "./Components/RoutesToTop";
 
 interface Products {
   id: number;
@@ -51,10 +52,12 @@ function App() {
 
   const { selectedProduct, showProductDetails } = useShowDetails();
 
+  RoutesToTop();
+
   return (
-    <FiltersProvider>
-      <div className="absolute top-0 left-0 right-0 bottom-0 overflow-y-auto z-[-2] bg-white dark:bg-black">
-        <Router>
+    <> 
+      <FiltersProvider>
+        <div className="absolute top-0 left-0 right-0 bottom-0 overflow-y-auto z-[-2] bg-white dark:bg-black">
           <Navbar
             countProducts={countProducts}
             countFavProducts={countFavProducts}
@@ -126,9 +129,9 @@ function App() {
             <Route path="/User" element={<Loggin />} />
           </Routes>
           <Footer />
-        </Router>
-      </div>
-    </FiltersProvider>
+        </div>
+      </FiltersProvider>
+    </>
   );
 }
 export default App;
