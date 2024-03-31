@@ -1,29 +1,23 @@
 import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 
-export default function useGoToTopButton() {
+export default function ScrollToTop() {
+  const location = useLocation();
   const [showButton, setShowButton] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 100) {
-        setShowButton(true);
-      } else {
-        setShowButton(false);
-        document.querySelector("#arrow-up")?.classList.remove("rotate-0");
-      }
-      return setShowButton;
-    };
+    if (window.scrollY < 200) {
+      setShowButton(true);
+      console.log(showButton)
+    } else {
+      setShowButton(false);
+      {console.log(showButton)}
+    }
+  }, [location, showButton]);
 
-    window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
   const goToTop = () => {
-    window.scrollTo(0, 0);
-    document.querySelector("#arrow-up")?.classList.add("rotate-0");
-    console.log("arriba");
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
+
   return { goToTop, showButton };
 }
