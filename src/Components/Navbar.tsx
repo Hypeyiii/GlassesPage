@@ -45,6 +45,7 @@ const Navbar: React.FC<NavbarProps> = ({ countProducts, countFavProducts }) => {
       document.querySelector("body")?.classList.remove("overflow-hidden");
     }
   };
+
   return (
     <>
       <div
