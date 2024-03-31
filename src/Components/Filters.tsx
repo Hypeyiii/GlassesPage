@@ -1,5 +1,6 @@
 import { useState, useContext } from "react";
 import { FiltersContext } from "../Context/filtersContext.tsx";
+import './Animations.css'
 
 const Filters = () => {
   const [showColors, setShowColors] = useState(false);
@@ -8,16 +9,32 @@ const Filters = () => {
   const handleChangeShape = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.checked) {
       setFilters({ ...filters, shape: event.target.value });
+      animateProducts(true);
     } else {
       setFilters({ ...filters, shape: "all" });
+      animateProducts(false);
     }
   };
+  
+  const animateProducts = (animate: boolean) => {
+    const products = document.querySelectorAll("#product-item");
+    products.forEach(product => {
+      if (animate) {
+        product.classList.add("scale-in-center");
+      } else {
+        product.classList.remove("scale-in-center");
+      }
+    });
+  };
+  
 
   const handleChangeColor = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.checked) {
       setFilters({ ...filters, color: event.target.value });
+      animateProducts(true);
     } else {
       setFilters({ ...filters, color: "all" });
+      animateProducts(true);
     }
   };
 
@@ -72,8 +89,8 @@ const Filters = () => {
       </div>
       <div
         id="menu-color"
-        className={`text-black dark:text-white  mx-auto p-2 max-w-fit grid-cols-3 md:grid-cols-4 justify-center items-center gap-2 md:gap-5 mb-5 
-          ${showColors ? "grid" : "hidden"}`}
+        className={`text-black dark:text-white  mx-auto p-2 max-w-fit grid grid-cols-3 md:grid-cols-4 justify-center items-center gap-2 md:gap-5 mb-5 
+          ${showColors ? "scale-in-center" : "hidden"}`}
       >
         <label
           htmlFor="color"
@@ -175,9 +192,9 @@ const Filters = () => {
         </label>
       </div>
       <div
-            id="menu-color"
-            className={`text-black dark:text-white  mx-auto p-2 max-w-fit grid-cols-3 md:grid-cols-4 justify-center items-center gap-5 mb-5 
-          ${showShapes ? "grid" : "hidden"}`}
+            id="menu-shape"
+            className={`text-black dark:text-white  mx-auto p-2 max-w-fit grid grid-cols-3 md:grid-cols-4 justify-center items-center gap-5 mb-5
+          ${showShapes ? "scale-in-center" : "hidden"}`}
           >
             <label
               htmlFor="shape"
