@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { BsHeartFill } from "react-icons/bs";
-import "./ProductItem.css";
+import "./Animations.css";
 import NotificationAdded from "../Components/NotificationAdded.tsx";
 import { Link } from "react-router-dom";
 import { useSetMobile } from "../Hooks/useSetMobile.tsx";
@@ -75,6 +75,7 @@ const ProductItem: React.FC<ProductItemProps> = ({
         onMouseLeave={() => setIsHover(false)}
       >
         <div
+          id="product-item"
           className={`text-white bg-[#f6f6f6] dark:bg-[#020202] rounded-sm ${stock === 0 ? "opacity-30" : "hover:shadow-xl dark:hover:shadow-md hover:shadow-black/40 dark:hover:shadow-white/5 border-[0.5px] border-black/10 hover:border-black/25 dark:border-white/10 dark:hover:border-white/20 opacity-85 hover:opacity-100"} 
           transition flex flex-col col-span-1 relative [&>div>img]:hover:scale-100 p-5 [&>div>#description]:hover:font-bold cursor-pointer h-fit w-full `}
         >
