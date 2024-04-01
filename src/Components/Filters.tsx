@@ -70,7 +70,7 @@ const Filters = () => {
       >
         <div className="text-black dark:text-white flex justify-center items-center flex-col">
           <button
-            className="text-sm md:text-2xl opacity-30 hover:opacity-100"
+            className="text-sm md:text-2xl opacity-30 md:hover:opacity-100"
             id="button-color"
             onClick={toggleColorMenu}
           >
@@ -79,7 +79,7 @@ const Filters = () => {
         </div>
         <div className="text-black dark:text-white flex justify-center items-center flex-col">
           <button
-            className="text-sm md:text-2xl opacity-30 hover:opacity-100"
+            className="text-sm md:text-2xl opacity-30 md:hover:opacity-100"
             id="button-shape"
             onClick={toggleShapeMenu}
           >
