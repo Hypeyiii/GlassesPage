@@ -1,41 +1,24 @@
 import { BiCart, BiMenu, BiSearch, BiUser } from "react-icons/bi";
 import { HiHeart } from "react-icons/hi";
-import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
-import "./Navbar.css";
+import { NavLink } from "react-router-dom";
+import { useState } from "react";
+import "./Animations.css";
 import { MdDarkMode, MdLightMode } from "react-icons/md";
 import { FaAngleDown } from "react-icons/fa";
 import { useSetMobile } from "../Hooks/useSetMobile";
 import TextAnimated from "./TextAnimated";
+import { useCart } from "../Hooks/useCart";
+import { useFav } from "../Hooks/useFav";
+import { useDarkMode } from "../Hooks/useDarkMode";
 
-export interface NavbarProps {
-  countProducts: number;
-  countFavProducts: number;
-}
-
-const Navbar: React.FC<NavbarProps> = ({ countProducts, countFavProducts }) => {
+const Navbar = () => {
   const [collection, setCollection] = useState<boolean>(false);
-  const [isDarkModeOn, setIsDarkModeOn] = useState<boolean>(false);
   const [isMenu, setIsMenu] = useState<boolean>(false);
 
-  const toggleColorScheme = () => {
-    document.querySelector("body")?.classList.toggle("dark");
-    setIsDarkModeOn(!isDarkModeOn);
-  };
-  useEffect(() => {
-    const prefersDarkMode =
-      window.matchMedia &&
-      window.matchMedia("(prefers-color-scheme: dark)").matches;
-    if (prefersDarkMode) {
-      document.querySelector("body")?.classList.add("dark");
-      setIsDarkModeOn(true);
-    } else {
-      document.querySelector("body")?.classList.remove("dark");
-      setIsDarkModeOn(false);
-    }
-  }, [setIsDarkModeOn]);
-
+  const { toggleColorScheme, isDarkModeOn } = useDarkMode();
   const { isMobile } = useSetMobile();
+  const { countProducts } = useCart();
+  const { countFavProducts } = useFav();
 
   const toggleMenu = () => {
     setIsMenu(!isMenu);
@@ -56,10 +39,10 @@ const Navbar: React.FC<NavbarProps> = ({ countProducts, countFavProducts }) => {
         {isMobile ? (
           <>
             <BiMenu className="size-6" onClick={toggleMenu} />
-            <Link to={"/"}>
-              <TextAnimated text={"Glasses"} />
-            </Link>
-            <Link
+            <NavLink to={"/"}>
+              <TextAnimated text={"Glasses"} fontSize="24x" />
+            </NavLink>
+            <NavLink
               to={"/Cart"}
               className="hover:font-semibold relative hover:text-black dark:hover:text-white [&>div]:hover:bg-white transition"
             >
@@ -67,18 +50,14 @@ const Navbar: React.FC<NavbarProps> = ({ countProducts, countFavProducts }) => {
               <div className="absolute text-xs text-black bg-white/80 rounded-full px-1 right-[-5px] top-[15px]">
                 {countProducts}
               </div>
-            </Link>
+            </NavLink>
           </>
         ) : (
           <>
             {" "}
-            <Link
-              to={"/"}
-              className="font-thin inline-flex text-3xl
-      animate-background-shine bg-[linear-gradient(110deg,#939393,45%,#1e293b,55%,#939393)] bg-[length:250%_100%] bg-clip-text text-transparent"
-            >
-              Glasses
-            </Link>
+            <NavLink to={"/"}>
+              <TextAnimated text={"Glasses"} fontSize="3xl" />
+            </NavLink>
             <div
               className="relative flex flex-row gap-x-2 h-full items-center justify-center hover:bg-black/10 dark:hover:bg-white/30 transition p-6 font-semibold cursor-pointer"
               onClick={() => setCollection(!collection)}
@@ -88,18 +67,18 @@ const Navbar: React.FC<NavbarProps> = ({ countProducts, countFavProducts }) => {
               {collection && (
                 <div className="absolute top-[75px]  bg-white dark:bg-black border-[1px] border-black dark:border-white z-50 text-wrap w-[150px] ">
                   <div className="flex flex-col text-xs md:text-sm">
-                    <Link
+                    <NavLink
                       to="/Sun-Glasses"
                       className="dark:hover:bg-white dark:hover:text-black hover:bg-black hover:text-white px-4 py-2"
                     >
                       Lentes de Sol
-                    </Link>
-                    <Link
+                    </NavLink>
+                    <NavLink
                       to="/Vision-Glasses"
                       className="dark:hover:bg-white dark:hover:text-black hover:bg-black hover:text-white px-4 py-2"
                     >
                       Lentes de Vista
-                    </Link>
+                    </NavLink>
                   </div>
                 </div>
               )}
@@ -108,13 +87,15 @@ const Navbar: React.FC<NavbarProps> = ({ countProducts, countFavProducts }) => {
               <li className="hover:font-semibold list-none cursor-pointer hover:text-black dark:hover:text-white transition">
                 <BiSearch className="size-6" />
               </li>
-              <Link
+              <NavLink
+                id="nav-item"
                 to={"/User"}
                 className="hover:font-semibold hover:text-black transition dark:hover:text-white"
               >
                 <BiUser className="size-6" />
-              </Link>
-              <Link
+              </NavLink>
+              <NavLink
+                id="nav-item"
                 to={"/Cart"}
                 className="hover:font-semibold relative hover:text-black dark:hover:text-white [&>div]:hover:bg-white transition"
               >
@@ -122,8 +103,9 @@ const Navbar: React.FC<NavbarProps> = ({ countProducts, countFavProducts }) => {
                 <div className="absolute text-xs text-white bg-black/80 dark:text-black dark:bg-white/80 rounded-full px-1 right-[-5px] top-[15px]">
                   {countProducts}
                 </div>
-              </Link>
-              <Link
+              </NavLink>
+              <NavLink
+                id="nav-item"
                 to={"/WishList"}
                 className="hover:font-semibold relative hover:text-black dark:hover:text-white [&>div]:hover:bg-white transition"
               >
@@ -131,7 +113,7 @@ const Navbar: React.FC<NavbarProps> = ({ countProducts, countFavProducts }) => {
                 <div className="absolute text-xs text-white bg-black/80 dark:text-black dark:bg-white/80 rounded-full px-1 right-[-5px] top-[15px]">
                   {countFavProducts}
                 </div>
-              </Link>
+              </NavLink>
               <li
                 className="hover:font-semibold list-none cursor-pointer hover:text-black dark:hover:text-white transition"
                 onClick={toggleColorScheme}
@@ -156,18 +138,18 @@ const Navbar: React.FC<NavbarProps> = ({ countProducts, countFavProducts }) => {
             className="slide-in-left fixed flex flex-col w-full h-[70%] text-black dark:text-white justify-between items-center mt-32 z-50"
             onClick={toggleMenu}
           >
-            <Link
+            <NavLink
               to={"/Sun-Glasses"}
               className="font-bold text-base hover:bg-black/10 dark:hover:bg-white/30 transition px-4 cursor-pointer"
             >
               Lentes de Sol
-            </Link>
-            <Link
+            </NavLink>
+            <NavLink
               to={"/Vision-Glasses"}
               className="font-bold text-base hover:bg-black/10 dark:hover:bg-white/30 transition px-4"
             >
               Lentes de Vision
-            </Link>
+            </NavLink>
             <li
               className="hover:font-semibold list-none cursor-pointer hover:text-black dark:hover:text-white transition
             flex flex-row items-center gap-x-1 text-base font-semibold"
@@ -175,14 +157,14 @@ const Navbar: React.FC<NavbarProps> = ({ countProducts, countFavProducts }) => {
               <BiSearch className="size-6" />
               <p>Buscar</p>
             </li>
-            <Link
+            <NavLink
               to={"/User"}
               className="hover:font-semibold hover:text-black transition dark:hover:text-white flex flex-row items-center gap-x-1 text-base font-semibold"
             >
               <BiUser className="size-6" />
               <p>Usuario</p>
-            </Link>
-            <Link
+            </NavLink>
+            <NavLink
               to={"/WishList"}
               className="hover:font-semibold relative hover:text-black dark:hover:text-white [&>div]:hover:bg-white transition
                 flex flex-row items-center gap-x-1 text-base font-semibold"
@@ -192,7 +174,7 @@ const Navbar: React.FC<NavbarProps> = ({ countProducts, countFavProducts }) => {
               <div className="absolute text-xs text-black bg-white/80 rounded-full px-1 right-[70px] top-[15px]">
                 {countFavProducts}
               </div>
-            </Link>
+            </NavLink>
             <li
               className="hover:font-semibold list-none cursor-pointer hover:text-black dark:hover:text-white transition"
               onClick={toggleColorScheme}
