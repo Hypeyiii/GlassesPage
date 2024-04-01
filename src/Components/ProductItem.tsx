@@ -14,7 +14,6 @@ export interface ProductItemProps {
   stock: number;
   addedToCart: () => void;
   id: number;
-  showDetails: () => void;
   addedToFav: () => void;
   isFav: boolean;
 }
@@ -27,7 +26,6 @@ const ProductItem: React.FC<ProductItemProps> = ({
   stock,
   addedToCart,
   id,
-  showDetails,
   addedToFav,
   isFav,
 }) => {
@@ -101,12 +99,11 @@ const ProductItem: React.FC<ProductItemProps> = ({
             />
           </div>
           <div className="relative col-span-5 md:col-span-3 m-auto flex flex-col justify-center items-center gap-y-1 size-[150px] md:size-[250px]">
-            <Link to={`/ProductDetail/${id}`}>
+            <Link to={`/product/${id}`}>
               <img
                 src={image}
                 alt={brand + " image"}
                 className="transition"
-                onClick={showDetails}
               />
             </Link>
             {
@@ -142,7 +139,7 @@ const ProductItem: React.FC<ProductItemProps> = ({
         </div>
         {stock === 0 ? (
           <div className="text-white dark:text-white absolute inset-0 m-auto flex justify-center items-center text-center text-wrap">
-            <TextAnimated text={"Agotado por el momento"}/>
+            <TextAnimated text={"Agotado por el momento"} fontSize="32px"/>
           </div>
         ) : (
           ""
