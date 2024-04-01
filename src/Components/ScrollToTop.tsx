@@ -1,7 +1,7 @@
 import { IoArrowUp } from "react-icons/io5";
 import useGoToTopButton from "../Hooks/useGoToTopButton.tsx";
 
-export const ScrollToTop = () => {
+const ScrollToTop = () => {
   const { goToTop, showButton } = useGoToTopButton();
 
   return (
@@ -17,9 +17,10 @@ export const ScrollToTop = () => {
       >
         <IoArrowUp
           id="arrow-up"
-          className="size-5 md:size-6 transition-all duration-200"
+          className="size-5 md:size-6 transition-all duration-200 -rotate-45"
         />
       </button>
     </div>
   );
 };
+export default ScrollToTop;
