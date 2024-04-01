@@ -1,21 +1,6 @@
 import { useContext, useEffect } from "react";
 import { CartContext } from "../Context/cartContext";
-
-interface Products {
-  id: number;
-  brand: string;
-  price: number;
-  image: string;
-  description: string;
-  quantity: number;
-  total: number;
-  countProducts: number;
-  category: string;
-  genre: string;
-  shape: string;
-  color: string;
-  stock: number;
-}
+import { Products } from "../Interface/Products";
 
 export function useCart() {
   const {
@@ -62,7 +47,7 @@ export function useCart() {
 
   const deleteProduct = (product: Products): Products[] => {
     const newProducts = allProducts.filter((p) => p.id !== product.id);
-    setTotal(total - product.price);
+    setTotal(total - (product.price * product.quantity));
     setCountProducts(countProducts - product.quantity);
     setAllProducts(newProducts);
     return newProducts;
