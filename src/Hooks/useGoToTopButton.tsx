@@ -8,15 +8,17 @@ export default function ScrollToTop() {
   useEffect(() => {
     if (window.scrollY < 200) {
       setShowButton(true);
-      console.log(showButton)
+      console.log(showButton);
     } else {
       setShowButton(false);
-      {console.log(showButton)}
+      {
+        console.log(showButton);
+      }
     }
   }, [location, showButton]);
 
   const goToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
   };
 
   return { goToTop, showButton };
