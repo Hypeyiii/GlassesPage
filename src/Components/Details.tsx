@@ -1,5 +1,5 @@
 import { Link, useParams } from "react-router-dom";
-import sunglasses from "../Products/Products-SunGlasses";
+import sunglasses from "../Products/Products";
 import { BsArrowLeft } from "react-icons/bs";
 import { AiFillHeart } from "react-icons/ai";
 import NotificationAdded from "./NotificationAdded";

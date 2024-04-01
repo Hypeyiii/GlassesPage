@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { FiltersContext } from "../Context/filtersContext.tsx";
-import sunglasses from "../Products/Products-SunGlasses.tsx";
+import sunglasses from "../Products/Products.tsx";
 
 export function useFilters() {
   const { filters } = useContext(FiltersContext);
