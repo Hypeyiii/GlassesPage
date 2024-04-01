@@ -88,6 +88,8 @@ export const sunglasses = [
     brand: "Vision Glasses",
     description: "Vision Glasses with a black frame and black lenses",
     category: "Vision-Glasses",
+    color: "gold",
+    shape: "circle",
     price: 100,
     image:
       "https://ucarecdn.com/d5fec2d5-308a-45c0-9c54-060cb4153089/-/format/auto/-/preview/3000x3000/-/quality/lighter/",
@@ -99,6 +101,8 @@ export const sunglasses = [
     brand: "Vision Glasses",
     description: "Vision Glasses with a black frame and black lenses",
     category: "Vision-Glasses",
+    color: "pink",
+    shape: "cat-eye",
     price: 100,
     image:
       "https://lux.mx/cdn/shop/products/Lente-Oftalmico-Blue-Light-Prive-Revaux-THECHLOE-Rosa-840219204079_1_ce30129f-b5a0-4c96-b54b-42eafd134f23.png?v=1675202426&width=533",
