@@ -1,5 +1,5 @@
 import { BiCheckCircle } from "react-icons/bi";
-import "./NotificationAdded.css";
+import "./Animations.css";
 
 export interface NotificacionAddedProps {
   isAdded: boolean;
@@ -8,11 +8,11 @@ export interface NotificacionAddedProps {
 
 const NotificationAdded: React.FC<NotificacionAddedProps> = ({ isAdded, addedText }) => {
   return (
-    <div className="fixed top-0 left-0 mt-[65px] z-40">
+    <div className="fixed top-0 left-0 mt-[65px] z-50">
       <div
         className={`${
         isAdded ? "slide-in-left visible" : "slide-out-left invisible"
-        } z-50 bg-black dark:bg-white text-white transition-all duration-500
+        } z-50 bg-black dark:bg-white text-white transition-all duration-1000
              dark:text-black p-2 flex flex-row gap-x-2 items-center justify-center w-fit mx-auto`}
       >
         <BiCheckCircle className="size-5" />
