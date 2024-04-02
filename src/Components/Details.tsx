@@ -24,6 +24,9 @@ export default function Details() {
   };
   const productFav = allFavProducts.find((p) => p.id === productId);
   const productCart = allProducts.find((p) => p.id === productId);
+  const similarProducts = sunglasses.filter(
+    (item) => item.shape === product?.shape && item.id !== product?.id
+  );
 
   if (!product) {
     return (
@@ -63,7 +66,7 @@ export default function Details() {
             <p>Regresar</p>
           </div>
         </div>
-        <div className="size-[400px] md:size-[700px] flex mx-auto items-center justify-center col-span-4 md:col-span-3 cursor-zoom-in">
+        <div className="size-[300px] md:size-[500px] flex mx-auto items-center justify-center col-span-4 md:col-span-3 cursor-zoom-in">
           <img src={product.image} alt="" />
         </div>
         <div className="text-black dark:text-white flex flex-col gap-4 items-start justify-start col-span-4 md:col-span-1">
@@ -97,6 +100,49 @@ export default function Details() {
           </div>
         </div>
       </div>
+      <div className="text-black dark:text-white w-[90%] md:w-[70%] mx-auto grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-5 mt-20 md:mt-0">
+        {similarProducts.length > 0 ? (
+          <p className="text-xl col-span-2 md:col-span-4 border-b-[1px] border-black/50 dark:border-white/50 pb-5">
+            Tambien te podría interesar
+          </p>
+        ) : (
+          <p className="text-xl col-span-2 md:col-span-4 flex justify-center items-center py-10 border-y-[1px] border-black/50 dark:border-white/50">
+            Lo sentimos, por el momento no hay productos similares
+          </p>
+        )}
+        {similarProducts.slice(0, 4).map((item) => (
+          <Link
+            to={`/product/${item.id}`}
+            key={item.id}
+            className="mt-2 text-white bg-[#f6f6f6] dark:bg-black/80 rounded-sm hover:shadow-2xl dark:hover:shadow-lg hover:shadow-black/40 
+                dark:hover:shadow-white/20 border-[0.5px] border-black/10 hover:border-black/25 dark:border-white/10 dark:hover:border-white/20 
+                flex-flex-col relative [&>div>img]:hover:scale-100 p-2 md:p-5 [&>div>#description]:hover:font-bold cursor-pointer h-full w-full 
+                opacity-85 hover:opacity-100 transition col-span-1"
+          >
+            <div className="absolute top-0 flex w-full justify-center">
+              <div
+                className="left-0 h-[1px] animate-border-width rounded-full bg-gradient-to-r from-[rgba(245,245,245,0)] to-[rgba(245,245,245,0)  
+                    dark:from-[rgba(17,17,17,0)] via-neutral-800 dark:via-white dark:to-[rgba(17,17,17,0)] transition-all duration-1000"
+              />
+            </div>
+            <div className="size-[100px] md:size-[200px] mx-auto flex items-center justify-center">
+              <img src={item.image} alt={item.description + "image"} />
+            </div>
+            <p className="text-black/60 dark:text-white/60 text-xs md:text-base font-semibold">
+              {item.brand}
+            </p>
+            <p className="text-black dark:text-white font-semibold text-xs md:text-lg">
+              {item.description}
+            </p>
+            <div className="flex flex-row justify-between items-center">
+              <p className="text-xs font-extrabold text-black dark:text-white">
+                ${item.price}.00 mx
+              </p>
+            </div>
+          </Link>
+        ))}
+      </div>
+
       {isOnCart && (
         <NotificationAdded
           isAdded={isOnCart}
