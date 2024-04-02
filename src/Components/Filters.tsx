@@ -65,12 +65,12 @@ const Filters = () => {
   return (
     <>
       <div
-        className="mt-32 text-white w-[70%] m-auto flex flex-row gap-4 justify-center items-start gap-x-14
+        className="mt-20 md:mt-32 text-white w-[70%] m-auto flex flex-row gap-4 justify-center items-start gap-x-14
        relative pt-10 mb-5 border-t-[1px] border-black/20 dark:border-white/20"
       >
         <div className="text-black dark:text-white flex justify-center items-center flex-col">
           <button
-            className="text-sm md:text-2xl opacity-30 md:hover:opacity-100"
+            className="text-lg md:text-2xl opacity-30 md:hover:opacity-100"
             id="button-color"
             onClick={toggleColorMenu}
           >
@@ -79,7 +79,7 @@ const Filters = () => {
         </div>
         <div className="text-black dark:text-white flex justify-center items-center flex-col">
           <button
-            className="text-sm md:text-2xl opacity-30 md:hover:opacity-100"
+            className="text-lg md:text-2xl opacity-30 md:hover:opacity-100"
             id="button-shape"
             onClick={toggleShapeMenu}
           >

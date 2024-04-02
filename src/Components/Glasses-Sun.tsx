@@ -8,8 +8,9 @@ import { useFav } from "../Hooks/useFav.tsx";
 
 const SunGlasses = () => {
   const { addToCart } = useCart();
-  const { addToFav, isFav } = useFav();
+  const { addToFav } = useFav();
   const { filterSunGlasses } = useFilters();
+
   return (
     <>
       <Filters />
@@ -40,7 +41,6 @@ const SunGlasses = () => {
               description={product.description}
               addedToCart={() => addToCart(product as Products)}
               addedToFav={() => addToFav(product as Products)}
-              isFav={isFav}
             />
           ))}
         </div>

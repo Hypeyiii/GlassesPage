@@ -5,6 +5,8 @@ import NotificationAdded from "../Components/NotificationAdded.tsx";
 import { Link } from "react-router-dom";
 import { useSetMobile } from "../Hooks/useSetMobile.tsx";
 import TextAnimated from "./TextAnimated.tsx";
+import { useFav } from "../Hooks/useFav.tsx";
+import { useCart } from "../Hooks/useCart.tsx";
 
 export interface ProductItemProps {
   brand: string;
@@ -15,7 +17,6 @@ export interface ProductItemProps {
   addedToCart: () => void;
   id: number;
   addedToFav: () => void;
-  isFav: boolean;
 }
 
 const ProductItem: React.FC<ProductItemProps> = ({
@@ -27,12 +28,15 @@ const ProductItem: React.FC<ProductItemProps> = ({
   addedToCart,
   id,
   addedToFav,
-  isFav,
 }) => {
   const [isHover, setIsHover] = useState(false);
   const [isAdded, setIsAdded] = useState(false);
   const [isAddedToFavs, setIsAddedToFavs] = useState(false);
   const { isMobile } = useSetMobile();
+  const { allFavProducts } = useFav();
+  const { allProducts } = useCart();
+  const productFav = allFavProducts.find((p) => p.id === id);
+  const productCart = allProducts.find((p) => p.id === id);
 
   useEffect(() => {
     if (isMobile) {
@@ -69,12 +73,18 @@ const ProductItem: React.FC<ProductItemProps> = ({
     <>
       <div
         className="flex flex-col gap-y-4 relative"
-        onMouseEnter={stock === 0 ? () => setIsHover(false) : () => setIsHover(true)}
+        onMouseEnter={
+          stock === 0 ? () => setIsHover(false) : () => setIsHover(true)
+        }
         onMouseLeave={() => setIsHover(false)}
       >
         <div
           id="product-item"
-          className={`text-white bg-[#f6f6f6] dark:bg-[#020202] rounded-sm ${stock === 0 ? "opacity-30" : "hover:shadow-xl dark:hover:shadow-md hover:shadow-black/40 dark:hover:shadow-white/5 border-[0.5px] border-black/10 hover:border-black/25 dark:border-white/10 dark:hover:border-white/20 opacity-85 hover:opacity-100"} 
+          className={`text-white bg-[#f0f0f0] dark:bg-neutral-950 rounded-sm ${
+            stock === 0
+              ? "opacity-30"
+              : "hover:shadow-xl dark:hover:shadow-md hover:shadow-black/40 dark:hover:shadow-white/5 border-[0.5px] border-black/10 hover:border-black/25 dark:border-white/10 dark:hover:border-white/20 opacity-85 hover:opacity-100"
+          } 
           transition flex flex-col col-span-1 relative [&>div>img]:hover:scale-100 p-5 [&>div>#description]:hover:font-bold cursor-pointer h-fit w-full `}
         >
           <div className="absolute top-0 flex w-full justify-center">
@@ -91,20 +101,14 @@ const ProductItem: React.FC<ProductItemProps> = ({
             onClick={addedToFav}
           >
             <BsHeartFill
-              className={`size-4 ${
-                isFav
-                  ? "text-black dark:text-white"
-                  : "text-black/60 dark:text-white/60"
+              className={`size-4 transition active:scale-125 ${
+                productFav ? "text-red-500" : "text-black/60 dark:text-white/60"
               }`}
             />
           </div>
           <div className="relative col-span-5 md:col-span-3 m-auto flex flex-col justify-center items-center gap-y-1 size-[150px] md:size-[250px]">
             <Link to={`/product/${id}`}>
-              <img
-                src={image}
-                alt={brand + " image"}
-                className="transition"
-              />
+              <img src={image} alt={brand + " image"} className="transition" />
             </Link>
             {
               <div
@@ -114,15 +118,15 @@ const ProductItem: React.FC<ProductItemProps> = ({
                }`}
                 onClick={addedToCart}
               >
-                {isAdded ? (
-                  <p onClick={added}>Añadido al carrito</p>
+                {productCart ? (
+                  <p onClick={added}>En el carrito!</p>
                 ) : (
                   <p onClick={added}>Añadir al carrito</p>
                 )}
               </div>
             }
           </div>
-          <div className="col-span-5 md:col-span-2 flex flex-col items-start justify-start gap-y-4 ">
+          <div className="col-span-5 md:col-span-2 flex flex-col items-start justify-start gap-y-4 text-left text-wrap">
             <p className=" text-black dark:text-white font-bold text-lg">
               {brand}
             </p>
@@ -139,7 +143,7 @@ const ProductItem: React.FC<ProductItemProps> = ({
         </div>
         {stock === 0 ? (
           <div className="text-white dark:text-white absolute inset-0 m-auto flex justify-center items-center text-center text-wrap">
-            <TextAnimated text={"Agotado por el momento"} fontSize="32px"/>
+            <TextAnimated text={"Agotado por el momento"} fontSize="32px" />
           </div>
         ) : (
           ""

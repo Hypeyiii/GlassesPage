@@ -34,7 +34,7 @@ const Navbar = () => {
       <div
         className={`${
           isMobile ? "absolute" : "absolute"
-        } w-[80%] md:w-[70%] mx-auto left-0 right-0 z-50 flex flex-row justify-between items-center bg-white/90 dark:bg-black/85 text-black/80 dark:text-white/80 py-4`}
+        } w-[80%] md:w-[70%] mx-auto left-0 right-0 z-50 flex flex-row justify-between items-center text-black/80 dark:text-white/80 py-4`}
       >
         {isMobile ? (
           <>
@@ -97,17 +97,17 @@ const Navbar = () => {
               <NavLink
                 id="nav-item"
                 to={"/Cart"}
-                className="hover:font-semibold relative hover:text-black dark:hover:text-white [&>div]:hover:bg-white transition"
+                className="hover:font-semibold relative hover:text-black dark:hover:text-white transition"
               >
                 <BiCart className="size-6" />
-                <div className="absolute text-xs text-white bg-black/80 dark:text-black dark:bg-white/80 rounded-full px-1 right-[-5px] top-[15px]">
+                <div className="absolute text-xs text-white bg-black dark:text-black dark:bg-white rounded-full px-1 right-[-5px] top-[15px]">
                   {countProducts}
                 </div>
               </NavLink>
               <NavLink
                 id="nav-item"
                 to={"/WishList"}
-                className="hover:font-semibold relative hover:text-black dark:hover:text-white [&>div]:hover:bg-white transition"
+                className="hover:font-semibold relative hover:text-black dark:hover:text-white transition"
               >
                 <HiHeart className="size-6" />
                 <div className="absolute text-xs text-white bg-black/80 dark:text-black dark:bg-white/80 rounded-full px-1 right-[-5px] top-[15px]">

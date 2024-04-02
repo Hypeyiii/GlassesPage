@@ -24,6 +24,7 @@ export function FavProvider({ children }: Fav) {
   const [allFavProducts, setAllFavProducts] = useState<Products[]>([]);
   const [countFavProducts, setCountFavProducts] = useState<number>(0);
   const [isFav, setIsFav] = useState<boolean>(false);
+
   return (
     <FavContext.Provider
       value={{

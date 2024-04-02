@@ -29,5 +29,7 @@ export default function App() {
       </Route>
     )
   );
-  return <RouterProvider router={router} />;
+  return (
+      <RouterProvider router={router} />
+  );
 }

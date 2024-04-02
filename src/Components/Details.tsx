@@ -16,8 +16,14 @@ export default function Details() {
     window.history.back();
   };
 
-  const { addToCart, isOnCart } = useCart();
-  const { isFav, addToFav } = useFav();
+  const { addToCart, isOnCart, allProducts } = useCart();
+  const { addToFav, allFavProducts } = useFav();
+
+  const toggleFav = () => {
+    addToFav(product as Products);
+  };
+  const productFav = allFavProducts.find((p) => p.id === productId);
+  const productCart = allProducts.find((p) => p.id === productId);
 
   if (!product) {
     return (
@@ -67,10 +73,11 @@ export default function Details() {
             </span>
             <li>
               <AiFillHeart
-                className={`size-6 cursor-pointer active:scale-125 duration-500 text-black dark:text-white ${
-                  isFav && "text-red-500 dark:text-red-500"
+                id="fav-icon"
+                className={`size-6 cursor-pointer active:scale-125 duration-500 ${
+                  productFav ? "text-red-500" : "text-black dark:text-white"
                 }`}
-                onClick={() => addToFav(product as Products)}
+                onClick={toggleFav}
               />
             </li>
           </div>
@@ -82,10 +89,10 @@ export default function Details() {
           <div className="flex gap-4">
             <button
               className="bg-black/60 hover:bg-black transition dark:bg-white/80 dark:hover:bg-white text-white dark:text-black text-xs 
-          font-medium py-2 px-6 rounded-full"
+              font-medium py-2 px-6 rounded-full"
               onClick={() => addToCart(product as Products)}
             >
-              Añadir al carrito
+              {productCart ? "En el carrito!" : "Añadir al carrito"}
             </button>
           </div>
         </div>
