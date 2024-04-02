@@ -80,7 +80,7 @@ const ProductItem: React.FC<ProductItemProps> = ({
       >
         <div
           id="product-item"
-          className={`text-white bg-[#f0f0f0] dark:bg-neutral-950 rounded-sm ${
+          className={`text-white bg-[#f0f0f0] dark:bg-[#0202] rounded-sm ${
             stock === 0
               ? "opacity-30"
               : "hover:shadow-xl dark:hover:shadow-md hover:shadow-black/40 dark:hover:shadow-white/5 border-[0.5px] border-black/10 hover:border-black/25 dark:border-white/10 dark:hover:border-white/20 opacity-85 hover:opacity-100"

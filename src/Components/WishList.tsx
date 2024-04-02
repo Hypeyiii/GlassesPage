@@ -50,12 +50,11 @@ const Wishlist = () => {
                 </div>
                 <Link
                   to={`/product/${product.id}`}
-                  className="size-[100px] md:size-[250px] mx-auto flex items-center justify-center"
+                  className="size-[100px] md:size-[200px] mx-auto flex items-center justify-center"
                 >
                   <img
                     src={product.image}
                     alt={product.description + "image"}
-                    className="scale-90 transition"
                   />
                 </Link>
                 <p className="text-black/60 dark:text-white/60 text-xs md:text-base font-semibold">
