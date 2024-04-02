@@ -2,7 +2,7 @@ export default function Footer() {
   return (
     <>
       <footer
-        className="mt-[400px] w-full bg-white dark:bg-black text-black dark:text-white p-10 text-xl border-t-black dark:border-t-white border-t-2 
+        className="mt-32 w-full bg-white dark:bg-black text-black dark:text-white p-10 text-xl border-t-black dark:border-t-white border-t-2 
         flex items-center justify-center"
       >
         <div>
