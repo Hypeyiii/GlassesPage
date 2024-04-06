@@ -5,6 +5,7 @@ import BuyCartModal from "../Modals/BuyCartModal.tsx";
 import { FaAngleDown, FaAngleUp } from "react-icons/fa";
 import { RxCross1 } from "react-icons/rx";
 import { useCart } from "../Hooks/useCart.tsx";
+import { IoBagAdd } from "react-icons/io5";
 
 const Cart = () => {
   const [buyCart, setBuyCart] = useState(false);
@@ -135,14 +136,16 @@ const Cart = () => {
           </div>
         </>
       ) : (
-        <div className="flex flex-col items-center justify-center w-full h-full">
-          <h1 className="text-xl font-bold text-black dark:text-white mx-auto text-center">
-            Tu carrito está vacío :(
+        <div className="flex flex-col items-center justify-center h-full gap-y-5 w-[50%] md:w-[20%] mx-auto text-black dark:text-white">
+          <IoBagAdd className="size-32  opacity-20" />
+          <h1 className="text-xl md:text-3xl font-bold  mx-auto text-center">
+            Tu carrito parecer estar vacío
           </h1>
+          <p>Agregue articulos a su carrito</p>
           <Link
             to={"/"}
             className="py-2 px-5 border-[0.5px] border-black dark:border-white hover:bg-black hover:text-white
-            dark:hover:bg-white dark:hover:text-black dark:text-white transition flex justify-center mt-6 uppercase font-bold"
+            dark:hover:bg-white dark:hover:text-black dark:text-white transition flex justify-center uppercase font-bold"
           >
             Seguir comprando
           </Link>
