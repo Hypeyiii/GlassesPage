@@ -10,6 +10,7 @@ import TextAnimated from "./TextAnimated";
 import { useCart } from "../Hooks/useCart";
 import { useFav } from "../Hooks/useFav";
 import { useDarkMode } from "../Hooks/useDarkMode";
+import { RxCross1 } from "react-icons/rx";
 
 const Navbar = () => {
   const [collection, setCollection] = useState<boolean>(false);
@@ -38,7 +39,11 @@ const Navbar = () => {
       >
         {isMobile ? (
           <>
-            <BiMenu className="size-6" onClick={toggleMenu} />
+            {isMenu ? (
+              <RxCross1 className="size-5" onClick={toggleMenu} />
+            ) : (
+              <BiMenu className="size-5" onClick={toggleMenu} />
+            )}
             <NavLink to={"/"}>
               <TextAnimated text={"Glasses"} fontSize="28px" />
             </NavLink>
@@ -128,72 +133,65 @@ const Navbar = () => {
           </>
         )}
       </div>
-      {isMobile && isMenu && (
-        <>
-          <div
-            className="fixed top-0 bottom-0 w-screen h-screen bg-white/80 dark:bg-black/95 z-10"
-            onClick={toggleMenu}
-          ></div>
-          <div
-            className="slide-in-left fixed flex flex-col w-full h-[70%] text-black dark:text-white justify-between items-center mt-32 z-50"
-            onClick={toggleMenu}
+      <>
+        <div
+          className={`${
+            isMenu ? "visible" : "invisible"
+          } fixed inset-0 h-screen w-screen bg-white/80 dark:bg-black/95 z-40 transition duration-500`}
+          onClick={toggleMenu}
+        ></div>
+        <div
+          className={`${
+            isMenu ? "slide-in-left" : "slide-out-left"
+          } fixed flex flex-col gap-4 w-[55%] h-full text-black dark:text-white justify-start items-start z-40
+             bg-white dark:bg-black p-4`}
+          onClick={toggleMenu}
+        >
+          <NavLink to={"/Sun-Glasses"} className="font-light text-base mt-24">
+            Lentes de Sol
+          </NavLink>
+          <NavLink to={"/Vision-Glasses"} className="font-light text-base">
+            Lentes de Vision
+          </NavLink>
+          <li className="flex flex-row gap-x-1 items-center text-xl font-bold">
+            <BiSearch className="size-6" />
+            <p>Buscar</p>
+          </li>
+          <NavLink
+            to={"/User"}
+            className="flex flex-row gap-x-1 items-center text-xl font-bold"
           >
-            <NavLink
-              to={"/Sun-Glasses"}
-              className="font-bold text-base hover:bg-black/10 dark:hover:bg-white/30 transition px-4 cursor-pointer"
-            >
-              Lentes de Sol
-            </NavLink>
-            <NavLink
-              to={"/Vision-Glasses"}
-              className="font-bold text-base hover:bg-black/10 dark:hover:bg-white/30 transition px-4"
-            >
-              Lentes de Vision
-            </NavLink>
-            <li
-              className="hover:font-semibold list-none cursor-pointer hover:text-black dark:hover:text-white transition
-            flex flex-row items-center gap-x-1 text-base font-semibold"
-            >
-              <BiSearch className="size-6" />
-              <p>Buscar</p>
-            </li>
-            <NavLink
-              to={"/User"}
-              className="hover:font-semibold hover:text-black transition dark:hover:text-white flex flex-row items-center gap-x-1 text-base font-semibold"
-            >
-              <BiUser className="size-6" />
-              <p>Usuario</p>
-            </NavLink>
-            <NavLink
-              to={"/WishList"}
-              className="hover:font-semibold relative hover:text-black dark:hover:text-white [&>div]:hover:bg-white transition
-                flex flex-row items-center gap-x-1 text-base font-semibold"
-            >
-              <HiHeart className="size-6" />
-              <p>Favoritos</p>
-              <div className="absolute text-xs text-black bg-white/80 rounded-full px-1 right-[70px] top-[15px]">
-                {countFavProducts}
+            <BiUser className="size-6" />
+            <p>Usuario</p>
+          </NavLink>
+          <NavLink
+            to={"/WishList"}
+            className="flex flex-row gap-x-1 items-center text-xl font-bold relative"
+          >
+            <HiHeart className="size-6" />
+            <p>Favoritos</p>
+            <div className="absolute text-xs text-black bg-white rounded-full px-1 top-4 left-3">
+              {countFavProducts}
+            </div>
+          </NavLink>
+          <li
+            className="flex flex-row gap-x-1 items-center text-xl font-bold"
+            onClick={toggleColorScheme}
+          >
+            {isDarkModeOn ? (
+              <div className="flex flex-row gap-x-1">
+                <MdDarkMode className="size-6 scale-in-center" />{" "}
+                <p>DarkMode</p>
               </div>
-            </NavLink>
-            <li
-              className="hover:font-semibold list-none cursor-pointer hover:text-black dark:hover:text-white transition"
-              onClick={toggleColorScheme}
-            >
-              {isDarkModeOn ? (
-                <div className="flex flex-row gap-x-1">
-                  <MdDarkMode className="size-6 scale-in-center" />{" "}
-                  <p>DarkMode</p>
-                </div>
-              ) : (
-                <div className="flex flex-row gap-x-1">
-                  <MdLightMode className="size-6 scale-in-center" />
-                  <p>LightMode</p>
-                </div>
-              )}
-            </li>
-          </div>
-        </>
-      )}
+            ) : (
+              <div className="flex flex-row gap-x-1">
+                <MdLightMode className="size-6 scale-in-center" />
+                <p>LightMode</p>
+              </div>
+            )}
+          </li>
+        </div>
+      </>
     </>
   );
 };
