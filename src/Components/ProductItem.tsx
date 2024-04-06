@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
-import { BsHeartFill } from "react-icons/bs";
+import { BsCartCheck, BsHeartFill } from "react-icons/bs";
 import "./Animations.css";
 import NotificationAdded from "../Components/NotificationAdded.tsx";
 import { Link } from "react-router-dom";
 import { useSetMobile } from "../Hooks/useSetMobile.tsx";
-import TextAnimated from "./TextAnimated.tsx";
 import { useFav } from "../Hooks/useFav.tsx";
 import { useCart } from "../Hooks/useCart.tsx";
+import { BiCartAdd } from "react-icons/bi";
 
 export interface ProductItemProps {
   brand: string;
@@ -80,10 +80,10 @@ const ProductItem: React.FC<ProductItemProps> = ({
       >
         <div
           id="product-item"
-          className={`text-white bg-[#f0f0f0] dark:bg-[#0202] rounded-sm ${
+          className={`text-white bg-[#f0f0f0] dark:bg-[#020202] scale-100 rounded-sm ${
             stock === 0
               ? "opacity-30"
-              : "hover:shadow-xl dark:hover:shadow-md hover:shadow-black/40 dark:hover:shadow-white/5 border-[0.5px] border-black/10 hover:border-black/25 dark:border-white/10 dark:hover:border-white/20 opacity-85 hover:opacity-100"
+              : "hover:scale-[1.01] hover:shadow-xl dark:hover:shadow-md hover:shadow-black/40 dark:hover:shadow-white/5 border-[0.5px] border-black/10 hover:border-black/25 dark:border-white/10 dark:hover:border-white/20 opacity-85 hover:opacity-100"
           } 
           transition flex flex-col col-span-1 relative [&>div>img]:hover:scale-100 p-5 [&>div>#description]:hover:font-bold cursor-pointer h-fit w-full `}
         >
@@ -93,38 +93,58 @@ const ProductItem: React.FC<ProductItemProps> = ({
              dark:from-[rgba(17,17,17,0)] via-neutral-800 dark:via-white dark:to-[rgba(17,17,17,0)] transition-all duration-1000"
             />
           </div>
-          <div
-            id="hover"
-            className={`absolute top-0 right-0 p-3 transition-all duration-500 ${
-              isHover ? "fade-in visible" : "fade-out invisible"
-            }`}
-            onClick={addedToFav}
-          >
-            <BsHeartFill
-              className={`size-4 transition active:scale-125 ${
-                productFav ? "text-red-500" : "text-black/60 dark:text-white/60"
+          {stock === 0 ? (
+            ""
+          ) : (
+            <div
+              id="hover"
+              className={`absolute top-0 right-0 p-3 transition-all duration-500 ${
+                isHover ? "fade-in visible" : "fade-out invisible"
               }`}
-            />
-          </div>
+              onClick={addedToFav}
+            >
+              <BsHeartFill
+                className={`size-4 transition active:scale-125 ${
+                  productFav
+                    ? "text-red-500"
+                    : "text-black/60 dark:text-white/60"
+                }`}
+              />
+            </div>
+          )}
           <div className="relative col-span-5 md:col-span-3 m-auto flex flex-col justify-center items-center gap-y-1 size-[150px] md:size-[250px]">
             <Link to={`/product/${id}`}>
-              <img src={image} alt={brand + " image"} className="transition" />
+              <img
+                src={image}
+                alt={brand + " image"}
+                className="transition"
+                loading="lazy"
+              />
             </Link>
-            {
+            {stock === 0 ? (
+              ""
+            ) : (
               <div
-                className={`absolute bottom-0 border-[0.5px] border-black/60 dark:border-white/60 py-1 px-2 hover:bg-black
+                className={`absolute bottom-0 border-[0.5px] border-black/60 dark:border-white/60 py-1 px-2 hover:bg-black flex flex-row gap-x-1 items-center justify-center
                dark:hover:bg-white text-black/70 dark:text-white/80 hover:text-white dark:hover:text-black font-semibold text-xs mb-5 transition-all duration-500 ${
                  isHover ? "fade-in visible" : "fade-out invisible"
                }`}
                 onClick={addedToCart}
               >
                 {productCart ? (
-                  <p onClick={added}>En el carrito!</p>
+                  <>
+                    <p onClick={added}>En el carrito!</p>
+                    <BsCartCheck className="size-4"/>
+                  </>
                 ) : (
-                  <p onClick={added}>Añadir al carrito</p>
+                  <>
+                    <p onClick={added}>Añadir al carrito</p>
+                    <BiCartAdd className="size-4"/>
+
+                  </>
                 )}
               </div>
-            }
+            )}
           </div>
           <div className="col-span-5 md:col-span-2 flex flex-col items-start justify-start gap-y-4 text-left text-wrap">
             <p className=" text-black dark:text-white font-bold text-lg">
@@ -142,8 +162,13 @@ const ProductItem: React.FC<ProductItemProps> = ({
           </div>
         </div>
         {stock === 0 ? (
-          <div className="text-white dark:text-white absolute inset-0 m-auto flex justify-center items-center text-center text-wrap">
-            <TextAnimated text={"Agotado por el momento"} fontSize="32px" />
+          <div
+            className="absolute inset-0 m-auto flex justify-center items-center text-center text-wrap px-4 py-2
+          text-xl opacity-60"
+          >
+            <p className="text-xl px-4 py-2 bg-black text-white dark:bg-white dark:text-black">
+              Sold out
+            </p>
           </div>
         ) : (
           ""
