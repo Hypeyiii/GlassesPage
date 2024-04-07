@@ -9,14 +9,14 @@ const CartPreview = () => {
     useCart();
   return (
     <div
-      className={`absolute inset-0 h-screen w-screen z-50 flex justify-end transition-all duration-500 ${
+      className={`absolute inset-0 h-screen w-screen z-50 flex justify-end transition-all ${
         showCartPreview ? "visible" : "invisible"
       }`}
       onClick={() => setShowCartPreview(false)}
     >
       <div
         className={`fixed flex flex-col h-full w-[70%] md:w-[30%] bg-white dark:bg-black border-l-[1px] border-black/50 dark:border-white/50
-        text-black dark:text-white px-4 py-20 overflow-y-auto transition-all duration-500  ${
+        text-black dark:text-white px-4 py-20 overflow-y-auto transition-all ${
           showCartPreview
             ? "slide-in-right visible"
             : "slide-out-right invisible"
