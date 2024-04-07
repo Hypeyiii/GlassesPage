@@ -12,8 +12,11 @@ export function useCart() {
     setCountProducts,
     setIsOnCart,
     isOnCart,
+    setShowCartPreview,
+    showCartPreview,
   } = useContext(CartContext);
   const addToCart = (product: Products): Products[] => {
+    setShowCartPreview(true);
     setIsOnCart(true);
     const existingProduct = allProducts.find((p) => p.id === product.id);
     if (existingProduct) {
@@ -92,5 +95,7 @@ export function useCart() {
     deleteProduct,
     addProduct,
     substractProduct,
+    showCartPreview,
+    setShowCartPreview,
   };
 }
