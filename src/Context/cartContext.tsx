@@ -12,7 +12,9 @@ export const CartContext = createContext({
     countProducts: 0,
     setCountProducts: (value: number) => {value},
     isOnCart: false,
-    setIsOnCart: (value: boolean) => {value},  
+    setIsOnCart: (value: boolean) => {value},
+    showCartPreview: false,  
+    setShowCartPreview: (value: boolean) => {value},
 });
 
 export function CartProvider({ children }: Cart) {
@@ -20,6 +22,7 @@ export function CartProvider({ children }: Cart) {
   const [total, setTotal] = useState<number>(0);
   const [countProducts, setCountProducts] = useState<number>(0);
   const [isOnCart, setIsOnCart] = useState<boolean>(false);
+  const [showCartPreview, setShowCartPreview] = useState<boolean>(false);
   return(
     <CartContext.Provider
       value={{
@@ -31,6 +34,8 @@ export function CartProvider({ children }: Cart) {
         setCountProducts,
         isOnCart,
         setIsOnCart,
+        showCartPreview,
+        setShowCartPreview,
       }}
     >
       {children}
