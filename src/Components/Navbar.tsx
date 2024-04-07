@@ -137,14 +137,14 @@ const Navbar = () => {
         <div
           className={`${
             isMenu ? "visible" : "invisible"
-          } fixed inset-0 h-screen w-screen bg-gray-100/60 dark:bg-black/60 z-40 transition duration-500`}
+          } fixed inset-0 h-screen w-screen bg-gray-100/60 dark:bg-black/60 z-40`}
           onClick={toggleMenu}
         ></div>
         <div
           className={`${
-            isMenu ? "slide-in-left" : "slide-out-left"
+            isMenu ? "slide-in-left visible" : "slide-out-left invisible"
           } fixed flex flex-col gap-4 w-[55%] h-full text-black dark:text-white justify-start items-start z-40
-             bg-gray-100 dark:bg-black p-4`}
+             bg-gray-100 dark:bg-black p-4 transition-all `}
           onClick={toggleMenu}
         >
           <NavLink to={"/"} className="text-xl font-bold mt-24 mb-5">
