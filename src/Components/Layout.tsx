@@ -2,6 +2,7 @@ import Navbar from "./Navbar";
 import Footer from "./Footer";
 import { Outlet, ScrollRestoration } from "react-router-dom";
 import ScrollToTop from "../Components/ScrollToTop";
+import CartPreview from "./CartPreview";
 
 const Layout = () => {
   return (
@@ -11,6 +12,7 @@ const Layout = () => {
       <Footer />
       <ScrollToTop />
       <ScrollRestoration />
+      <CartPreview />
     </div>
   );
 };
