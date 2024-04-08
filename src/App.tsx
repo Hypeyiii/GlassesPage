@@ -19,13 +19,13 @@ export default function App() {
     createRoutesFromElements(
       <Route path="/" element={<Layout />}>
         <Route path="/" element={<HomePage />} />
-        <Route path="/Cart" element={<Cart />} />
-        <Route path="/Wishlist" element={<Wishlist />} />
-        <Route path="/product/:id" element={<Details />} />
-        <Route path="/Sun-Glasses" element={<SunGlasses />} />
-        <Route path="/Vision-Glasses" element={<VisionGlasses />} />
+        <Route path="Cart" element={<Cart />} />
+        <Route path="Wishlist" element={<Wishlist />} />
+        <Route path="product/:id" element={<Details />} />
+        <Route path="Sun-Glasses" element={<SunGlasses />} />
+        <Route path="Vision-Glasses" element={<VisionGlasses />} />
         <Route path="*" element={<ErrorPage />} />
-        <Route path="/User" element={<Loggin />} />
+        <Route path="User" element={<Loggin />} />
       </Route>
     )
   );
