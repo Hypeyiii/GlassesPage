@@ -54,7 +54,7 @@ const Cart = () => {
                     >
                       <div className="w-full bg-cover flex flex-row justify-center items-center">
                         <Link
-                          to={`/product/${product.id}`}
+                          to={`/${product.category}/Product/${product.id}`}
                           className="w-[60px] md:w-[100px] h-[40px] md:h-[80px] m-auto"
                         >
                           <img
@@ -118,7 +118,7 @@ const Cart = () => {
                 </div>
               </div>
               <Link
-                to={"/Checkout"}
+                to={"/Cart/Checkout"}
                 className="py-2 px-5 border-[0.5px] border-black dark:border-white/50 hover:bg-black hover:text-white
                dark:hover:bg-white dark:hover:text-black transition text-xs md:text-base flex justify-center"
                 onClick={() => setBuyCart(true)}

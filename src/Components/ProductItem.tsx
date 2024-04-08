@@ -14,6 +14,7 @@ export interface ProductItemProps {
   image: string;
   description: string;
   stock: number;
+  category: string;
   addedToCart: () => void;
   id: number;
   addedToFav: () => void;
@@ -24,6 +25,7 @@ const ProductItem: React.FC<ProductItemProps> = ({
   price,
   image,
   description,
+  category,
   stock,
   addedToCart,
   id,
@@ -113,7 +115,7 @@ const ProductItem: React.FC<ProductItemProps> = ({
             </div>
           )}
           <div className="relative col-span-5 md:col-span-3 m-auto flex flex-col justify-center items-center gap-y-1 size-[150px] md:size-[250px]">
-            <Link to={`/product/${id}`}>
+            <Link to={`/${category}/Product/${id}`}>
               <img
                 src={image}
                 alt={brand + " image"}

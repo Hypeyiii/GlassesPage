@@ -33,6 +33,7 @@ const SunGlasses = () => {
           </div>
           {filterVisionGlasses.map((product) => (
             <ProductItem
+              category={product.category}
               key={product.id}
               id={product.id}
               brand={product.brand}

@@ -22,12 +22,12 @@ export default function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="Cart" element={<Cart />} />
         <Route path="Wishlist" element={<Wishlist />} />
-        <Route path="product/:id" element={<Details />} />
-        <Route path="Sun-Glasses" element={<SunGlasses />} />
-        <Route path="Vision-Glasses" element={<VisionGlasses />} />
+        <Route path=":category/Product/:id" element={<Details />} />
+        <Route path="Sun" element={<SunGlasses />} />
+        <Route path="Vision" element={<VisionGlasses />} />
         <Route path="*" element={<ErrorPage />} />
         <Route path="User" element={<Loggin />} />
-        <Route path="Checkout" element={<Checkout />} />
+        <Route path="Cart/Checkout" element={<Checkout />} />
       </Route>
     )
   );

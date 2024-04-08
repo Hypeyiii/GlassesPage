@@ -6,7 +6,7 @@ export function useFilters() {
   const { filters } = useContext(FiltersContext);
   const filterSunGlasses = sunglasses.filter(
     (product) =>
-      product.category === "Sun-Glasses" &&
+      product.category === "Sun" &&
       product.price >= filters.minPrice &&
       (filters.genre === "all" || product.genre === filters.genre) &&
       (filters.shape === "all" || product.shape === filters.shape) &&
@@ -14,7 +14,7 @@ export function useFilters() {
   );
   const filterVisionGlasses = sunglasses.filter(
     (product) =>
-      product.category === "Vision-Glasses" &&
+      product.category === "Vision" &&
       product.price >= filters.minPrice &&
       (filters.genre === "all" || product.genre === filters.genre) &&
       (filters.shape === "all" || product.shape === filters.shape) &&

@@ -34,6 +34,7 @@ const SunGlasses = () => {
             <ProductItem
               key={product.id}
               id={product.id}
+              category={product.category}
               brand={product.brand}
               price={product.price}
               image={product.image}

@@ -35,7 +35,7 @@ const CartPreview = () => {
             className="grid grid-cols-6 w-full py-4 border-b border-black/50 dark:border-white/50 gap-5"
           >
             <Link
-              to={`/product/${product.id}`}
+              to={`/${product.category}/Product/${product.id}`}
               className="col-span-2 size-[70px] md:size-[150px] flex items-center justify-center"
             >
               <img

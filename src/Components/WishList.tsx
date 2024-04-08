@@ -49,7 +49,7 @@ const Wishlist = () => {
                   />
                 </div>
                 <Link
-                  to={`/product/${product.id}`}
+                  to={`/${product.category}/Product/${product.id}`}
                   className="size-[100px] md:size-[200px] mx-auto flex items-center justify-center"
                 >
                   <img

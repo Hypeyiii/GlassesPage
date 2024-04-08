@@ -8,7 +8,7 @@ import { useFav } from "../Hooks/useFav";
 import { Products } from "../Interface/Products";
 
 export default function Details() {
-  const { id } = useParams<{ id: string }>();
+  const { id } = useParams();
   const productId = parseInt(id || "", 10);
   const product = sunglasses.find((item) => item.id === productId);
 

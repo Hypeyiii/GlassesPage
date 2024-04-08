@@ -72,13 +72,13 @@ const Navbar = () => {
                   <div className="absolute top-[75px]  bg-white dark:bg-black border-[1px] border-black dark:border-white z-50 text-wrap w-[150px] ">
                     <div className="flex flex-col text-xs md:text-sm">
                       <NavLink
-                        to="/Sun-Glasses"
+                        to="/Sun"
                         className="dark:hover:bg-white dark:hover:text-black hover:bg-black hover:text-white px-4 py-2"
                       >
                         Lentes de Sol
                       </NavLink>
                       <NavLink
-                        to="/Vision-Glasses"
+                        to="/Vision"
                         className="dark:hover:bg-white dark:hover:text-black hover:bg-black hover:text-white px-4 py-2"
                       >
                         Lentes de Vista
@@ -150,10 +150,10 @@ const Navbar = () => {
           <NavLink to={"/"} className="text-xl font-bold mt-24 mb-5">
             Inicio
           </NavLink>
-          <NavLink to={"/Sun-Glasses"} className="font-light text-base">
+          <NavLink to={"/Sun"} className="font-light text-base">
             Lentes de Sol
           </NavLink>
-          <NavLink to={"/Vision-Glasses"} className="font-light text-base">
+          <NavLink to={"/Vision"} className="font-light text-base">
             Lentes de Vision
           </NavLink>
           <li className="flex flex-row gap-x-1 items-center text-xl font-bold mt-5">
