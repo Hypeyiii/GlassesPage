@@ -9,7 +9,7 @@ const CartPreview = () => {
     useCart();
   return (
     <div
-      className={`absolute inset-0 h-screen w-screen z-50 flex justify-end transition-all ${
+      className={`absolute inset-0 w-full h-full z-50 flex justify-end transition-all ${
         showCartPreview ? "visible" : "invisible"
       }`}
       onClick={() => setShowCartPreview(false)}
@@ -55,7 +55,7 @@ const CartPreview = () => {
               <div onClick={() => deleteProduct(product as Products)}>
                 <RxCross1 className="absolute top-0 right-0 cursor-pointer" />
               </div>
-              <p className="text-[9px] md:text-sm font-bold">${product.price}.00 MX</p>
+              <p className="text-[9px] md:text-sm font-bold">${product.price}.00</p>
             </div>
           </div>
         ))}
