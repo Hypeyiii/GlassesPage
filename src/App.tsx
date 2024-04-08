@@ -13,6 +13,7 @@ import Cart from "./Components/Cart";
 import Wishlist from "./Components/WishList";
 import Loggin from "./Components/Loggin";
 import Details from "./Components/Details";
+import Checkout from "./Components/Checkout";
 
 export default function App() {
   const router = createBrowserRouter(
@@ -26,6 +27,7 @@ export default function App() {
         <Route path="Vision-Glasses" element={<VisionGlasses />} />
         <Route path="*" element={<ErrorPage />} />
         <Route path="User" element={<Loggin />} />
+        <Route path="Checkout" element={<Checkout />} />
       </Route>
     )
   );
