@@ -15,6 +15,7 @@ export function useCart() {
     setShowCartPreview,
     showCartPreview,
   } = useContext(CartContext);
+
   const addToCart = (product: Products): Products[] => {
     setShowCartPreview(true);
     setIsOnCart(true);
@@ -50,7 +51,7 @@ export function useCart() {
 
   const deleteProduct = (product: Products): Products[] => {
     const newProducts = allProducts.filter((p) => p.id !== product.id);
-    setTotal(total - (product.price * product.quantity));
+    setTotal(total - product.price * product.quantity);
     setCountProducts(countProducts - product.quantity);
     setAllProducts(newProducts);
     return newProducts;
@@ -82,6 +83,13 @@ export function useCart() {
     return newProducts;
   };
 
+  const savedProducts = localStorage.getItem("cart");
+  console.log(savedProducts);
+
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(allProducts));
+  }, [allProducts]);
+  
   return {
     allProducts,
     setAllProducts,
