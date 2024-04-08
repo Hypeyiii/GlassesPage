@@ -117,13 +117,14 @@ const Cart = () => {
                   </div>
                 </div>
               </div>
-              <button
+              <Link
+                to={"/Checkout"}
                 className="py-2 px-5 border-[0.5px] border-black dark:border-white/50 hover:bg-black hover:text-white
-               dark:hover:bg-white dark:hover:text-black transition text-xs md:text-base"
+               dark:hover:bg-white dark:hover:text-black transition text-xs md:text-base flex justify-center"
                 onClick={() => setBuyCart(true)}
               >
                 Proceder a pagar
-              </button>
+              </Link>
               <Link
                 to={"/"}
                 className="py-2 px-5 border-[0.5px] border-black dark:border-white/50 hover:bg-black hover:text-white
