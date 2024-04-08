@@ -6,8 +6,10 @@ import NotificationAdded from "./NotificationAdded";
 import { useCart } from "../Hooks/useCart";
 import { useFav } from "../Hooks/useFav";
 import { Products } from "../Interface/Products";
+import { useEffect, useState } from "react";
 
 export default function Details() {
+  const [copy, setCopy] = useState(false);
   const { id } = useParams();
   const productId = parseInt(id || "", 10);
   const product = sunglasses.find((item) => item.id === productId);
@@ -27,6 +29,17 @@ export default function Details() {
   const similarProducts = sunglasses.filter(
     (item) => item.shape === product?.shape && item.id !== product?.id
   );
+
+  const onCopy = () => {
+    setCopy(true);
+    navigator.clipboard.writeText(window.location.href);
+  };
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setCopy(false);
+    }, 3000);
+    return () => clearTimeout(timer);
+  }, [copy]);
 
   if (!product) {
     return (
@@ -97,6 +110,13 @@ export default function Details() {
             >
               {productCart ? "En el carrito!" : "Añadir al carrito"}
             </button>
+            <button
+              onClick={onCopy}
+              className="bg-black/60 hover:bg-black transition dark:bg-white/80 dark:hover:bg-white text-white dark:text-black text-xs 
+              font-medium py-2 px-6 rounded-full"
+            >
+              Compartir!
+            </button>
           </div>
         </div>
       </div>
@@ -112,7 +132,7 @@ export default function Details() {
         )}
         {similarProducts.slice(0, 4).map((item) => (
           <Link
-            to={`/product/${item.id}`}
+            to={`/${item.category}/Product/${item.id}`}
             key={item.id}
             className="mt-2 text-white bg-[#f6f6f6] dark:bg-black/80 rounded-sm hover:shadow-2xl dark:hover:shadow-lg hover:shadow-black/40 
                 dark:hover:shadow-white/20 border-[0.5px] border-black/10 hover:border-black/25 dark:border-white/10 dark:hover:border-white/20 
@@ -147,6 +167,12 @@ export default function Details() {
         <NotificationAdded
           isAdded={isOnCart}
           addedText={"Añadido al carrito correctamente"}
+        />
+      )}
+      {copy && (
+        <NotificationAdded
+          isAdded={copy}
+          addedText={"Enlace copiado al portapapeles"}
         />
       )}
     </>
