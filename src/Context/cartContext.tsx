@@ -1,5 +1,5 @@
 import { createContext, useState } from "react";
-import { Products } from "../Interface/Products";
+import { Products } from "../UI/Interface/Products";
 
 export interface Cart {
   children: React.ReactNode;

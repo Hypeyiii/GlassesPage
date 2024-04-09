@@ -4,16 +4,17 @@ import {
   createRoutesFromElements,
   RouterProvider,
 } from "react-router-dom";
-import Layout from "./Components/Layout";
-import VisionGlasses from "./Components/Glasses-Vision";
-import SunGlasses from "./Components/Glasses-Sun";
-import HomePage from "./Components/HomePage";
-import ErrorPage from "./Components/ErrorPage";
-import Cart from "./Components/Cart";
-import Wishlist from "./Components/WishList";
-import Loggin from "./Components/Loggin";
-import Details from "./Components/Details";
-import Checkout from "./Components/Checkout";
+import Layout from "./UI/Components/Layout";
+import VisionGlasses from "./UI/Pages/Glasses-Vision";
+import SunGlasses from "./UI/Pages/Glasses-Sun";
+import HomePage from "./UI/Components/HomePage";
+import ErrorPage from "./UI/Components/ErrorPage";
+import Cart from "./UI/Components/Cart";
+import Wishlist from "./UI/Components/WishList";
+import Loggin from "./UI/Components/Loggin";
+import Details from "./UI/Components/Details";
+import Checkout from "./UI/Components/Checkout";
+import SingUp from "./Auth/Components/SingUp";
 
 export default function App() {
   const router = createBrowserRouter(
@@ -27,11 +28,10 @@ export default function App() {
         <Route path="Vision" element={<VisionGlasses />} />
         <Route path="*" element={<ErrorPage />} />
         <Route path="User" element={<Loggin />} />
+        <Route path="Sing-Up" element={<SingUp />} />
         <Route path="Cart/Checkout" element={<Checkout />} />
       </Route>
     )
   );
-  return (
-      <RouterProvider router={router} />
-  );
+  return <RouterProvider router={router} />;
 }

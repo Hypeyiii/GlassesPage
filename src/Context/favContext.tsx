@@ -1,5 +1,5 @@
 import React, { createContext, useState } from "react";
-import { Products } from "../Interface/Products";
+import { Products } from "../UI/Interface/Products";
 
 interface Fav {
   children: React.ReactNode;
