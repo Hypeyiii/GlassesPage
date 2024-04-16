@@ -24,7 +24,6 @@ const ProductItem: React.FC<ProductItemProps> = ({
   brand,
   price,
   image,
-  description,
   category,
   stock,
   addedToCart,
@@ -151,12 +150,6 @@ const ProductItem: React.FC<ProductItemProps> = ({
           <div className="col-span-5 md:col-span-2 flex flex-col items-start justify-start gap-y-4 text-left text-wrap">
             <p className=" text-black dark:text-white font-bold text-lg">
               {brand}
-            </p>
-            <p
-              id="description"
-              className="text-black/60 dark:text-white/60 text-sm font-semibold transition"
-            >
-              {description}
             </p>
             <p className="font-extrabold text-black dark:text-white text-sm">
               ${price}.00 mx
