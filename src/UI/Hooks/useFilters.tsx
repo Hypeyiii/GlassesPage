@@ -1,9 +1,11 @@
 import { useContext } from "react";
-import { FiltersContext } from "../../Context/filtersContext.tsx";
+import { FiltersContext } from "../Context/filtersContext.tsx";
 import sunglasses from "../Data/Data.tsx";
+import { useNavigate } from "react-router-dom";
 
 export function useFilters() {
-  const { filters } = useContext(FiltersContext);
+  const navigate = useNavigate();
+  const { filters, searchTerm, setSearchTerm } = useContext(FiltersContext);
   const filterSunGlasses = sunglasses.filter(
     (product) =>
       product.category === "Sun" &&
@@ -20,5 +22,34 @@ export function useFilters() {
       (filters.shape === "all" || product.shape === filters.shape) &&
       (filters.color === "all" || product.color === filters.color)
   );
-  return { filterSunGlasses, filterVisionGlasses };
+
+  const handleChangeSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchTerm(event.target.value);
+  };
+
+  const handleSearch = () => {
+    navigate(`/search/${searchTerm}`);
+  };
+
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter") {
+      handleSearch();
+    }
+  };
+
+  const searchResults = sunglasses.filter(
+    (product) =>
+      product.brand.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      product.category.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  return {
+    filterSunGlasses,
+    filterVisionGlasses,
+    handleChangeSearch,
+    searchTerm,
+    handleSearch,
+    handleKeyDown,
+    searchResults,
+  };
 }

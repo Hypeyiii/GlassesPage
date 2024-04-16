@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { FavContext } from "../../Context/favContext";
+import { FavContext } from "../Context/favContext";
 import { Products } from "../Interface/Products";
 
 export function useFav() {
