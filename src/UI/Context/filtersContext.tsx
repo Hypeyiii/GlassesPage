@@ -1,5 +1,4 @@
 import { createContext, useState } from "react";
-import { SiEa } from "react-icons/si";
 
 export interface Filters {
   children: React.ReactNode;
