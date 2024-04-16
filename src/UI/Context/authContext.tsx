@@ -5,8 +5,8 @@ export interface Auth {
 }
 
 export const AuthContext = createContext({
-  jwt: null,
-  setJWT: (value: null) => {
+  jwt: false,
+  setJWT: (value: boolean) => {
     value;
   },
   username: "",
@@ -24,7 +24,7 @@ export const AuthContext = createContext({
 });
 
 export function AuthProvider({ children }: Auth) {
-  const [jwt, setJWT] = useState(null);
+  const [jwt, setJWT] = useState(false);
   const [username, setUsername] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");

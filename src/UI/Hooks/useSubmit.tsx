@@ -14,7 +14,7 @@ export function useSubmit() {
   } = useContext(AuthContext);
 
   const login = useCallback(() => {
-    setJWT("jwt");
+    setJWT(true)
   }, [setJWT]);
 
   return {
