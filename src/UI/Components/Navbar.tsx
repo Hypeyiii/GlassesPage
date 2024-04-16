@@ -4,22 +4,25 @@ import { NavLink } from "react-router-dom";
 import { useState } from "react";
 import "./Animations.css";
 import { MdDarkMode, MdLightMode } from "react-icons/md";
-import { FaAngleDown } from "react-icons/fa";
+import { FaAngleDown, FaUser, FaUserCheck } from "react-icons/fa";
 import { useSetMobile } from "../Hooks/useSetMobile";
 import TextAnimated from "../Design-System/TextAnimated";
 import { useCart } from "../Hooks/useCart";
 import { useFav } from "../Hooks/useFav";
 import { useDarkMode } from "../Hooks/useDarkMode";
 import { RxCross1 } from "react-icons/rx";
+import { useSubmit } from "../Hooks/useSubmit";
+import { useFilters } from "../Hooks/useFilters";
 
 const Navbar = () => {
   const [collection, setCollection] = useState<boolean>(false);
   const [isMenu, setIsMenu] = useState<boolean>(false);
-
+  const { isLogged } = useSubmit();
   const { toggleColorScheme, isDarkModeOn } = useDarkMode();
   const { isMobile } = useSetMobile();
   const { countProducts } = useCart();
   const { countFavProducts } = useFav();
+  const { handleKeyDown, handleSearch, handleChangeSearch, searchTerm } = useFilters();
 
   const toggleMenu = () => {
     setIsMenu(!isMenu);
@@ -32,7 +35,7 @@ const Navbar = () => {
 
   return (
     <>
-      <div className="absolute top-0 w-full z-50 bg-gray-100 dark:bg-black">
+      <div className="absolute top-0 w-full z-50 bg-gray-100 dark:bg-black/30 border-b-[1px] border-black/10 dark:border-white/20">
         <div
           className={`w-[80%] md:w-[70%] mx-auto flex flex-row justify-between items-center text-black/80 dark:text-white/80 py-4`}
         >
@@ -63,7 +66,7 @@ const Navbar = () => {
                 <TextAnimated text={"Glasses"} fontSize="32px" />
               </NavLink>
               <div
-                className="relative flex flex-row gap-x-2 h-full items-center justify-center hover:bg-black/10 dark:hover:bg-white/30 transition p-6 font-semibold cursor-pointer"
+                className="relative flex flex-row gap-1 h-full items-center justify-center hover:bg-black/10 dark:hover:bg-white/30 transition p-6 font-semibold cursor-pointer"
                 onClick={() => setCollection(!collection)}
               >
                 Colecciones
@@ -88,15 +91,32 @@ const Navbar = () => {
                 )}
               </div>
               <div className="flex flex-row gap-x-4">
-                <li className="hover:font-semibold list-none cursor-pointer hover:text-black dark:hover:text-white transition">
-                  <BiSearch className="size-6" />
+                <li className="hover:font-semibold list-none cursor-pointer hover:text-black dark:hover:text-white transition flex flex-row gap-1">
+                  <button onClick={handleSearch} className="group relative">
+                    <BiSearch className="size-6" />
+                      <div className="absolute bottom-[-25px] right-[-15px] bg-black dark:bg-white text-white dark:text-black rounded-xl p-1 text-[10px] transition hidden group-hover:block">
+                        Buscar
+                      </div>
+                  </button>
+                  <input
+                    type="text"
+                    className="w-32 bg-black dark:bg-white text-white dark:text-black text-xs font-light text-center"
+                    placeholder="Buscar"
+                    onChange={handleChangeSearch}
+                    value={searchTerm}
+                    onKeyDown={handleKeyDown}
+                  />
                 </li>
                 <NavLink
                   id="nav-item"
-                  to={"/User"}
+                  to={`My-account`}
                   className="hover:font-semibold hover:text-black transition dark:hover:text-white"
                 >
-                  <BiUser className="size-6" />
+                  {isLogged ? (
+                    <FaUserCheck className="size-6 relative" />
+                  ) : (
+                    <FaUser className="size-6 relative" />
+                  )}
                 </NavLink>
                 <NavLink
                   id="nav-item"
