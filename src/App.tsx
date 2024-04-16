@@ -4,34 +4,44 @@ import {
   createRoutesFromElements,
   RouterProvider,
 } from "react-router-dom";
-import Layout from "./UI/Components/Layout";
+import Layout from "./UI/Layout/Layout";
 import VisionGlasses from "./UI/Pages/Glasses-Vision";
 import SunGlasses from "./UI/Pages/Glasses-Sun";
-import HomePage from "./UI/Components/HomePage";
-import ErrorPage from "./UI/Components/ErrorPage";
-import Cart from "./UI/Components/Cart";
-import Wishlist from "./UI/Components/WishList";
-import Loggin from "./UI/Components/Loggin";
-import Details from "./UI/Components/Details";
-import Checkout from "./UI/Components/Checkout";
-import SingUp from "./Auth/Components/SingUp";
+import HomePage from "./UI/Pages/HomePage";
+import ErrorPage from "./UI/Pages/ErrorPage";
+import Cart from "./UI/Pages/Cart";
+import Wishlist from "./UI/Pages/WishList";
+import Loggin from "./UI/Pages/Loggin";
+import Details from "./UI/Pages/Details";
+import Checkout from "./UI/Pages/Checkout";
+import SingIn from "./UI/Pages/SingIn";
+import MyAccount from "./UI/Pages/MyAccount";
+import Search from "./UI/Pages/Search";
 
 export default function App() {
   const router = createBrowserRouter(
     createRoutesFromElements(
-      <Route path="/" element={<Layout />}>
-        <Route path="/" element={<HomePage />} />
-        <Route path="Cart" element={<Cart />} />
-        <Route path="Wishlist" element={<Wishlist />} />
-        <Route path=":category/Product/:id" element={<Details />} />
-        <Route path="Sun" element={<SunGlasses />} />
-        <Route path="Vision" element={<VisionGlasses />} />
-        <Route path="*" element={<ErrorPage />} />
-        <Route path="User" element={<Loggin />} />
-        <Route path="Sing-Up" element={<SingUp />} />
-        <Route path="Cart/Checkout" element={<Checkout />} />
-      </Route>
+      <>
+        <Route path="/" element={<Layout />}>
+          <Route path="/" element={<HomePage />} />
+          <Route path="Cart" element={<Cart />} />
+          <Route path="Wishlist" element={<Wishlist />} />
+          <Route path=":category/Product/:id" element={<Details />} />
+          <Route path="Sun" element={<SunGlasses />} />
+          <Route path="Vision" element={<VisionGlasses />} />
+          <Route path="*" element={<ErrorPage />} />
+          <Route path="User" element={<Loggin />} />
+          <Route path="Sing-In" element={<SingIn />} />
+          <Route path="My-account" element={<MyAccount />} />
+          <Route path="Cart/Checkout" element={<Checkout />} />
+          <Route path="/search/:term" element={<Search />} />
+        </Route>
+      </>
     )
   );
-  return <RouterProvider router={router} />;
+  return (
+    <>
+      <RouterProvider router={router} />
+    </>
+  );
 }
