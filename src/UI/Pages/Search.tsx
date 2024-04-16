@@ -12,10 +12,10 @@ const Search = () => {
   let { term } = useParams();
   term = searchTerm;
   return (
-    <div className="w-[90%] md:w-[70%] m-auto text-black dark:text-white">
+    <div className="w-[90%] md:w-[80%] m-auto text-black dark:text-white">
       {searchResults.length > 0 ? (
-        <div className="mt-32 grid grid-cols-3 items-center justify-center gap-4">
-          <h1 className="text-xl col-span-3">Productos para: {term}</h1>
+        <div className="mt-32 grid grid-cols-1 md:grid-cols-3 items-center justify-center gap-4">
+          <h1 className="text-xl col-span-1 md:col-span-3">Productos para: {term}</h1>
           {searchResults.map((product) => (
             <ProductItem
               key={product.id}
