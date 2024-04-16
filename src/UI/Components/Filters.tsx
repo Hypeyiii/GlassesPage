@@ -1,5 +1,5 @@
 import { useState, useContext } from "react";
-import { FiltersContext } from "../../Context/filtersContext.tsx";
+import { FiltersContext } from "../Context/filtersContext.tsx";
 import './Animations.css'
 
 const Filters = () => {
@@ -66,7 +66,7 @@ const Filters = () => {
     <>
       <div
         className="mt-20 md:mt-32 text-white w-[70%] m-auto flex flex-row gap-4 justify-center items-start gap-x-14
-       relative pt-10 mb-5 border-t-[1px] border-black/20 dark:border-white/20"
+       relative pt-10 mb-5"
       >
         <div className="text-black dark:text-white flex justify-center items-center flex-col">
           <button
