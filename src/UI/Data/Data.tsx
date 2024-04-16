@@ -1,7 +1,7 @@
 export const sunglasses = [
   {
     id: 1,
-    brand: "Sunglasses",
+    brand: "Versace",
     description: "Sunglasses with a black frame and black lenses",
     category: "Sun",
     genre: "man",
@@ -15,7 +15,7 @@ export const sunglasses = [
   },
   {
     id: 2,
-    brand: "Sunglasses",
+    brand: "Mont Blanc",
     description: "Sunglasses with a black frame and black lenses",
     category: "Sun",
     genre: "man",
@@ -29,7 +29,7 @@ export const sunglasses = [
   },
   {
     id: 3,
-    brand: "Sunglasses",
+    brand: "Burberry",
     description: "Sunglasses with a black frame and black lenses",
     category: "Sun",
     genre: "woman",
@@ -57,7 +57,7 @@ export const sunglasses = [
   },
   {
     id: 5,
-    brand: "Sunglasses",
+    brand: "Ray-Ban",
     description: "Sunglasses with a black frame and black lenses",
     category: "Sun",
     genre: "man",
@@ -111,7 +111,7 @@ export const sunglasses = [
   },
   {
     id: 41,
-    brand: "Man Sun Glasses",
+    brand: "Hawkers",
     description: "Squared Sun Glasses with a black frame and black lenses",
     category: "Sun",
     genre: "man",
@@ -167,7 +167,7 @@ export const sunglasses = [
   },
   {
     id: 61,
-    brand: "Ray-Ban",
+    brand: "Guess",
     price: 120,
     category: "Sun",
     genre: "woman",
@@ -177,7 +177,7 @@ export const sunglasses = [
       "https://econolentes.com.pe/cdn/shop/products/889214307156_2_e3522cbd-e160-4182-a73f-f3e01af5611e_700x700.png?v=1696050898",
     quantity: 1,
     stock: 10,
-    description: "Lentes de sol Ray-Ban",
+    description: "Lentes de sol Guess",
   },
   {
     id: 81,
@@ -192,7 +192,7 @@ export const sunglasses = [
   },
   {
     id: 101,
-    brand: "Ray-Ban",
+    brand: "Giorgio Armani",
     price: 120,
     category: "Sun",
     genre: "man",
