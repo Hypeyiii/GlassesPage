@@ -1,11 +1,13 @@
 import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
 import "./index.css";
-import { CartProvider } from "./Context/cartContext.tsx";
-import { FavProvider } from "./Context/favContext.tsx";
-import { FiltersProvider } from "./Context/filtersContext.tsx";
+import { CartProvider } from "./UI/Context/cartContext.tsx";
+import { FavProvider } from "./UI/Context/favContext.tsx";
+import { FiltersProvider } from "./UI/Context/filtersContext.tsx";
+import { AuthProvider } from "./UI/Context/authContext.tsx";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
+  <AuthProvider>
   <CartProvider>
     <FavProvider>
       <FiltersProvider>
@@ -13,4 +15,5 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
       </FiltersProvider>
     </FavProvider>
   </CartProvider>
+  </AuthProvider>
 );
