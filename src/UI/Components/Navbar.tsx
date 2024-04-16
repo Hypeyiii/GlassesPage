@@ -13,8 +13,10 @@ import { useDarkMode } from "../Hooks/useDarkMode";
 import { RxCross1 } from "react-icons/rx";
 import { useSubmit } from "../Hooks/useSubmit";
 import { useFilters } from "../Hooks/useFilters";
+import SearchOnMobile from "./SearchOnMobile";
 
 const Navbar = () => {
+  const [searchMobile, setSearchMobile] = useState<boolean>(false);
   const [collection, setCollection] = useState<boolean>(false);
   const [isMenu, setIsMenu] = useState<boolean>(false);
   const { isLogged } = useSubmit();
@@ -22,7 +24,8 @@ const Navbar = () => {
   const { isMobile } = useSetMobile();
   const { countProducts } = useCart();
   const { countFavProducts } = useFav();
-  const { handleKeyDown, handleSearch, handleChangeSearch, searchTerm } = useFilters();
+  const { handleKeyDown, handleSearch, handleChangeSearch, searchTerm } =
+    useFilters();
 
   const toggleMenu = () => {
     setIsMenu(!isMenu);
@@ -94,9 +97,9 @@ const Navbar = () => {
                 <li className="hover:font-semibold list-none cursor-pointer hover:text-black dark:hover:text-white transition flex flex-row gap-1">
                   <button onClick={handleSearch} className="group relative">
                     <BiSearch className="size-6" />
-                      <div className="absolute bottom-[-25px] right-[-15px] bg-black dark:bg-white text-white dark:text-black rounded-xl p-1 text-[10px] transition hidden group-hover:block">
-                        Buscar
-                      </div>
+                    <div className="absolute bottom-[-25px] right-[-15px] bg-black dark:bg-white text-white dark:text-black rounded-xl p-1 text-[10px] transition hidden group-hover:block">
+                      Buscar
+                    </div>
                   </button>
                   <input
                     type="text"
@@ -176,7 +179,10 @@ const Navbar = () => {
           <NavLink to={"/Vision"} className="font-light text-base">
             Lentes de Vision
           </NavLink>
-          <li className="flex flex-row gap-x-1 items-center text-xl font-bold mt-5">
+          <li
+            className="flex flex-row gap-x-1 items-center text-xl font-bold mt-5"
+            onClick={() => setSearchMobile(!searchMobile)}
+          >
             <BiSearch className="size-6" />
             <p>Buscar</p>
           </li>
@@ -215,6 +221,7 @@ const Navbar = () => {
           </li>
         </div>
       </>
+      {searchMobile && <SearchOnMobile close={() => setSearchMobile(false)} />}
     </>
   );
 };
