@@ -1,7 +1,6 @@
 import Navbar from "../Components/Navbar";
 import Footer from "../Components/Footer";
 import { Outlet } from "react-router-dom";
-import ScrollToTop from "../Components/ScrollToTop";
 import CartPreview from "../Components/CartPreview";
 import RoutesToTop from "../Components/RoutesToTop";
 import SearchModal from "../Components/SearchModal";
@@ -13,7 +12,6 @@ const Layout = () => {
       <RoutesToTop />
       <Outlet />
       <Footer />
-      <ScrollToTop />
       <CartPreview />
       <SearchModal />
     </div>
