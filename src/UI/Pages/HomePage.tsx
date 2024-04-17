@@ -11,6 +11,7 @@ export default function HomePage() {
         <Section category="woman" collection="mujer"/>
         <PromotionImage />
         <Section category="Sun" collection="sol"/>
+        <Section category="Vision" collection="vision" />
       </div>
     </>
   );
