@@ -8,6 +8,12 @@
   transform: translateY(-2px) scale(1.1);
   opacity: 1;
 }
+.dark #nav-collection.active{
+  border-color: white;
+}
+#nav-collection.active{
+  border-color: black;
+}
 #login{
   background-image: url("https://www.godelta.com/hubfs/Blog-Images/blue-light-blocking-glasses-are-the-best-promo-product-of-the-year/hero-blue-light-blocking-glasses-are-the-best-promo-product-of-the-year.jpg");
   background-size: cover;
