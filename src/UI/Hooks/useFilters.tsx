@@ -5,25 +5,14 @@ import { useNavigate } from "react-router-dom";
 
 export function useFilters() {
   const navigate = useNavigate();
-  const { filters, searchTerm, setSearchTerm, showSearchTool, setShowSearchTool } = useContext(FiltersContext);
-  const filterSunGlasses = sunglasses.filter(
-    (product) =>
-      product.category === "Sun" &&
-      product.price >= filters.minPrice &&
-      (filters.genre === "all" || product.genre === filters.genre) &&
-      (filters.shape === "all" || product.shape === filters.shape) &&
-      (filters.color === "all" || product.color === filters.color)
-  );
-  const filterVisionGlasses = sunglasses.filter(
-    (product) =>
-      product.category === "Vision" &&
-      product.price >= filters.minPrice &&
-      (filters.genre === "all" || product.genre === filters.genre) &&
-      (filters.shape === "all" || product.shape === filters.shape) &&
-      (filters.color === "all" || product.color === filters.color)
-  );
+  const {
+    searchTerm,
+    setSearchTerm,
+    showSearchTool,
+    setShowSearchTool,
+  } = useContext(FiltersContext);
 
-  console.log(showSearchTool)
+  console.log(showSearchTool);
 
   const handleChangeSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value);
@@ -47,8 +36,6 @@ export function useFilters() {
   );
 
   return {
-    filterSunGlasses,
-    filterVisionGlasses,
     handleChangeSearch,
     searchTerm,
     handleSearch,
