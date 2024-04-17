@@ -18,9 +18,14 @@ export const FiltersContext = createContext({
   setSearchTerm: (searchTerm: string) => {
     searchTerm;
   },
+  showSearchTool: false,
+  setShowSearchTool: (showSearchTool: boolean) => {
+    showSearchTool;
+  },
 });
 
 export function FiltersProvider({ children }: Filters) {
+  const [showSearchTool, setShowSearchTool] = useState<boolean>(false);
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [filters, setFilters] = useState({
     minPrice: 0,
@@ -35,6 +40,8 @@ export function FiltersProvider({ children }: Filters) {
         setFilters,
         searchTerm,
         setSearchTerm,
+        showSearchTool,
+        setShowSearchTool,
       }}
     >
       {children}
