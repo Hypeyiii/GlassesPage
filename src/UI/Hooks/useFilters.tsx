@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 export function useFilters() {
   const navigate = useNavigate();
-  const { filters, searchTerm, setSearchTerm } = useContext(FiltersContext);
+  const { filters, searchTerm, setSearchTerm, showSearchTool, setShowSearchTool } = useContext(FiltersContext);
   const filterSunGlasses = sunglasses.filter(
     (product) =>
       product.category === "Sun" &&
@@ -23,11 +23,14 @@ export function useFilters() {
       (filters.color === "all" || product.color === filters.color)
   );
 
+  console.log(showSearchTool)
+
   const handleChangeSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value);
   };
 
   const handleSearch = () => {
+    setShowSearchTool(false);
     navigate(`/search/${searchTerm}`);
   };
 
@@ -51,5 +54,7 @@ export function useFilters() {
     handleSearch,
     handleKeyDown,
     searchResults,
+    showSearchTool,
+    setShowSearchTool,
   };
 }
