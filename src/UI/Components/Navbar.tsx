@@ -69,14 +69,14 @@ const Navbar = () => {
               <div className="relative flex flex-row gap-4 h-full items-center justify-centertransition font-semibold cursor-pointer">
                 <NavLink
                   id="nav-collection"
-                  to="/Sun"
+                  to="collection/Sun"
                   className="px-4 py-2 border-b-[1px] border-transparent dark:hover:border-white/20 hover:border-black/20"
                 >
                   Lentes de Sol
                 </NavLink>
                 <NavLink
                   id="nav-collection"
-                  to="/Vision"
+                  to="collection/Vision"
                   className="px-4 py-2 border-b-[1px] border-transparent dark:hover:border-white/20 hover:border-black/20"
                 >
                   Lentes de Vista
@@ -168,7 +168,7 @@ const Navbar = () => {
             <p>Buscar</p>
           </li>
           <NavLink
-            to={"/User"}
+            to={"/My-Account"}
             className="flex flex-row gap-x-1 items-center text-xl font-bold"
           >
             <BiUser className="size-6" />
