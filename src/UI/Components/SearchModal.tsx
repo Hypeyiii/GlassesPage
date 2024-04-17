@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { HiHeart } from "react-icons/hi";
 import { useFav } from "../Hooks/useFav";
 import { Products } from "../Interface/Products";
+import "../Components/Animations.css";
 
 export default function SearchModal() {
   const {
@@ -22,12 +23,9 @@ export default function SearchModal() {
     <>
       <div
         className={`${
-          showSearchTool
-            ? "scale-in-center visible"
-            : "scale-out-center invisible"
-        } fixed
-  backdrop-blur-md inset-0 w-screen h-screen text-white transition-all
- dark:text-black flex flex-col justify-center items-center py-4 z-50`}
+          showSearchTool ? "visible" : "invisible"
+        } transition-all duration-100 fixed backdrop-blur-md inset-0 w-screen h-screen text-white
+         dark:text-black flex flex-col justify-center items-center py-4 z-50`}
       >
         <div
           className="absolute right-0 top-0 p-5"
@@ -36,8 +34,10 @@ export default function SearchModal() {
           <RxCross1 className="size-8 text-black dark:text-white cursor-pointer" />
         </div>
         <div
-          className="flex flex-col w-[80%] md:w-[50%] h-[70%] justify-center items-center px-6 py-10 relative bg-white dark:bg-neutral-950 rounded-lg 
-    border-[1px] border-black dark:border-white"
+          className={` ${
+            showSearchTool ? "scale-in-center" : "scale-out-center"
+          } transition-all duration-500 flex flex-col w-[80%] md:w-[50%] h-[70%] justify-center items-center px-6 py-10 relative bg-white dark:bg-neutral-950 rounded-lg 
+          border-[1px] border-black dark:border-white`}
         >
           <div
             className="absolute top-0 py-10 px-6 w-full h-10 text-black dark:text-white text-xs font-light text-center flex flex-col 
@@ -45,14 +45,14 @@ export default function SearchModal() {
           >
             <input
               type="text"
-              className="w-full bg-black dark:bg-white text-white dark:text-black text-sm font-light text-center"
-              placeholder="Buscar"
+              className="w-full py-2 bg-black dark:bg-white text-white dark:text-black text-sm font-light text-center"
+              placeholder="Buscar por marca o categoria"
               onChange={handleChangeSearch}
               value={searchTerm}
               onKeyDown={handleKeyDown}
             />
             <button
-              className="absolute right-10 flex justify-center items-center text-white dark:text-black"
+              className="absolute right-10 bottom-3 flex justify-center items-center text-white dark:text-black"
               onClick={handleSearch}
             >
               <BiSearch className="size-5" />
@@ -65,22 +65,23 @@ export default function SearchModal() {
               resultados
             </p>
           </div>
-          <div className="flex flex-col overflow-y-auto w-full mt-16">
+          <div className="flex flex-col overflow-y-auto w-full mt-20">
             {searchTerm.length > 0 && searchResults.length > 0 ? (
               searchResults.map((product) => (
-                <Link
-                  to={`${product.category}/Product/${product.id}`}
+                <div
                   key={product.id}
                   className="grid grid-cols-5 gap-2 items-center justify-center text-black dark:text-white max-w-full 
               border-t-[1px] border-black/20 dark:border-white/20 hover:bg-gray-100 dark:hover:bg-neutral-800"
                 >
-                  <div
+                  <Link
+                    to={`${product.category}/Product/${product.id}`}
                     className="col-span-1 size-[75px] md:size-[100px] flex justify-center items-center m-auto"
                     onClick={() => setShowSearchTool(false)}
                   >
                     <img src={product.image} alt={product.brand} />
-                  </div>
-                  <div
+                  </Link>
+                  <Link
+                    to={`${product.category}/Product/${product.id}`}
                     className="col-span-3 flex flex-row justify-center items-center gap-1 text-xs md:text-base text-center text-nowrap"
                     onClick={() => setShowSearchTool(false)}
                   >
@@ -89,34 +90,43 @@ export default function SearchModal() {
                     <p className="hidden md:block">
                       {product.category}-Glasses
                     </p>
-                  </div>
+                  </Link>
                   <button
                     onClick={() => addToFav(product as Products)}
                     className={`${
-                      productFav(product.id) ? "text-red-500" : ""
-                    }`}
+                      productFav(product.id)
+                        ? "text-red-500 scale-in-center"
+                        : "text-black dark:text-white scale-in-center"
+                    } transition-all duration-300`}
                   >
                     <HiHeart className="size-6" />
                   </button>
-                </Link>
+                </div>
               ))
             ) : (
-              <p className="text-black dark:text-white text-lg font-normal text-center">
+              <>
                 {searchTerm.length === 0 ? (
-                  "Escribe algo para buscar"
+                  <div className="m-auto w-fit h-fit flex justify-center items-center text-black dark:text-white">
+                    <BiSearch className="absolute size-24 opacity-10" />
+                    <p className="absolute">
+                      Escribe algo para identificar el producto
+                    </p>
+                  </div>
                 ) : (
-                  <p>No hay resultados para: {searchTerm}</p>
+                  <div className="m-auto w-fit h-fit flex justify-center items-center text-black dark:text-white">
+                    <BiSearch className="absolute size-24 opacity-10" />
+                    <p className="absolute">
+                      No hay resultados para: {searchTerm}
+                    </p>
+                  </div>
                 )}
-              </p>
+              </>
             )}
             <div
               className="mt-5 absolute bottom-0 right-0 left-0 w-full m-auto flex flex-row justify-between items-center text-black dark:text-white
-        border-t-[1px] border-black/20 dark:border-white/20 py-2 px-4 bg-white dark:bg-neutral-950 rounded-b-lg"
+                        border-t-[1px] border-black/20 dark:border-white/20 py-2 px-4 bg-white dark:bg-neutral-950 rounded-b-lg"
             >
-              <p
-                className="text-base flex
-         justify-center items-center flex-row gap-1"
-              >
+              <p className="text-base flex justify-center items-center flex-row gap-1">
                 Busqueda para:{" "}
                 <span className="text-yellow-500"> {searchTerm} </span>
               </p>
@@ -124,7 +134,7 @@ export default function SearchModal() {
                 className="flex flex-row gap-1 border px-2 py-1 text-xs md:opacity-50 hover:opacity-100 transition"
                 onClick={handleSearch}
               >
-                <BiSearch className="size-4" />
+                <BiSearch className="size-4"/>
                 Buscar
               </button>
             </div>
