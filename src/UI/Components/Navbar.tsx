@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 import { useState } from "react";
 import "./Animations.css";
 import { MdDarkMode, MdLightMode } from "react-icons/md";
-import { FaAngleDown, FaUser, FaUserCheck } from "react-icons/fa";
+import { FaUser, FaUserCheck } from "react-icons/fa";
 import { useSetMobile } from "../Hooks/useSetMobile";
 import TextAnimated from "../Design-System/TextAnimated";
 import { useCart } from "../Hooks/useCart";
@@ -13,19 +13,17 @@ import { useDarkMode } from "../Hooks/useDarkMode";
 import { RxCross1 } from "react-icons/rx";
 import { useSubmit } from "../Hooks/useSubmit";
 import { useFilters } from "../Hooks/useFilters";
-import SearchOnMobile from "./SearchOnMobile";
 
 const Navbar = () => {
-  const [searchMobile, setSearchMobile] = useState<boolean>(false);
-  const [collection, setCollection] = useState<boolean>(false);
   const [isMenu, setIsMenu] = useState<boolean>(false);
   const { isLogged } = useSubmit();
   const { toggleColorScheme, isDarkModeOn } = useDarkMode();
   const { isMobile } = useSetMobile();
   const { countProducts } = useCart();
   const { countFavProducts } = useFav();
-  const { handleKeyDown, handleSearch, handleChangeSearch, searchTerm } =
-    useFilters();
+  const { showSearchTool, setShowSearchTool } = useFilters();
+
+  console.log(showSearchTool);
 
   const toggleMenu = () => {
     setIsMenu(!isMenu);
@@ -68,47 +66,30 @@ const Navbar = () => {
               <NavLink to={"/"}>
                 <TextAnimated text={"Glasses"} fontSize="32px" />
               </NavLink>
-              <div
-                className="relative flex flex-row gap-1 h-full items-center justify-center hover:bg-black/10 dark:hover:bg-white/30 transition p-6 font-semibold cursor-pointer"
-                onClick={() => setCollection(!collection)}
-              >
-                Colecciones
-                <FaAngleDown className="size-4" />
-                {collection && (
-                  <div className="absolute top-[75px]  bg-white dark:bg-black border-[1px] border-black dark:border-white z-50 text-wrap w-[150px] ">
-                    <div className="flex flex-col text-xs md:text-sm">
-                      <NavLink
-                        to="/Sun"
-                        className="dark:hover:bg-white dark:hover:text-black hover:bg-black hover:text-white px-4 py-2"
-                      >
-                        Lentes de Sol
-                      </NavLink>
-                      <NavLink
-                        to="/Vision"
-                        className="dark:hover:bg-white dark:hover:text-black hover:bg-black hover:text-white px-4 py-2"
-                      >
-                        Lentes de Vista
-                      </NavLink>
-                    </div>
-                  </div>
-                )}
+              <div className="relative flex flex-row gap-4 h-full items-center justify-centertransition font-semibold cursor-pointer">
+                <NavLink
+                  id="nav-collection"
+                  to="/Sun"
+                  className="px-4 py-2 border-b-[1px] border-transparent dark:hover:border-white/20 hover:border-black/20"
+                >
+                  Lentes de Sol
+                </NavLink>
+                <NavLink
+                  id="nav-collection"
+                  to="/Vision"
+                  className="px-4 py-2 border-b-[1px] border-transparent dark:hover:border-white/20 hover:border-black/20"
+                >
+                  Lentes de Vista
+                </NavLink>
               </div>
               <div className="flex flex-row gap-x-4">
                 <li className="hover:font-semibold list-none cursor-pointer hover:text-black dark:hover:text-white transition flex flex-row gap-1">
-                  <button onClick={handleSearch} className="group relative">
+                  <button
+                    className="group relative"
+                    onClick={() => setShowSearchTool(!showSearchTool)}
+                  >
                     <BiSearch className="size-6" />
-                    <div className="absolute bottom-[-25px] right-[-15px] bg-black dark:bg-white text-white dark:text-black rounded-xl p-1 text-[10px] transition hidden group-hover:block">
-                      Buscar
-                    </div>
                   </button>
-                  <input
-                    type="text"
-                    className="w-32 bg-black dark:bg-white text-white dark:text-black text-xs font-light text-center"
-                    placeholder="Buscar"
-                    onChange={handleChangeSearch}
-                    value={searchTerm}
-                    onKeyDown={handleKeyDown}
-                  />
                 </li>
                 <NavLink
                   id="nav-item"
@@ -181,7 +162,7 @@ const Navbar = () => {
           </NavLink>
           <li
             className="flex flex-row gap-x-1 items-center text-xl font-bold mt-5"
-            onClick={() => setSearchMobile(!searchMobile)}
+            onClick={() => setShowSearchTool(true)}
           >
             <BiSearch className="size-6" />
             <p>Buscar</p>
@@ -221,7 +202,6 @@ const Navbar = () => {
           </li>
         </div>
       </>
-      {searchMobile && <SearchOnMobile close={() => setSearchMobile(false)} />}
     </>
   );
 };
