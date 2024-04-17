@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 export const MainPromotion = () => {
   return (
-    <div className="w-screen flex justify-center items-center relative [&>div>img]:hover:scale-105">
+    <div className="w-full flex flex-col gap-4 justify-center items-center relative [&>div>img]:hover:scale-105">
       <div className="bg-cover overflow-hidden">
         <img
           src="https://www.reallusion.com/ContentStore/iClone/pack/Modern_Glasses/images/Main_page_1920x700.jpg"
@@ -10,7 +10,7 @@ export const MainPromotion = () => {
           className="w-full h-[150px] md:h-auto opacity-90 dark:opacity-50 transition-all duration-1000"
         />
       </div>
-      <div className="absolute right-0 md:right-[100px] top-0 bottom-0 h-full w-[400px] text-center m-auto flex flex-col gap-4 justify-center items-center">
+      <div className="md:absolute md:right-0 top-0 bottom-0 h-full md:w-[400px] text-center m-auto flex flex-col gap-2 md:gap-4 justify-center items-center">
         <h1 className="text-white text-base md:text-4xl font-bold">
           Modern Glasses, quality and style
         </h1>
@@ -18,7 +18,7 @@ export const MainPromotion = () => {
           ¡Found the perfect style for you!
         </p>
         <Link to={"collection/Sun"}>
-          <button className="bg-white text-black text-sm md:text-2xl font-bold px-2 md:px-4 py-1 md:py-2 rounded-lg hover:bg-gray-200">
+          <button className="border border-white rounded-lg text-white font-semibold py-2 md:py-4 px-3 md:px-6 uppercase md:-translate-y-2 hover:translate-y-0 transition">
             Shop now
           </button>
         </Link>
