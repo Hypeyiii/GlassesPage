@@ -1,14 +1,17 @@
-import { PromotionImage, PromotionLogin } from "../Components/Promotions";
+import { MainPromotion, PromotionImage, PromotionLogin } from "../Components/Promotions";
+import Section from "../Components/HomePage-Sections";
 
 export default function HomePage() {
   return (
     <>
-      <div className="flex flex-col items-center justify-center mt-32 gap-y-4">
+      <div className="flex flex-col items-center justify-center mt-32 gap-y-20 w-[80%] md:w-[70%] m-auto">
+        <MainPromotion/>
+        <Section category="man" collection="hombres"/>
         <PromotionLogin />
-        <div className="mt-20 md:mt-32">
-          <PromotionImage />
-        </div>
+        <Section category="woman" collection="mujer"/>
+        <PromotionImage />
+        <Section category="Sun" collection="sol"/>
       </div>
     </>
   );
-} 
+}
