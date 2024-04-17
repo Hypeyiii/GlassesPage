@@ -57,7 +57,7 @@ export default function Details() {
 
   return (
     <>
-      <div className="grid grid-cols-4 items-center justify-center mt-32 w-[90%] md:w-[70%] mx-auto relative">
+      <div className="grid grid-cols-4 items-center justify-center mt-32 w-[80%] md:w-[70%] mx-auto relative">
         <div className="col-span-4 text-black dark:text-white flex flex-row items-center justify-between text-sm md:text-base cursor-pointer transition">
           <div>
             <Link to={"/"} className="text-black/60 dark:text-white/60">
@@ -120,7 +120,7 @@ export default function Details() {
           </div>
         </div>
       </div>
-      <div className="text-black dark:text-white w-[90%] md:w-[70%] mx-auto grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-5 mt-20 md:mt-0">
+      <div className="text-black dark:text-white w-[80%] md:w-[70%] mx-auto grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-5 mt-20 md:mt-0">
         {similarProducts.length > 0 ? (
           <p className="text-xl col-span-2 md:col-span-4 border-b-[1px] border-black/50 dark:border-white/50 pb-5">
             Tambien te podría interesar
@@ -150,9 +150,6 @@ export default function Details() {
             </div>
             <p className="text-black/60 dark:text-white/60 text-xs md:text-base font-semibold">
               {item.brand}
-            </p>
-            <p className="text-black dark:text-white font-semibold text-xs md:text-lg">
-              {item.description}
             </p>
             <div className="flex flex-row justify-between items-center">
               <p className="text-xs font-extrabold text-black dark:text-white">
