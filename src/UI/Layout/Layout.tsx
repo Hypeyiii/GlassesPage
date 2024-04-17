@@ -4,6 +4,7 @@ import { Outlet } from "react-router-dom";
 import ScrollToTop from "../Components/ScrollToTop";
 import CartPreview from "../Components/CartPreview";
 import RoutesToTop from "../Components/RoutesToTop";
+import SearchModal from "../Components/SearchModal";
 
 const Layout = () => {
   return (
@@ -14,6 +15,7 @@ const Layout = () => {
       <Footer />
       <ScrollToTop />
       <CartPreview />
+      <SearchModal />
     </div>
   );
 };
