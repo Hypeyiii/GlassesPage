@@ -154,10 +154,10 @@ const Navbar = () => {
           <NavLink to={"/"} className="text-xl font-bold mt-24 mb-5">
             Inicio
           </NavLink>
-          <NavLink to={"/Sun"} className="font-light text-base">
+          <NavLink to={"collection/Sun"} className="font-light text-base">
             Lentes de Sol
           </NavLink>
-          <NavLink to={"/Vision"} className="font-light text-base">
+          <NavLink to={"collection/Vision"} className="font-light text-base">
             Lentes de Vision
           </NavLink>
           <li
