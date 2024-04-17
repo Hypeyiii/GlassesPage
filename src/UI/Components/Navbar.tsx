@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 import { useState } from "react";
 import "./Animations.css";
 import { MdDarkMode, MdLightMode } from "react-icons/md";
-import { FaUser, FaUserCheck } from "react-icons/fa";
+import { FaAngleDown, FaUser, FaUserCheck } from "react-icons/fa";
 import { useSetMobile } from "../Hooks/useSetMobile";
 import TextAnimated from "../Design-System/TextAnimated";
 import { useCart } from "../Hooks/useCart";
@@ -16,6 +16,7 @@ import { useFilters } from "../Hooks/useFilters";
 
 const Navbar = () => {
   const [isMenu, setIsMenu] = useState<boolean>(false);
+  const [showCollectionMenu, setShowCollectionMenu] = useState<boolean>(false);
   const { isLogged } = useSubmit();
   const { toggleColorScheme, isDarkModeOn } = useDarkMode();
   const { isMobile } = useSetMobile();
@@ -66,21 +67,49 @@ const Navbar = () => {
               <NavLink to={"/"}>
                 <TextAnimated text={"Glasses"} fontSize="32px" />
               </NavLink>
-              <div className="relative flex flex-row gap-4 h-full items-center justify-centertransition font-semibold cursor-pointer">
-                <NavLink
-                  id="nav-collection"
-                  to="collection/Sun"
-                  className="px-4 py-2 border-b-[1px] border-transparent dark:hover:border-white/20 hover:border-black/20"
+              <div
+                className="relative h-full items-center justify-centertransition font-semibold cursor-pointer"
+                onClick={() => setShowCollectionMenu(!showCollectionMenu)}
+              >
+                <div className="flex flex-row gap-1 items-center h-full">
+                  <p>Colecciones</p>
+                  <FaAngleDown />
+                </div>
+                <div
+                  className={`${
+                    showCollectionMenu ? "visible" : "invisible"
+                  } absolute right-[-20px] text-black dark:text-white top-10 m-auto flex flex-col w-fit
+                    text-nowrap bg-white dark:bg-black border border-black dark:border-white rounded-lg`}
                 >
-                  Lentes de Sol
-                </NavLink>
-                <NavLink
-                  id="nav-collection"
-                  to="collection/Vision"
-                  className="px-4 py-2 border-b-[1px] border-transparent dark:hover:border-white/20 hover:border-black/20"
-                >
-                  Lentes de Vista
-                </NavLink>
+                  <NavLink
+                    id="nav-collection"
+                    to="collection/Sun"
+                    className="py-2 px-4 text-sm rounded-t-lg hover:bg-black/5 dark:hover:bg-white/20"
+                  >
+                    Lentes de Sol
+                  </NavLink>
+                  <NavLink
+                    id="nav-collection"
+                    to="collection/Vision"
+                    className="py-2 px-4 text-sm hover:bg-black/5 dark:hover:bg-white/20"
+                  >
+                    Lentes de Vista
+                  </NavLink>
+                  <NavLink
+                    id="nav-collection"
+                    to="collection/man"
+                    className="py-2 px-4 text-sm hover:bg-black/5 dark:hover:bg-white/20"
+                  >
+                    Lentes de Hombre
+                  </NavLink>
+                  <NavLink
+                    id="nav-collection"
+                    to="collection/woman"
+                    className="py-2 px-4 text-sm rounded-b-lg hover:bg-black/5 dark:hover:bg-white/20"
+                  >
+                    Lentes de Mujer
+                  </NavLink>
+                </div>
               </div>
               <div className="flex flex-row gap-x-4">
                 <li className="hover:font-semibold list-none cursor-pointer hover:text-black dark:hover:text-white transition flex flex-row gap-1">
