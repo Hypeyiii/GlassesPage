@@ -1,7 +1,6 @@
 import { useContext } from "react";
 import { FavContext } from "../Context/favContext";
 import { Products } from "../Interface/Products";
-
 export function useFav() {
   const {
     setIsFav,
@@ -11,6 +10,7 @@ export function useFav() {
     setCountFavProducts,
     isFav,
   } = useContext(FavContext);
+
   const addToFav = (product: Products): Products[] => {
     const existingProduct = allFavProducts.find((p) => p.id === product.id);
     if (existingProduct) {
@@ -38,6 +38,10 @@ export function useFav() {
     return newProducts;
   };
 
+  const productFav = (id: number): boolean => {
+    return allFavProducts.some((product) => product.id === id);
+  }
+
   return {
     addToFav,
     allFavProducts,
@@ -46,5 +50,6 @@ export function useFav() {
     setCountFavProducts,
     isFav,
     deleteFavProduct,
+    productFav,
   };
 }
