@@ -30,7 +30,7 @@ export const Carrousel = () => {
   };
 
   return (
-    <div className="w-full flex flex-col gap-4 justify-center items-center relative [&>div>img]:hover:scale-105">
+    <div className="w-screen md:w-full flex flex-col gap-4 justify-center items-center relative [&>div>img]:hover:scale-105">
       {image}
       <button
         onClick={handlePrevious}
