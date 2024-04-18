@@ -37,7 +37,7 @@ const Navbar = () => {
 
   return (
     <>
-      <div className="absolute top-0 w-full z-50 bg-gray-100 dark:bg-black/30 border-b-[1px] border-black/10 dark:border-white/20">
+      <div className="absolute top-0 w-full z-50 bg-gray-200 dark:bg-black/30 border-b-[1px] border-black/10 dark:border-white/20">
         <div
           className={`w-[80%] md:w-[70%] mx-auto flex flex-row justify-between items-center text-black/80 dark:text-white/80 py-4`}
         >
@@ -69,22 +69,23 @@ const Navbar = () => {
               </NavLink>
               <div
                 className="relative h-full items-center justify-centertransition font-semibold cursor-pointer"
+                onMouseEnter={() => setShowCollectionMenu(true)} onMouseLeave={() => setShowCollectionMenu(false)}
                 onClick={() => setShowCollectionMenu(!showCollectionMenu)}
               >
-                <div className="flex flex-row gap-1 items-center h-full">
+                <div className="flex flex-row gap-1 items-center h-full py-4 px-2">
                   <p>Colecciones</p>
                   <FaAngleDown />
                 </div>
                 <div
                   className={`${
-                    showCollectionMenu ? "visible" : "invisible"
-                  } absolute right-[-20px] text-black dark:text-white top-10 m-auto flex flex-col w-fit
+                    showCollectionMenu ? "visible scale-in-center" : "invisible"
+                  } absolute right-[-20px] text-black dark:text-white top-[50px] m-auto flex flex-col w-fit
                     text-nowrap bg-white dark:bg-black border border-black dark:border-white rounded-lg`}
                 >
                   <NavLink
                     id="nav-collection"
                     to="collection/Sun"
-                    className="py-2 px-4 text-sm rounded-t-lg hover:bg-black/5 dark:hover:bg-white/20"
+                    className="py-2 px-4 text-sm rounded-t-md hover:bg-black/5 dark:hover:bg-white/20"
                   >
                     Lentes de Sol
                   </NavLink>
@@ -105,7 +106,7 @@ const Navbar = () => {
                   <NavLink
                     id="nav-collection"
                     to="collection/woman"
-                    className="py-2 px-4 text-sm rounded-b-lg hover:bg-black/5 dark:hover:bg-white/20"
+                    className="py-2 px-4 text-sm rounded-b-md hover:bg-black/5 dark:hover:bg-white/20"
                   >
                     Lentes de Mujer
                   </NavLink>
