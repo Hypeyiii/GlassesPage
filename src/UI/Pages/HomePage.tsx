@@ -8,7 +8,7 @@ import Section from "../Components/HomePage-Sections";
 export default function HomePage() {
   return (
     <>
-      <div className="flex flex-col items-center justify-center mt-32 gap-y-20 w-[80%] md:w-[70%] m-auto">
+      <div className="flex flex-col items-center justify-center mt-[75px] md:mt-32 gap-y-20 w-[80%] md:w-[70%] m-auto">
         <Carrousel />
         <Section category="man" collection="hombres" />
         <PromotionLogin />
