@@ -1,28 +1,49 @@
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
+import {
+  ClassicGlasses,
+  ModernGlasses,
+  SpaceGlasses,
+} from "./Carrousel-Containers";
 
-export const MainPromotion = () => {
+export const Carrousel = () => {
+  const container = [<ModernGlasses />, <ClassicGlasses />, <SpaceGlasses />];
+  const [index, setIndex] = useState(0);
+  const [image, setImage] = useState(container[index]);
+
+  const handlePrevious = () => {
+    if (index === 0) {
+      setIndex(container.length - 1);
+    } else {
+      setIndex(index - 1);
+    }
+    setImage(container[index]);
+  };
+  const handleNext = () => {
+    if (index === container.length - 1) {
+      setIndex(0);
+    } else {
+      setIndex(index + 1);
+    }
+    setImage(container[index]);
+  };
+
   return (
     <div className="w-full flex flex-col gap-4 justify-center items-center relative [&>div>img]:hover:scale-105">
-      <div className="bg-cover overflow-hidden">
-        <img
-          src="https://www.reallusion.com/ContentStore/iClone/pack/Modern_Glasses/images/Main_page_1920x700.jpg"
-          alt="Imagen promocional de lentes de sol modernos"
-          className="w-full h-[150px] md:h-auto opacity-90 dark:opacity-50 transition-all duration-1000"
-        />
-      </div>
-      <div className="md:absolute md:right-0 top-0 bottom-0 h-full md:w-[400px] text-center m-auto flex flex-col gap-2 md:gap-4 justify-center items-center">
-        <h1 className="text-white text-base md:text-4xl font-bold">
-          Modern Glasses, quality and style
-        </h1>
-        <p className="text-white text-sm md:text-lg lg:text-2xl">
-          ¡Found the perfect style for you!
-        </p>
-        <Link to={"collection/Sun"}>
-          <button className="border border-white rounded-lg text-white font-semibold py-2 md:py-4 px-3 md:px-6 uppercase md:-translate-y-2 hover:translate-y-0 transition">
-            Shop now
-          </button>
-        </Link>
-      </div>
+      {image}
+      <button
+        onClick={handlePrevious}
+        className="absolute left-0 top-0 bottom-0 m-auto text-white p-3"
+      >
+        <FaAngleLeft className="size-8 hover:bg-white/20" />
+      </button>
+      <button
+        onClick={handleNext}
+        className="absolute right-0 top-0 bottom-0 m-auto text-white p-3"
+      >
+        <FaAngleRight className="size-8 hover:bg-white/20" />
+      </button>
     </div>
   );
 };
@@ -115,4 +136,4 @@ export const PromotionLogin = () => {
     </div>
   );
 };
-export default { PromotionImage, PromotionLogin, MainPromotion };
+export default { PromotionImage, PromotionLogin, Carrousel };
