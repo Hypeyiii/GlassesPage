@@ -34,15 +34,15 @@ export const Carrousel = () => {
       {image}
       <button
         onClick={handlePrevious}
-        className="absolute left-0 top-0 bottom-0 m-auto text-white p-3"
+        className="absolute left-0 top-0 bottom-0 m-auto text-black dark:text-white p-1 bg-white/50 dark:bg-black/50 rounded-full h-fit"
       >
-        <FaAngleLeft className="size-8 md:hover:bg-white/20" />
+        <FaAngleLeft className="size-6 md:size-8" />
       </button>
       <button
         onClick={handleNext}
-        className="absolute right-0 top-0 bottom-0 m-auto text-white p-3"
+        className="absolute right-0 top-0 bottom-0 m-auto text-black dark:text-white p-1 bg-white/50 dark:bg-black/50  rounded-full h-fit"
       >
-        <FaAngleRight className="size-8 md:hover:bg-white/20" />
+        <FaAngleRight className="size-6 md:size-8" />
       </button>
     </div>
   );

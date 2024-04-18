@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 export function ModernGlasses() {
   return (
-    <div className="w-full flex flex-col gap-4 justify-center items-center relative [&>div>img]:hover:scale-105 bg-white/60 rounded-lg">
+    <div className="w-full flex flex-col gap-4 justify-center items-center relative [&>div>img]:hover:scale-105 bg-black dark:bg-white rounded-lg">
       <div className="bg-cover overflow-hidden w-full h-[150px] md:h-[500px] ">
         <img
           src="https://www.reallusion.com/ContentStore/iClone/pack/Modern_Glasses/images/Main_page_1920x700.jpg"
@@ -28,7 +28,7 @@ export function ModernGlasses() {
 }
 export function ClassicGlasses() {
   return (
-    <div className="w-full flex flex-col gap-4 justify-center items-center relative [&>div>img]:hover:scale-105 bg-white/60 rounded-lg">
+    <div className="w-full flex flex-col gap-4 justify-center items-center relative [&>div>img]:hover:scale-105 bg-black dark:bg-white rounded-lg">
       <div className="bg-cover overflow-hidden w-full h-[150px] md:h-[500px] ">
         <img
           src="https://www.nseyewear.com/static/module/index/xinli/fodder/land/land-sunglass-screen.jpg"
@@ -54,7 +54,7 @@ export function ClassicGlasses() {
 }
 export function SpaceGlasses() {
     return (
-      <div className="w-full flex flex-col gap-4 justify-center items-center relative [&>div>img]:hover:scale-105 bg-white/60 rounded-lg">
+      <div className="w-full flex flex-col gap-4 justify-center items-center relative [&>div>img]:hover:scale-105 bg-black dark:bg-white rounded-lg">
         <div className="bg-cover overflow-hidden w-full h-[150px] md:h-[500px] ">
           <img
             src="https://images.accentuate.io/?c_options=w_2160&shop=hellovisionist.myshopify.com&image=https://cdn.accentuate.io/85322956957/1632775749188/Matthew_Donovan_A_3457-Yellow-(3).jpeg?v=0"
