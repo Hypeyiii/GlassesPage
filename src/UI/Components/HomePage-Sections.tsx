@@ -15,7 +15,7 @@ export default function Section({ category, collection }: SectionProps) {
   return (
     <div className="text-black dark:text-white w-full flex flex-col gap-4">
       <div className="flex flex-row items-center justify-between w-full">
-        <p className="text-sm text-center text-wrap md:text-lg">
+        <p className="text-sm text-center text-wrap md:text-2xl">
           Colección lentes de <span className="text-yellow-500">{collection}</span>
         </p>
         <Link
