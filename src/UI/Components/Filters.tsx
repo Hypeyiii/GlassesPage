@@ -65,7 +65,7 @@ const Filters = () => {
   return (
     <>
       <div
-        className="mt-20 text-white w-[70%] m-auto flex flex-row gap-4 justify-center items-start gap-x-14
+        className="w-[70%] m-auto flex flex-row gap-4 justify-center items-start gap-x-14
        relative pt-10 mb-5"
       >
         <div className="text-black dark:text-white flex justify-center items-center flex-col">
