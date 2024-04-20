@@ -10,7 +10,15 @@ export function useFilters() {
     setSearchTerm,
     showSearchTool,
     setShowSearchTool,
+    setFilters,
   } = useContext(FiltersContext);
+
+  const cleanFilters = () => {
+    setFilters({
+      shape: "all",
+      color: "all",
+    });
+  }
 
   console.log(showSearchTool);
 
@@ -32,7 +40,8 @@ export function useFilters() {
   const searchResults = sunglasses.filter(
     (product) =>
       product.brand.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      product.category.toLowerCase().includes(searchTerm.toLowerCase())
+      product.category.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      product.genre?.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   return {
@@ -43,5 +52,6 @@ export function useFilters() {
     searchResults,
     showSearchTool,
     setShowSearchTool,
+    cleanFilters,
   };
 }
