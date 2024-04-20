@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 import { useState } from "react";
 import "./Animations.css";
 import { MdDarkMode, MdLightMode } from "react-icons/md";
-import { FaAngleDown, FaUser, FaUserCheck } from "react-icons/fa";
+import { FaAngleDown, FaAngleRight, FaUser, FaUserCheck } from "react-icons/fa";
 import { useSetMobile } from "../Hooks/useSetMobile";
 import TextAnimated from "../Design-System/TextAnimated";
 import { useCart } from "../Hooks/useCart";
@@ -69,46 +69,63 @@ const Navbar = () => {
               </NavLink>
               <div
                 className="relative h-full items-center justify-centertransition font-semibold cursor-pointer"
-                onMouseEnter={() => setShowCollectionMenu(true)} onMouseLeave={() => setShowCollectionMenu(false)}
+                onMouseEnter={() => setShowCollectionMenu(true)}
+                onMouseLeave={() => setShowCollectionMenu(false)}
                 onClick={() => setShowCollectionMenu(!showCollectionMenu)}
               >
                 <div className="flex flex-row gap-1 items-center h-full py-4 px-2">
                   <p>Colecciones</p>
-                  <FaAngleDown />
+                  <FaAngleDown
+                    className={`${
+                      showCollectionMenu ? "rotate-0" : "-rotate-90"
+                    } transition-all`}
+                  />
                 </div>
                 <div
                   className={`${
-                    showCollectionMenu ? "visible scale-in-center" : "invisible"
-                  } absolute right-[-20px] text-black dark:text-white top-[50px] m-auto flex flex-col w-fit
+                    showCollectionMenu ? "visible scale-in-center" : "invisible scale-out-center"
+                  } absolute transition-all right-[-20px] text-black dark:text-white top-[50px] m-auto flex flex-col w-fit
                     text-nowrap bg-white dark:bg-black border border-black dark:border-white rounded-lg`}
                 >
                   <NavLink
                     id="nav-collection"
-                    to="collection/Sun"
-                    className="py-2 px-4 text-sm rounded-t-md hover:bg-black/5 dark:hover:bg-white/20"
+                    to="collection/sol"
+                    className="py-2 px-4 text-sm rounded-t-md hover:bg-black/5 dark:hover:bg-white/20 flex flex-row gap-1 items-center"
                   >
                     Lentes de Sol
+                    <button>
+                      <FaAngleRight className="size-4" />
+                    </button>
                   </NavLink>
                   <NavLink
                     id="nav-collection"
-                    to="collection/Vision"
-                    className="py-2 px-4 text-sm hover:bg-black/5 dark:hover:bg-white/20"
+                    to="collection/vision"
+                    className="py-2 px-4 text-sm hover:bg-black/5 dark:hover:bg-white/20 flex flex-row gap-1 items-center"
                   >
                     Lentes de Vista
+                    <button>
+                      <FaAngleRight className="size-4" />
+                    </button>
                   </NavLink>
                   <NavLink
                     id="nav-collection"
-                    to="collection/man"
-                    className="py-2 px-4 text-sm hover:bg-black/5 dark:hover:bg-white/20"
+                    to="collection/hombre"
+                    className="py-2 px-4 text-sm hover:bg-black/5 dark:hover:bg-white/20 flex flex-row gap-1 items-center"
                   >
                     Lentes de Hombre
+                    <button>
+                      <FaAngleRight className="size-4" />
+                    </button>
                   </NavLink>
                   <NavLink
                     id="nav-collection"
-                    to="collection/woman"
-                    className="py-2 px-4 text-sm rounded-b-md hover:bg-black/5 dark:hover:bg-white/20"
+                    to="collection/mujer"
+                    className="py-2 px-4 text-sm rounded-b-md hover:bg-black/5 dark:hover:bg-white/20 flex flex-row gap-1 items-center"
                   >
                     Lentes de Mujer
+                    <button>
+                      <FaAngleRight className="size-4" />
+                    </button>
                   </NavLink>
                 </div>
               </div>
@@ -184,11 +201,17 @@ const Navbar = () => {
           <NavLink to={"/"} className="text-xl font-bold mt-24 mb-5">
             Inicio
           </NavLink>
-          <NavLink to={"collection/Sun"} className="font-light text-base">
+          <NavLink to={"collection/sol"} className="font-light text-base">
             Lentes de Sol
           </NavLink>
-          <NavLink to={"collection/Vision"} className="font-light text-base">
+          <NavLink to={"collection/vision"} className="font-light text-base">
             Lentes de Vision
+          </NavLink>
+          <NavLink to={"collection/hombre"} className="font-light text-base">
+            Lentes de Hombre
+          </NavLink>
+          <NavLink to={"collection/mujer"} className="font-light text-base">
+            Lentes de Mujer
           </NavLink>
           <li
             className="flex flex-row gap-x-1 items-center text-xl font-bold mt-5"
