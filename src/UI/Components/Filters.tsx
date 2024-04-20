@@ -93,98 +93,98 @@ const Filters = () => {
       >
         <label
           htmlFor="black"
-          className="flex flex-row  gap-x-2 text-xs md:text-sm lg:text-base"
+          className="flex flex-row items-center gap-x-2 text-xs md:text-sm lg:text-base"
         >
           <input
             type="checkbox"
             id="black"
             value="black"
             onChange={handleChangeColor}
-            className="color-option size-3 md:size-5 rounded-full active:bg-white"
+            className="color-option md:size-5 rounded-full active:bg-white"
             style={{ backgroundColor: "black" }}
           />
           <span className="option-text">Negro</span>
         </label>
         <label
           htmlFor="brown"
-          className="flex flex-row  gap-x-2 text-xs md:text-sm lg:text-base"
+          className="flex flex-row items-center gap-x-2 text-xs md:text-sm lg:text-base"
         >
           <input
             type="checkbox"
             id="brown"
             value="brown"
             onChange={handleChangeColor}
-            className="color-option size-3 md:size-5 rounded-full"
+            className="color-option md:size-5 rounded-full"
             style={{ backgroundColor: "brown" }}
           />
           <span>Marrón</span>
         </label>
         <label
           htmlFor="red"
-          className="flex flex-row  gap-x-2 text-xs md:text-sm lg:text-base"
+          className="flex flex-row items-center gap-x-2 text-xs md:text-sm lg:text-base"
         >
           <input
             type="checkbox"
             id="red"
             value="red"
             onChange={handleChangeColor}
-            className="color-option size-3 md:size-5 rounded-full"
+            className="color-option md:size-5 rounded-full"
             style={{ backgroundColor: "red" }}
           />
           <span>Rojo</span>
         </label>
         <label
           htmlFor="pink"
-          className="flex flex-row  gap-x-2 text-xs md:text-sm lg:text-base"
+          className="flex flex-row items-center gap-x-2 text-xs md:text-sm lg:text-base"
         >
           <input
             type="checkbox"
             id="pink"
             value="pink"
             onChange={handleChangeColor}
-            className="color-option size-3 md:size-5 rounded-full"
+            className="color-option md:size-5 rounded-full"
             style={{ backgroundColor: "pink" }}
           />
           <span>Rosa</span>
         </label>
         <label
           htmlFor="gold"
-          className="flex flex-row  gap-x-2 text-xs md:text-sm lg:text-base"
+          className="flex flex-row items-center gap-x-2 text-xs md:text-sm lg:text-base"
         >
           <input
             type="checkbox"
             id="gold"
             value="gold"
             onChange={handleChangeColor}
-            className="color-option size-3 md:size-5 rounded-full"
+            className="color-option md:size-5 rounded-full"
             style={{ backgroundColor: "gold" }}
           />
           <span>Oro</span>
         </label>
         <label
           htmlFor="tornasol"
-          className="flex flex-row  gap-x-2 text-xs md:text-sm lg:text-base"
+          className="flex flex-row items-center gap-x-2 text-xs md:text-sm lg:text-base"
         >
           <input
             type="checkbox"
             id="tornasol"
             value="tornasol"
             onChange={handleChangeColor}
-            className="color-option size-3 md:size-5 rounded-full"
+            className="color-option md:size-5 rounded-full"
             style={{ backgroundColor: "lightblue" }}
           />
           <span>Tornasol</span>
         </label>
         <label
           htmlFor="blue"
-          className="flex flex-row  gap-x-2 text-xs md:text-sm lg:text-base"
+          className="flex flex-row items-center gap-x-2 text-xs md:text-sm lg:text-base"
         >
           <input
             type="checkbox"
             id="blue"
             value="blue"
             onChange={handleChangeColor}
-            className="color-option size-3 md:size-5 rounded-full"
+            className="color-option md:size-5 rounded-full"
             style={{ backgroundColor: "blue" }}
           />
           <span>Azul</span>
@@ -197,67 +197,67 @@ const Filters = () => {
       >
         <label
           htmlFor="squared"
-          className="flex flex-row  gap-x-2 text-xs md:text-sm lg:text-base"
+          className="flex flex-row items-center gap-x-2 text-xs md:text-sm lg:text-base"
         >
           <input
             type="checkbox"
             id="squared"
             value="squared"
             onChange={handleChangeShape}
-            className="shape-option size-3 md:size-5 rounded-full"
+            className="shape-option md:size-5 rounded-full"
           />
           <span>Cuadrados</span>
         </label>
         <label
           htmlFor="circle"
-          className="flex flex-row  gap-x-2 text-xs md:text-sm lg:text-base"
+          className="flex flex-row items-center gap-x-2 text-xs md:text-sm lg:text-base"
         >
           <input
             type="checkbox"
             id="circle"
             value="circle"
             onChange={handleChangeShape}
-            className="shape-option size-3 md:size-5 rounded-full"
+            className="shape-option md:size-5 rounded-full"
           />
           <span>Circulares</span>
         </label>
         <label
           htmlFor="aviator"
-          className="flex flex-row  gap-x-2 text-xs md:text-sm lg:text-base"
+          className="flex flex-row items-center gap-x-2 text-xs md:text-sm lg:text-base"
         >
           <input
             type="checkbox"
             id="aviator"
             value="aviator"
             onChange={handleChangeShape}
-            className="shape-option size-3 md:size-5 rounded-full"
+            className="shape-option md:size-5 rounded-full"
           />
           <span>Aviador</span>
         </label>
         <label
           htmlFor="cat-eye"
-          className="flex flex-row  gap-x-2 text-xs md:text-sm lg:text-base"
+          className="flex flex-row items-center gap-x-2 text-xs md:text-sm lg:text-base"
         >
           <input
             type="checkbox"
             id="cat-eye"
             value="cat-eye"
             onChange={handleChangeShape}
-            className="shape-option size-3 md:size-5 rounded-full"
+            className="shape-option md:size-5 rounded-full"
 
           />
           <span>Cat-eye</span>
         </label>
         <label
           htmlFor="shape"
-          className="flex flex-row  gap-x-2 text-xs md:text-sm lg:text-base"
+          className="flex flex-row items-center gap-x-2 text-xs md:text-sm lg:text-base"
         >
           <input
             type="checkbox"
             id="heart"
             value="heart"
             onChange={handleChangeShape}
-            className="shape-option size-3 md:size-5 rounded-full"
+            className="shape-option md:size-5 rounded-full"
           />
           <label htmlFor="heart">Corazón</label>
         </label>
