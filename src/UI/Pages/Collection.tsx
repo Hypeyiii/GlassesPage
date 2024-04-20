@@ -28,7 +28,7 @@ export default function Collection() {
       {filtredSunglasses.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mt-20 md:mt-32 relative w-[80%] md:w-[70%] mx-auto">
           <div className="col-span-1 md:col-span-3 w-full flex flex-col gap-2 items-center justify-center text-black dark:text-white">
-            <h1 className="text-lg md:text-2xl font-semibold text-center mt-10">
+            <h1 className="text-lg md:text-2xl font-semibold text-center text-nowrap mt-10">
               ¡Bienvenido a la colección lentes de {section}!
             </h1>
             <p className="text-sm md:text-base text-center text-wrap md:text-nowrap">
@@ -79,7 +79,7 @@ export default function Collection() {
           <h1 className="text-xl md:text-3xl font-bold  mx-auto text-center">
             ¡Lo sentimos!
           </h1>
-          <p className="text-center text-nowrap">
+          <p className="text-center text-wrap md:text-nowrap">
             No se encontraron productos con los filtros seleccionados.
             {section === "all"
               ? "Intenta seleccionar una categoría o género."
