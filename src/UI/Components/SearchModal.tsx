@@ -19,6 +19,19 @@ export default function SearchModal() {
   } = useFilters();
   const { addToFav, productFav } = useFav();
 
+  const categories = [
+    "versace",
+    "ray-ban",
+    "oakley",
+    "dior",
+    "hombre",
+    "mujer",
+    "sol",
+    "vision",
+  ];
+  const randomCategory =
+    categories[Math.floor(Math.random() * categories.length)];
+
   return (
     <>
       <div
@@ -46,7 +59,7 @@ export default function SearchModal() {
             <input
               type="text"
               className="w-full py-2 bg-black dark:bg-white text-white dark:text-black text-sm font-light text-center"
-              placeholder="Buscar por marca o categoria"
+              placeholder="Buscar por marca, categoría o género"
               onChange={handleChangeSearch}
               value={searchTerm}
               onKeyDown={handleKeyDown}
@@ -88,7 +101,9 @@ export default function SearchModal() {
                     <p>{product.brand}</p>
                     <p className="hidden md:block">|</p>
                     <p className="hidden md:block">
-                      {product.category}-Glasses
+                      Lentes -{" "}
+                      {product.category.slice(0, 1).toUpperCase() +
+                        product.category.slice(1)}
                     </p>
                   </Link>
                   <button
@@ -107,17 +122,20 @@ export default function SearchModal() {
               <>
                 {searchTerm.length === 0 ? (
                   <div className="m-auto w-fit h-fit flex justify-center items-center text-black dark:text-white">
-                    <BiSearch className="absolute size-24 opacity-10" />
-                    <p className="absolute">
+                    <BiSearch className="absolute size-32 opacity-10" />
+                    <div className="absolute flex flex-col gap-1 justify-center text-center text-nowrap">
                       Escribe algo para identificar el producto
-                    </p>
+                      <p>Ejemplo: {randomCategory}</p>
+                    </div>
                   </div>
                 ) : (
                   <div className="m-auto w-fit h-fit flex justify-center items-center text-black dark:text-white">
-                    <BiSearch className="absolute size-24 opacity-10" />
-                    <p className="absolute">
-                      No hay resultados para: {searchTerm}
-                    </p>
+                    <BiSearch className="absolute size-32 opacity-10" />
+                    <div className="absolute flex flex-col gap-1 justify-center text-center text-nowrap">
+                      <p>No hay resultados para: {searchTerm}</p>
+                      <p>Intenta con otra búsqueda</p>
+                      <p>Ejemplo: {randomCategory}</p>
+                    </div>
                   </div>
                 )}
               </>
@@ -134,7 +152,7 @@ export default function SearchModal() {
                 className="flex flex-row gap-1 border px-2 py-1 text-xs md:opacity-50 hover:opacity-100 transition"
                 onClick={handleSearch}
               >
-                <BiSearch className="size-4"/>
+                <BiSearch className="size-4" />
                 Buscar
               </button>
             </div>
