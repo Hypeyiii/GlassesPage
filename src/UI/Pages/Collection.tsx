@@ -79,7 +79,7 @@ export default function Collection() {
           <h1 className="text-xl md:text-3xl font-bold  mx-auto text-center">
             ¡Lo sentimos!
           </h1>
-          <p className="text-center text-wrap md:text-nowrap">
+          <p className="text-center text-nowrap">
             No se encontraron productos con los filtros seleccionados.
             {section === "all"
               ? "Intenta seleccionar una categoría o género."
