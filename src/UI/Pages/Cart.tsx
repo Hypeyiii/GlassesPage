@@ -21,7 +21,7 @@ const Cart = () => {
               <div>
                 <Link to={"/"} className="text-black/60 dark:text-white/60">
                   Inicio /
-                </Link>{" "}
+                </Link>{" "} 
                 <Link to={`/Cart`} className="text-black dark:text-white">
                   Cart
                 </Link>
