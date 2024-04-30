@@ -59,9 +59,12 @@ const Cart = () => {
                             className="cursor-pointer"
                           />
                         </Link>
-                        <div className="absolute right-0 flex justify-center itesm-center">
+                        <div
+                          className="absolute right-0 flex justify-center items-center p-1 hover:bg-black/5 dark:hover:bg-white/10 hover:text-red-500 dark:hover:text-red-400
+                        text-black dark:text-white cursor-pointer transition"
+                        >
                           <RxCross1
-                            className="text-black dark:text-white cursor-pointer size-4"
+                            className="size-4 transition"
                             onClick={() => deleteProduct(product)}
                           />
                         </div>
@@ -77,11 +80,11 @@ const Cart = () => {
                       {product.quantity}
                       <div className="flex flex-col">
                         <FaAngleUp
-                          className="cursor-pointer"
+                          className="cursor-pointer hover:scale-125"
                           onClick={() => addProduct(product)}
                         />
                         <FaAngleDown
-                          className="cursor-pointer"
+                          className="cursor-pointer hover:scale-125"
                           onClick={() => substractProduct(product)}
                         />
                       </div>

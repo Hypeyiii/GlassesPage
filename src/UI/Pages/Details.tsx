@@ -64,10 +64,10 @@ export default function Details() {
               Inicio /
             </Link>{" "}
             <Link
-              to={`/${product.category}`}
+              to={`/collection/${product.category}`}
               className="text-black/60 dark:text-white/60"
             >
-              {product.category} /{" "}
+              {(product.category.slice(0,1).toUpperCase())}{(product.category.slice(1))} /{" "}
             </Link>
             {product.brand}
           </div>

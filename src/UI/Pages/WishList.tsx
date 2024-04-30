@@ -1,10 +1,12 @@
-import { BiTrash } from "react-icons/bi";
-import { FaAngleLeft } from "react-icons/fa";
+import { BiLeftArrowAlt, BiTrash } from "react-icons/bi";
 import { Link } from "react-router-dom";
 import { Products } from "../Interface/Products";
 import { useFav } from "../Hooks/useFav";
 import { RiHeartAddLine } from "react-icons/ri";
+import { useLocation } from "react-router-dom";
+
 const Wishlist = () => {
+  const location = useLocation();
   const { allFavProducts, deleteFavProduct } = useFav();
 
   const backUp = () => {
@@ -15,20 +17,24 @@ const Wishlist = () => {
     <>
       {allFavProducts.length ? (
         <>
-          <div className="mt-32 mb-8 text-black dark:text-white text-xl font-medium flex items-center justify-between w-[80%] md:w-[70%] mx-auto">
-            <p className="text-xs md:text-lg">
-              Wishlist:{" "}
-              <span className="text-yellow-500">{allFavProducts.length}</span>
-            </p>
+          <div className="w-[80%] md:w-[70%] mt-20 md:mt-32 text-black dark:text-white flex flex-row items-center justify-between m-auto text-xs md:text-base">
+            <div>
+              <Link to={"/"} className="text-black/60 dark:text-white/60">
+                Inicio /
+              </Link>{" "}
+              <Link to={`/WishList`} className="text-black dark:text-white">
+                WishList
+              </Link>
+            </div>
             <div
-              className="flex flex-row gap-2 items-center text-sm border-b-[0.5px] border-transparent hover:border-black dark:hover:border-white cursor-pointer"
+              className="flex flex-row gap-1 items-center text-xs md:text-base border-b-[0.5px] border-transparent hover:border-black dark:hover:border-white cursor-pointer"
               onClick={backUp}
             >
-              <FaAngleLeft className="size-4" />
-              Regresar
+              <BiLeftArrowAlt className="size-4" />
+              <p>Regresar</p>
             </div>
           </div>
-          <div className="grid grid-cols-4 items-center justify-center w-[80%] md:w-[70%] gap-5 mx-auto">
+          <div className="mt-6 grid grid-cols-4 items-center justify-center w-[80%] md:w-[70%] gap-5 mx-auto">
             {allFavProducts.map((product) => (
               <div
                 key={product.id}
