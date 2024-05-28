@@ -1,52 +1,55 @@
-import { createContext, useState } from "react";
+import React, { createContext, useState, ReactNode } from "react";
 
-export interface Auth {
-  children: React.ReactNode;
+export interface User {
+  email: string;
+  uid: string;
 }
 
-export const AuthContext = createContext({
+interface AuthContextProps {
+  jwt: boolean;
+  setJWT: (value: boolean) => void;
+  username: string;
+  setUsername: (value: string) => void;
+  email: string;
+  setEmail: (value: string) => void;
+  password: string;
+  setPassword: (value: string) => void;
+  isLogged: boolean;
+  setIsLogged: (value: boolean) => void;
+  user: User | null;
+  setUser: (value: User | null) => void;
+}
+
+export const AuthContext = createContext<AuthContextProps>({
   jwt: false,
-  setJWT: (value: boolean) => {
-    value;
-  },
+  setJWT: (value: boolean) => {value},
   username: "",
-  setUsername: (value: string) => {
-    value;
-  },
+  setUsername: (value: string) => {value},
   email: "",
-  setEmail: (value: string) => {
-    value;
-  },
+  setEmail: (value: string) => {value},
   password: "",
-  setPassword: (value: string) => {
-    value;
-  },
-
+  setPassword: (value: string) => {value},
   isLogged: false,
-  setIsLogged: (value: boolean) => {
-    value;
-  },
-
+  setIsLogged: (value: boolean) => {value},
   user: null,
-
-  setUser: (value: null) => {
-    value;
-  },
+  setUser: (value: User | null) => {value},
 });
 
-export function AuthProvider({ children }: Auth) {
+interface AuthProviderProps {
+  children: ReactNode;
+}
+
+export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [jwt, setJWT] = useState(false);
   const [username, setUsername] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [isLogged, setIsLogged] = useState(false);
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState<User | null>(null);
 
   return (
     <AuthContext.Provider
       value={{
-        user,
-        setUser,
         jwt,
         setJWT,
         username,
@@ -57,9 +60,11 @@ export function AuthProvider({ children }: Auth) {
         setPassword,
         isLogged,
         setIsLogged,
+        user,
+        setUser,
       }}
     >
       {children}
     </AuthContext.Provider>
   );
-}
+};

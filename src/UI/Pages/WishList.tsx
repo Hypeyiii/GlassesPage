@@ -3,10 +3,10 @@ import { Link } from "react-router-dom";
 import { Products } from "../Interface/Products";
 import { useFav } from "../Hooks/useFav";
 import { RiHeartAddLine } from "react-icons/ri";
-import { useLocation } from "react-router-dom";
+// import { useLocation } from "react-router-dom";
 
 const Wishlist = () => {
-  const location = useLocation();
+  // const location = useLocation();
   const { allFavProducts, deleteFavProduct } = useFav();
 
   const backUp = () => {

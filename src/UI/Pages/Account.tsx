@@ -19,14 +19,21 @@ const Account = () => {
         console.log("Sesión cerrada");
       })
       .catch((error) => {
+        setLoading(false);
         console.log(error);
       });
   };
 
   return (
     <div className="m-auto w-[85%]">
-      <h1>Correo electrónico: {user.email} </h1>
-      {/* <h1>ID: {user.uid}</h1> */}
+      {user ? (
+        <>
+          <h1>Correo electrónico: {user.email}</h1>
+          {/* <h1>ID: {user.uid}</h1> */}
+        </>
+      ) : (
+        <h1>No user information available</h1>
+      )}
       <button
         className="px-4 py-2 border rounded-xl m-auto flex flex-row gap-1 items-center"
         onClick={handleLogout}
@@ -43,4 +50,5 @@ const Account = () => {
     </div>
   );
 };
+
 export default Account;
