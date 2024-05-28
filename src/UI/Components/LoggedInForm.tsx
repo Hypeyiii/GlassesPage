@@ -1,12 +1,12 @@
+import React, { useState } from "react";
 import { useSubmit } from "../Hooks/useSubmit";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../Context/firebaseConfig";
-import { useState } from "react";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import { User } from "../Context/authContext";
 
 const LoggedInForm = () => {
-  const { email, password, setEmail, setPassword, setIsLogged, setUser } =
-    useSubmit();
+  const { email, password, setEmail, setPassword, setIsLogged, setUser } = useSubmit();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -16,7 +16,11 @@ const LoggedInForm = () => {
     setError("");
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        const user = userCredential.user;
+        const firebaseUser = userCredential.user;
+        const user: User = {
+          email: firebaseUser.email,
+          uid: firebaseUser.uid,
+        };
         setUser(user);
         setLoading(false);
         setIsLogged(true);
@@ -38,7 +42,7 @@ const LoggedInForm = () => {
         <input
           className="bg-gray-200 dark:bg-white"
           type="text"
-          placeholder="Name"
+          placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
@@ -67,4 +71,5 @@ const LoggedInForm = () => {
     </div>
   );
 };
+
 export default LoggedInForm;
