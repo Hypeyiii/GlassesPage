@@ -7,6 +7,17 @@ import { getAuth } from "firebase/auth";
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+
+export interface FirebaseConfig{
+  apiKey: string;
+  authDomain: string;
+  projectId: string;
+  storageBucket: string;
+  messagingSenderId: string;
+  appId: string;
+  measurementId: string;
+}
+
 const firebaseConfig = {
   apiKey: "AIzaSyB43GbNryEW-XAYmnNtrILFO2_PrYxl6vk",
   authDomain: "react-glasses-page.firebaseapp.com",

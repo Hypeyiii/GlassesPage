@@ -40,7 +40,7 @@ export function AuthProvider({ children }: Auth) {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [isLogged, setIsLogged] = useState(false);
-  const [user, setUser] = useState<null>(null);
+  const [user, setUser] = useState(null);
 
   return (
     <AuthContext.Provider

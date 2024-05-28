@@ -51,7 +51,7 @@ const ProductItem: React.FC<ProductItemProps> = ({
     setIsAdded(true);
   };
   useEffect(() => {
-    let timeout: number;
+    let timeout: NodeJS.Timeout;
     if (isAdded) {
       timeout = setTimeout(() => {
         setIsAdded(false);
@@ -61,7 +61,7 @@ const ProductItem: React.FC<ProductItemProps> = ({
   }, [isAdded]);
 
   useEffect(() => {
-    let time: number;
+    let time: NodeJS.Timeout;
     if (isAddedToFavs) {
       time = setTimeout(() => {
         setIsAddedToFavs(false);
