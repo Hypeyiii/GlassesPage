@@ -21,6 +21,17 @@ export const AuthContext = createContext({
   setPassword: (value: string) => {
     value;
   },
+
+  isLogged: false,
+  setIsLogged: (value: boolean) => {
+    value;
+  },
+
+  user: null,
+
+  setUser: (value: null) => {
+    value;
+  },
 });
 
 export function AuthProvider({ children }: Auth) {
@@ -28,10 +39,14 @@ export function AuthProvider({ children }: Auth) {
   const [username, setUsername] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const [isLogged, setIsLogged] = useState(false);
+  const [user, setUser] = useState<null>(null);
 
   return (
     <AuthContext.Provider
       value={{
+        user,
+        setUser,
         jwt,
         setJWT,
         username,
@@ -40,6 +55,8 @@ export function AuthProvider({ children }: Auth) {
         setEmail,
         password,
         setPassword,
+        isLogged,
+        setIsLogged,
       }}
     >
       {children}

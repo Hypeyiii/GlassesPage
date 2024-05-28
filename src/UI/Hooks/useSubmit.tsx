@@ -1,25 +1,28 @@
-import { useCallback, useContext } from "react";
+import { useContext } from "react";
 import { AuthContext } from "../Context/authContext";
 
 export function useSubmit() {
   const {
     jwt,
-    setJWT,
+    // setJWT,
+    user,
+    setUser,
     username,
     setUsername,
     email,
     setEmail,
     password,
     setPassword,
+    isLogged,
+    setIsLogged,
   } = useContext(AuthContext);
 
-  const login = useCallback(() => {
-    setJWT(true)
-  }, [setJWT]);
-
   return {
-    isLogged: Boolean(jwt),
-    login,
+    isLogged,
+    setIsLogged,
+    // login,
+    user,
+    setUser,
     jwt,
     username,
     setUsername,

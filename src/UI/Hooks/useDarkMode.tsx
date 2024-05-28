@@ -19,7 +19,5 @@ export function useDarkMode() {
     }
   }, [setIsDarkModeOn]);
 
-  console.log(isDarkModeOn);
-
   return { toggleColorScheme, isDarkModeOn };
 }

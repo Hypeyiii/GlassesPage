@@ -40,7 +40,7 @@ export function useCart() {
     }
   };
   useEffect(() => {
-    let timeout: number;
+    let timeout: NodeJS.Timeout;
     if (isOnCart) {
       timeout = setTimeout(() => {
         setIsOnCart(false);
@@ -83,13 +83,13 @@ export function useCart() {
     return newProducts;
   };
 
-  const savedProducts = localStorage.getItem("cart");
-  console.log(savedProducts);
+  // const savedProducts = localStorage.getItem("cart");
+  // console.log(savedProducts);
 
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(allProducts));
   }, [allProducts]);
-  
+
   return {
     allProducts,
     setAllProducts,

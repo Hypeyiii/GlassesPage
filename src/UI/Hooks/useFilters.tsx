@@ -19,9 +19,7 @@ export function useFilters() {
       color: "all",
     });
   }
-
-  console.log(showSearchTool);
-
+  
   const handleChangeSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value);
   };

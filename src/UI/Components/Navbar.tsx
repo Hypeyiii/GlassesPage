@@ -24,8 +24,6 @@ const Navbar = () => {
   const { countFavProducts } = useFav();
   const { showSearchTool, setShowSearchTool } = useFilters();
 
-  console.log(showSearchTool);
-
   const toggleMenu = () => {
     setIsMenu(!isMenu);
     if (isMenu) {
