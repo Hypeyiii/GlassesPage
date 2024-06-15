@@ -76,7 +76,6 @@ const useAuth = () => {
   ) => {
     e.preventDefault();
 
-    setError("");
     try {
       setLoading(true);
       const response = await fetch("http://localhost:5000/users/login", {
@@ -87,6 +86,7 @@ const useAuth = () => {
         body: JSON.stringify({ email, password }),
         credentials: "include",
       });
+
       const data = await response.json();
 
       if (!response.ok) {
@@ -97,7 +97,9 @@ const useAuth = () => {
       setIsLogged(true);
       setLoading(false);
     } catch (error) {
-      setError("Error al iniciar sesión");
+      console.log(error)
+      setError("Credenciales inválidas");
+      setLoading(false);
     }
   };
 
