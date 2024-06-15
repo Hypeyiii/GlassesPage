@@ -21,18 +21,18 @@ import { loadStripe } from "@stripe/stripe-js";
 import { useContext } from "react";
 import { AuthContext } from "./UI/Context/authContext";
 import Dashboard from "./UI/Pages/Dashboard";
-import DashboardProducts from "./UI/Pages/DashbordProducts.js";
-import ProductEdit from "./UI/Pages/ProductEdit.js";
+import DashboardProducts from "./UI/Pages/DashbordProducts";
+import ProductEdit from "./UI/Pages/ProductEdit";
 import ProductCreate from "./UI/Pages/ProductCreate";
 import DashboardUsers from "./UI/Pages/DashboardUsers";
-import useUsers from "./UI/Hooks/useUsers.js";
-import { STRIPE_SECRET_KEY } from "./config.tsx";
-
+import useUsers from "./UI/Hooks/useUsers";
 export default function App() {
   const { isLogged } = useContext(AuthContext);
   const { userData } = useUsers();
 
-  const stripePromise = loadStripe(STRIPE_SECRET_KEY);
+  const stripePromise = loadStripe(
+    "pk_test_51OkKmsBlx8QfT450Ul1ORZbvVVbcd0KEcWAPLHj5mP9P6BORvJ47mS9WFgDoC9ytYntZqMdNL3ITReBzaOkB3NOu00FOmepwfm"
+  );
 
   const router = createBrowserRouter(
     createRoutesFromElements(
