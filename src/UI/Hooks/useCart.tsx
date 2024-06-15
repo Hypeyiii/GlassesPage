@@ -28,17 +28,20 @@ export function useCart() {
         return p;
       });
       setCountProducts(countProducts + 1);
-      setTotal(total + product.price);
+      // Asegúrate de que el precio sea un número
+      setTotal(total + Number(product.price));
       setAllProducts(newProducts);
       return newProducts;
     } else {
       setCountProducts(countProducts + 1);
-      setTotal(total + product.price);
+      // Asegúrate de que el precio sea un número
+      setTotal(total + Number(product.price));
       const newProduct = { ...product, quantity: 1 };
       setAllProducts([...allProducts, newProduct]);
       return [...allProducts, newProduct];
     }
   };
+
   useEffect(() => {
     let timeout: NodeJS.Timeout;
     if (isOnCart) {
@@ -51,7 +54,8 @@ export function useCart() {
 
   const deleteProduct = (product: Products): Products[] => {
     const newProducts = allProducts.filter((p) => p.id !== product.id);
-    setTotal(total - product.price * product.quantity);
+    // Asegúrate de que el precio sea un número
+    setTotal(total - Number(product.price) * product.quantity);
     setCountProducts(countProducts - product.quantity);
     setAllProducts(newProducts);
     return newProducts;
@@ -65,7 +69,8 @@ export function useCart() {
       return p;
     });
     setCountProducts(countProducts + 1);
-    setTotal(total + product.price);
+    // Asegúrate de que el precio sea un número
+    setTotal(total + Number(product.price));
     setAllProducts(newProducts);
     return newProducts;
   };
@@ -73,7 +78,7 @@ export function useCart() {
   const substractProduct = (product: Products): Products[] => {
     const newProducts = allProducts.map((p) => {
       if (p.id === product.id && p.quantity > 1) {
-        setTotal(total - product.price);
+        setTotal(total - Number(product.price));
         setCountProducts(countProducts - 1);
         return { ...p, quantity: p.quantity - 1 };
       }
@@ -82,9 +87,6 @@ export function useCart() {
     setAllProducts(newProducts);
     return newProducts;
   };
-
-  // const savedProducts = localStorage.getItem("cart");
-  // console.log(savedProducts);
 
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(allProducts));

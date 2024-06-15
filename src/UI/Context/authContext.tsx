@@ -6,8 +6,6 @@ export interface User {
 }
 
 interface AuthContextProps {
-  jwt: boolean;
-  setJWT: (value: boolean) => void;
   username: string;
   setUsername: (value: string) => void;
   email: string;
@@ -21,8 +19,6 @@ interface AuthContextProps {
 }
 
 export const AuthContext = createContext<AuthContextProps>({
-  jwt: false,
-  setJWT: (value: boolean) => {value},
   username: "",
   setUsername: (value: string) => {value},
   email: "",
@@ -40,7 +36,6 @@ interface AuthProviderProps {
 }
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
-  const [jwt, setJWT] = useState(false);
   const [username, setUsername] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
@@ -50,8 +45,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   return (
     <AuthContext.Provider
       value={{
-        jwt,
-        setJWT,
         username,
         setUsername,
         email,

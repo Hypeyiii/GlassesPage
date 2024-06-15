@@ -1,7 +1,7 @@
 import { BiCart, BiMenu, BiSearch, BiUser } from "react-icons/bi";
 import { HiHeart } from "react-icons/hi";
 import { NavLink } from "react-router-dom";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import "./Animations.css";
 import { MdDarkMode, MdLightMode } from "react-icons/md";
 import { FaAngleDown, FaAngleRight, FaUser, FaUserCheck } from "react-icons/fa";
@@ -11,18 +11,22 @@ import { useCart } from "../Hooks/useCart";
 import { useFav } from "../Hooks/useFav";
 import { useDarkMode } from "../Hooks/useDarkMode";
 import { RxCross1 } from "react-icons/rx";
-import { useSubmit } from "../Hooks/useSubmit";
 import { useFilters } from "../Hooks/useFilters";
+import { AuthContext } from "../Context/authContext";
+import { GrConfigure } from "react-icons/gr";
+import useUsers from "../Hooks/useUsers";
 
 const Navbar = () => {
   const [isMenu, setIsMenu] = useState<boolean>(false);
   const [showCollectionMenu, setShowCollectionMenu] = useState<boolean>(false);
-  const { isLogged } = useSubmit();
+
+  const { isLogged } = useContext(AuthContext);
   const { toggleColorScheme, isDarkModeOn } = useDarkMode();
   const { isMobile } = useSetMobile();
   const { countProducts } = useCart();
   const { countFavProducts } = useFav();
   const { showSearchTool, setShowSearchTool } = useFilters();
+  const { userData } = useUsers();
 
   const toggleMenu = () => {
     setIsMenu(!isMenu);
@@ -66,7 +70,7 @@ const Navbar = () => {
                 <TextAnimated text={"Glasses"} fontSize="32px" />
               </NavLink>
               <div
-                className="relative h-full items-center justify-centertransition font-semibold cursor-pointer"
+                className="relative h-full flex flex-row gap-4 items-center justify-center transition font-semibold cursor-pointer"
                 onMouseEnter={() => setShowCollectionMenu(true)}
                 onMouseLeave={() => setShowCollectionMenu(false)}
                 onClick={() => setShowCollectionMenu(!showCollectionMenu)}
@@ -81,7 +85,9 @@ const Navbar = () => {
                 </div>
                 <div
                   className={`${
-                    showCollectionMenu ? "visible scale-in-center" : "invisible scale-out-center"
+                    showCollectionMenu
+                      ? "visible scale-in-center"
+                      : "invisible scale-out-center"
                   } absolute transition-all right-[-20px] text-black dark:text-white top-[50px] m-auto flex flex-col w-fit
                     text-nowrap bg-white dark:bg-black border border-black dark:border-white rounded-lg`}
                 >
@@ -177,6 +183,15 @@ const Navbar = () => {
                     <MdLightMode className="size-6 scale-in-center" />
                   )}
                 </li>
+                <NavLink
+                  to={"/Dashboard"}
+                  id="nav-item"
+                  className="hover:font-semibold list-none cursor-pointer hover:text-black dark:hover:text-white transition"
+                >
+                  {isLogged && userData?.role === "Admin" && (
+                    <GrConfigure className="size-6" />
+                  )}
+                </NavLink>
               </div>
             </>
           )}

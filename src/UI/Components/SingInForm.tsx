@@ -1,34 +1,15 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useSubmit } from "../Hooks/useSubmit";
-import { auth } from "../Context/firebaseConfig.js";
-import { createUserWithEmailAndPassword } from "firebase/auth";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import useAuth from "../Hooks/useAuth";
 
-const SingInForm = () => {
-  const { email, password, setEmail, setPassword, setIsLogged, setUser } =
+const SignInForm = () => {
+  const { username, setUsername, email, password, setEmail, setPassword } =
     useSubmit();
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
+  const [error, setError] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
 
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setLoading(true);
-    setError("");
-    createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        const user = userCredential.user;
-        setUser(user);
-        setLoading(false);
-        setIsLogged(true);
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.error(errorCode, errorMessage);
-        setLoading(false);
-        setError(errorMessage);
-      });
-  };
+  const { handleRegister } = useAuth();
 
   useEffect(() => {
     let timer: NodeJS.Timeout;
@@ -53,8 +34,15 @@ const SingInForm = () => {
       </div>
       <form
         className="flex flex-col gap-3 w-[50%] text-white dark:text-black [&>input]:px-4 [&>input]:py-2 [&>input]:rounded-full [&>input]:border-[1px] [&>input]:border-black/50"
-        onSubmit={onSubmit}
+        onSubmit={(e) => handleRegister(e, setLoading)}
       >
+        <input
+          className="bg-gray-200 dark:bg-white"
+          type="text"
+          placeholder="Username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+        />
         <input
           className="bg-gray-200 dark:bg-white"
           type="email"
@@ -95,4 +83,4 @@ const SingInForm = () => {
   );
 };
 
-export default SingInForm;
+export default SignInForm;

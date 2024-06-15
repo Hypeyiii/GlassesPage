@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
-import sunglasses from "../Data/Data";
 import ProductItem from "../Design-System/ProductItem";
 import { Products } from "../Interface/Products";
 import { useCart } from "../Hooks/useCart";
 import { useFav } from "../Hooks/useFav";
+import useProducts from "../Hooks/useProducts";
 
 interface SectionProps {
   category: string;
@@ -12,6 +12,8 @@ interface SectionProps {
 export default function Section({ category, collection }: SectionProps) {
   const { addToCart } = useCart();
   const { addToFav } = useFav();
+  const { products } = useProducts();
+
   return (
     <div className="text-black dark:text-white w-full flex flex-col gap-4">
       <div className="flex flex-row items-center justify-between w-full">
@@ -27,7 +29,7 @@ export default function Section({ category, collection }: SectionProps) {
         </Link>
       </div>
       <div className="w-full grid grid-cols-1 md:grid-cols-3 gap-4 justify-center items-center m-auto">
-        {sunglasses
+        {products
           .filter((product) => product.genre === category || product.category === category)
           .slice(0, 3)
           .map((product) => (

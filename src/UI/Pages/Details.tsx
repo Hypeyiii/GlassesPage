@@ -1,18 +1,21 @@
 import { Link, useParams } from "react-router-dom";
-import sunglasses from "../Data/Data";
-import { AiFillHeart } from "react-icons/ai";
+import { AiFillHeart, AiOutlineLoading3Quarters } from "react-icons/ai";
 import NotificationAdded from "../Design-System/NotificationAdded";
 import { useCart } from "../Hooks/useCart";
 import { useFav } from "../Hooks/useFav";
-import { Products } from "../Interface/Products";
 import { useEffect, useState } from "react";
 import { BiLeftArrowAlt } from "react-icons/bi";
+import useProducts from "../Hooks/useProducts";
+import { Products } from "../Interface/Products";
 
 export default function Details() {
   const [copy, setCopy] = useState(false);
-  const { id } = useParams();
-  const productId = parseInt(id || "", 10);
-  const product = sunglasses.find((item) => item.id === productId);
+  const [product, setProduct] = useState<Products | null>(null);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string>("");
+  const { id } = useParams<{ id: string }>();
+  const productId = id as string;
+  const { products } = useProducts();
 
   const backUp = () => {
     window.history.back();
@@ -21,12 +24,40 @@ export default function Details() {
   const { addToCart, isOnCart, allProducts } = useCart();
   const { addToFav, allFavProducts } = useFav();
 
+  useEffect(() => {
+    const fetchProducts = async () => {
+      setLoading(true);
+      setError("");
+      try {
+        const response = await fetch(
+          `http://localhost:5000/glasses/${productId}`
+        );
+        if (!response.ok) {
+          throw new Error("Error en la carga de productos");
+        }
+        const data: Products = await response.json();
+        setProduct(data);
+      } catch (error) {
+        setError("No se pudieron cargar los productos");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    if (productId) {
+      fetchProducts();
+    }
+  }, [productId]);
+
   const toggleFav = () => {
-    addToFav(product as Products);
+    if (product) {
+      addToFav(product);
+    }
   };
-  const productFav = allFavProducts.find((p) => p.id === productId);
-  const productCart = allProducts.find((p) => p.id === productId);
-  const similarProducts = sunglasses.filter(
+
+  const productFav = allFavProducts.find((p) => p.id.toString() === productId);
+  const productCart = allProducts.find((p) => p.id.toString() === productId);
+  const similarProducts = products.filter(
     (item) => item.shape === product?.shape && item.id !== product?.id
   );
 
@@ -34,6 +65,7 @@ export default function Details() {
     setCopy(true);
     navigator.clipboard.writeText(window.location.href);
   };
+
   useEffect(() => {
     const timer = setTimeout(() => {
       setCopy(false);
@@ -41,10 +73,34 @@ export default function Details() {
     return () => clearTimeout(timer);
   }, [copy]);
 
-  if (!product) {
+  if (loading) {
     return (
       <div className="text-black dark:text-white w-full h-full flex flex-col gap-y-3 justify-center items-center">
-        <p className="text-3xl">No se encontró el producto:(</p>
+        <h1 className="text-2xl">Intentando conseguir el producto...</h1>
+        Espere un momento
+        <AiOutlineLoading3Quarters className="spin text-4xl size-32 text-black dark:text-white" />
+      </div>
+    );
+  }
+
+  if (!product && error) {
+    return (
+      <div className="text-black dark:text-white w-full h-full flex flex-col gap-y-3 justify-center items-center">
+        <p className="text-3xl">No se pudo cargar el producto :(</p>
+        <Link
+          to={"/"}
+          className="px-4 py-2 border border-black dark:border-white hover:scale-110 transition"
+        >
+          Sigue explorando más productos
+        </Link>
+      </div>
+    );
+  }
+
+  if (!product && !error) {
+    return (
+      <div className="text-black dark:text-white w-full h-full flex flex-col gap-y-3 justify-center items-center">
+        <p className="text-3xl">El producto {id} no existe:(</p>
         <Link
           to={"/"}
           className="px-4 py-2 border border-black dark:border-white hover:scale-110 transition"
@@ -63,13 +119,16 @@ export default function Details() {
             <Link to={"/"} className="text-black/60 dark:text-white/60">
               Inicio /
             </Link>{" "}
-            <Link
-              to={`/collection/${product.category}`}
-              className="text-black/60 dark:text-white/60"
-            >
-              {(product.category.slice(0,1).toUpperCase())}{(product.category.slice(1))} /{" "}
-            </Link>
-            {product.brand}
+            {product && (
+              <Link
+                to={`/collection/${product.category}`}
+                className="text-black/60 dark:text-white/60"
+              >
+                {product.category.slice(0, 1).toUpperCase()}
+                {product.category.slice(1)} /{" "}
+              </Link>
+            )}
+            {product?.brand}
           </div>
           <div
             className="flex flex-row gap-1 items-center cursor-pointer border-black hover:border-black dark:hover:border-white border-transparent border-b"
@@ -79,46 +138,53 @@ export default function Details() {
             <p>Regresar</p>
           </div>
         </div>
-        <div className="size-[300px] md:size-[500px] flex mx-auto items-center justify-center col-span-4 md:col-span-3 cursor-zoom-in">
-          <img src={product.image} alt="" />
-        </div>
-        <div className="text-black dark:text-white flex flex-col gap-4 items-start justify-start col-span-4 md:col-span-1">
-          <div className="flex flex-row justify-between items-center w-full list-none">
-            <span className="uppercase text-white dark:text-black py-1 px-4 bg-black dark:bg-white rounded-full font-semibold text-xs">
-              Solo en línea
-            </span>
-            <li>
-              <AiFillHeart
-                id="fav-icon"
-                className={`size-6 cursor-pointer active:scale-125 duration-500 ${
-                  productFav ? "text-red-500" : "text-black dark:text-white"
-                }`}
-                onClick={toggleFav}
+        {product && (
+          <>
+            <div className="size-[300px] md:size-[500px] flex mx-auto items-center justify-center col-span-4 md:col-span-3 cursor-zoom-in">
+              <img
+                src={product.image}
+                alt={`Imagen del producto ${product.brand}`}
               />
-            </li>
-          </div>
-          <p className="font-bold text-base md:text-xl ">{product.brand}</p>
-          <p className="font-light text-base underline">
-            {product.description}
-          </p>
-          <p className="font-light text-xl">${product.price}.00 mx</p>
-          <div className="flex gap-4">
-            <button
-              className="bg-black/60 hover:bg-black transition dark:bg-white/80 dark:hover:bg-white text-white dark:text-black text-xs 
-              font-medium py-2 px-6 rounded-full"
-              onClick={() => addToCart(product as Products)}
-            >
-              {productCart ? "En el carrito!" : "Añadir al carrito"}
-            </button>
-            <button
-              onClick={onCopy}
-              className="bg-black/60 hover:bg-black transition dark:bg-white/80 dark:hover:bg-white text-white dark:text-black text-xs 
-              font-medium py-2 px-6 rounded-full"
-            >
-              Compartir!
-            </button>
-          </div>
-        </div>
+            </div>
+            <div className="text-black dark:text-white flex flex-col gap-4 items-start justify-start col-span-4 md:col-span-1">
+              <div className="flex flex-row justify-between items-center w-full list-none">
+                <span className="uppercase text-white dark:text-black py-1 px-4 bg-black dark:bg-white rounded-full font-semibold text-xs">
+                  Solo en línea
+                </span>
+                <li>
+                  <AiFillHeart
+                    id="fav-icon"
+                    className={`size-6 cursor-pointer active:scale-125 duration-500 ${
+                      productFav ? "text-red-500" : "text-black dark:text-white"
+                    }`}
+                    onClick={toggleFav}
+                  />
+                </li>
+              </div>
+              <p className="font-bold text-base md:text-xl ">{product.brand}</p>
+              <p className="font-light text-base underline">
+                {product.description}
+              </p>
+              <p className="font-light text-xl">${product.price} MX</p>
+              <div className="flex gap-4">
+                <button
+                  className="bg-black/60 hover:bg-black transition dark:bg-white/80 dark:hover:bg-white text-white dark:text-black text-xs 
+                  font-medium py-2 px-6 rounded-full"
+                  onClick={() => addToCart(product)}
+                >
+                  {productCart ? "En el carrito!" : "Añadir al carrito"}
+                </button>
+                <button
+                  onClick={onCopy}
+                  className="bg-black/60 hover:bg-black transition dark:bg-white/80 dark:hover:bg-white text-white dark:text-black text-xs 
+                  font-medium py-2 px-6 rounded-full"
+                >
+                  Compartir!
+                </button>
+              </div>
+            </div>
+          </>
+        )}
       </div>
       <div className="text-black dark:text-white w-[80%] md:w-[70%] mx-auto grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-5 mt-20 md:mt-0">
         {similarProducts.length > 0 ? (
@@ -153,7 +219,7 @@ export default function Details() {
             </p>
             <div className="flex flex-row justify-between items-center">
               <p className="text-xs font-extrabold text-black dark:text-white">
-                ${item.price}.00 mx
+                ${item.price} mx
               </p>
             </div>
           </Link>

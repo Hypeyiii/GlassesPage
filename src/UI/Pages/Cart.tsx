@@ -90,7 +90,7 @@ const Cart = () => {
                       </div>
                     </div>
                     <div className="col-span-1 text-center text-xs md:text-base">
-                      ${product.price}.00
+                      ${product.price}
                     </div>
                   </div>
                 </>
@@ -104,7 +104,7 @@ const Cart = () => {
                 <div className="flex flex-col text-xs md:text-base">
                   <div className="flex flex-row justify-between py-3 items-center border-b-[0.5px] border-black/30 dark:border-white/30">
                     <p className="font-bold">Subotal:</p>
-                    <p>${total}.00</p>
+                    <p>${total}.00 MX</p>
                   </div>
                   <div className="flex flex-row justify-between py-3 items-center border-b-[0.5px] border-black/30 dark:border-white/30">
                     <p className="font-bold">Shipping:</p>
@@ -112,7 +112,7 @@ const Cart = () => {
                   </div>
                   <div className="flex flex-row justify-between py-3 items-center border-b-[0.5px] border-black/30 dark:border-white/30">
                     <p className="font-bold">Total:</p>
-                    <p>${total}.00</p>
+                    <p>${total}.00 MX</p>
                   </div>
                 </div>
               </div>

@@ -1,42 +1,19 @@
-import React, { useState } from "react";
-import { useSubmit } from "../Hooks/useSubmit";
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../Context/firebaseConfig";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
-import { User } from "../Context/authContext";
+import useAuth from "../Hooks/useAuth";
+import { useSubmit } from "../Hooks/useSubmit";
+import { useState } from "react";
 
 const LoggedInForm = () => {
-  const { email, password, setEmail, setPassword, setIsLogged, setUser } = useSubmit();
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
+  const [loading, setLoading] = useState<boolean>(false);
 
-  const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setLoading(true);
-    setError("");
-    signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        const firebaseUser = userCredential.user;
-        const user: User = {
-          email: firebaseUser.email,
-          uid: firebaseUser.uid,
-        };
-        setUser(user);
-        setLoading(false);
-        setIsLogged(true);
-      })
-      .catch((error) => {
-        const errorMessage = error.message;
-        setError(errorMessage);
-        setLoading(false);
-      });
-  };
+  const { email, password, setEmail, setPassword } = useSubmit();
+  const { handleLogin, error } = useAuth();
 
   return (
     <div className="text-black dark:text-white flex flex-col justify-center items-center gap-2 h-full rounded-tr-xl rounded-br-xl w-full">
       <h1 className="text-sm md:text-xl text-black">Iniciar sesión</h1>
       <form
-        onSubmit={handleLogin}
+        onSubmit={(e) => handleLogin(e, setLoading)}
         className="flex flex-col gap-3 text-white dark:text-black [&>input]:px-4 [&>input]:py-2 [&>input]:rounded-full [&>input]:border-[1px] [&>input]:border-black/50"
       >
         <input

@@ -1,9 +1,11 @@
 import { useContext } from "react";
 import { FiltersContext } from "../Context/filtersContext.tsx";
-import sunglasses from "../Data/Data.tsx";
 import { useNavigate } from "react-router-dom";
+import useProducts from "./useProducts.tsx";
 
 export function useFilters() {
+  const { products } = useProducts();
+
   const navigate = useNavigate();
   const {
     searchTerm,
@@ -35,7 +37,7 @@ export function useFilters() {
     }
   };
 
-  const searchResults = sunglasses.filter(
+  const searchResults = products.filter(
     (product) =>
       product.brand.toLowerCase().includes(searchTerm.toLowerCase()) ||
       product.category.toLowerCase().includes(searchTerm.toLowerCase()) ||

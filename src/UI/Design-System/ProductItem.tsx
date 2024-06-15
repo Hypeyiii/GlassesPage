@@ -34,7 +34,7 @@ const ProductItem: React.FC<ProductItemProps> = ({
   const [isAdded, setIsAdded] = useState(false);
   const [isAddedToFavs, setIsAddedToFavs] = useState(false);
   const { isMobile } = useSetMobile();
-  const { allFavProducts } = useFav();
+  const { allFavProducts, deleteFavProduct } = useFav();
   const { allProducts } = useCart();
   const productFav = allFavProducts.find((p) => p.id === id);
   const productCart = allProducts.find((p) => p.id === id);
@@ -102,7 +102,9 @@ const ProductItem: React.FC<ProductItemProps> = ({
               className={`absolute top-0 right-0 p-3 transition-all duration-500 ${
                 isHover ? "fade-in visible" : "fade-out invisible"
               }`}
-              onClick={addedToFav}
+              onClick={
+                productFav ? () => deleteFavProduct(productFav) : addedToFav
+              }
             >
               <BsHeartFill
                 className={`size-4 transition active:scale-125 ${
@@ -135,13 +137,12 @@ const ProductItem: React.FC<ProductItemProps> = ({
                 {productCart ? (
                   <>
                     <p onClick={added}>En el carrito!</p>
-                    <BsCartCheck className="size-4"/>
+                    <BsCartCheck className="size-4" />
                   </>
                 ) : (
                   <>
                     <p onClick={added}>Añadir al carrito</p>
-                    <BiCartAdd className="size-4"/>
-
+                    <BiCartAdd className="size-4" />
                   </>
                 )}
               </div>
@@ -152,7 +153,7 @@ const ProductItem: React.FC<ProductItemProps> = ({
               {brand}
             </p>
             <p className="font-extrabold text-black dark:text-white text-sm">
-              ${price}.00 mx
+              ${price} mx
             </p>
           </div>
         </div>

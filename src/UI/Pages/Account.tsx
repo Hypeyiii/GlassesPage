@@ -1,46 +1,50 @@
-import { useSubmit } from "../Hooks/useSubmit";
-import { auth } from "../Context/firebaseConfig";
-import { signOut } from "firebase/auth";
-import { useState } from "react";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import useAuth from "../Hooks/useAuth";
+import { useEffect, useState } from "react";
+import { Users } from "../Interface/Users";
 
 const Account = () => {
-  const { user, setIsLogged, setEmail, setPassword } = useSubmit();
-  const [loading, setLoading] = useState(false);
+  const { logout, user } = useAuth();
 
-  const handleLogout = () => {
-    setLoading(true);
-    signOut(auth)
-      .then(() => {
-        setLoading(false);
-        setIsLogged(false);
-        setEmail("");
-        setPassword("");
-        console.log("Sesión cerrada");
+  const [loading, setLoading] = useState<boolean>(false);
+  const [userData, setUserData] = useState<Users | null>(null);
+
+  useEffect(() => {
+    try {
+      fetch(`http://localhost:5000/users/${user?.id}`, {
+        method: "GET",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
       })
-      .catch((error) => {
-        setLoading(false);
-        console.log(error);
-      });
-  };
+        .then((response) => response.json())
+        .then((data) => setUserData(data));
+    } catch (error) {
+      console.error("Error al obtener usuario", error);
+    }
+  });
 
   return (
-    <div className="m-auto w-[85%]">
-      {user ? (
-        <>
-          <h1>Correo electrónico: {user.email}</h1>
-          {/* <h1>ID: {user.uid}</h1> */}
-        </>
-      ) : (
-        <h1>No user information available</h1>
-      )}
+    <div className="m-auto w-[85%] mt-32 text-black dark:text-white">
+      <h1 className="text-2xl font-bold text-center">Mi cuenta</h1>
+      <p className="text-center text-gray-500">
+        Bienvenido {userData?.username}
+      </p>
+      <hr className="my-4" />
+      <h2 className="text-lg font-bold">Datos de usuario</h2>
+      <p>ID de usuario: {userData?.id}</p>
+      <p>Nombre de usuario: {userData?.username}</p>
+      <p>Correo electrónico: {userData?.email}</p>
+      <p>Rol: {userData?.role}</p>
+      <hr className="my-4" />
       <button
         className="px-4 py-2 border rounded-xl m-auto flex flex-row gap-1 items-center"
-        onClick={handleLogout}
+        onClick={() => logout(setLoading)}
       >
         {loading ? (
           <>
-            <AiOutlineLoading3Quarters className="animate-spin" />
+            <AiOutlineLoading3Quarters className="spin" />
             Cerrando Sesión
           </>
         ) : (
