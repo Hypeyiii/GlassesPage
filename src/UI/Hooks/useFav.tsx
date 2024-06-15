@@ -38,7 +38,7 @@ export function useFav() {
     return newProducts;
   };
 
-  const productFav = (id: number): boolean => {
+  const productFav = (id: string): boolean => {
     return allFavProducts.some((product) => product.id === id);
   }
 
