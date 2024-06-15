@@ -3,8 +3,6 @@ import { AuthContext } from "../Context/authContext";
 
 export function useSubmit() {
   const {
-    jwt,
-    // setJWT,
     user,
     setUser,
     username,
@@ -23,7 +21,6 @@ export function useSubmit() {
     // login,
     user,
     setUser,
-    jwt,
     username,
     setUsername,
     email,
