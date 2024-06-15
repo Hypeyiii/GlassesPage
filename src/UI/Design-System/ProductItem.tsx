@@ -16,7 +16,7 @@ export interface ProductItemProps {
   stock: number;
   category: string;
   addedToCart: () => void;
-  id: number;
+  id: string;
   addedToFav: () => void;
 }
 
