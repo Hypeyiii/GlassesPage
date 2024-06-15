@@ -26,7 +26,7 @@ import ProductEdit from "./UI/Pages/ProductEdit.js";
 import ProductCreate from "./UI/Pages/ProductCreate";
 import DashboardUsers from "./UI/Pages/DashboardUsers";
 import useUsers from "./UI/Hooks/useUsers.js";
-import { STRIPE_SECRET_KEY } from "./config";
+import { STRIPE_SECRET_KEY } from "./config.tsx";
 
 export default function App() {
   const { isLogged } = useContext(AuthContext);
