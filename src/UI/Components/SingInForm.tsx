@@ -25,7 +25,7 @@ const SignInForm = () => {
 
   return (
     <div className="text-black dark:text-white flex flex-col justify-center items-center gap-2 h-full rounded-tr-xl rounded-br-xl">
-      <div className="my-5 text-black flex flex-col gap-1">
+      <div className="my-5 flex flex-col gap-1">
         <h1 className="text-sm md:text-2xl">Crear una cuenta</h1>
         <p className="text-xs md:text-base">
           ¡Disfrutarás de ofertas exclusivas, acceso prioritario y servicios
@@ -33,7 +33,7 @@ const SignInForm = () => {
         </p>
       </div>
       <form
-        className="flex flex-col gap-3 w-[50%] text-white dark:text-black [&>input]:px-4 [&>input]:py-2 [&>input]:rounded-full [&>input]:border-[1px] [&>input]:border-black/50"
+        className="flex flex-col gap-3 w-[70%] text-white dark:text-black [&>input]:px-4 [&>input]:py-2 [&>input]:rounded-full [&>input]:border-[1px] [&>input]:border-black/50"
         onSubmit={(e) => handleRegister(e, setLoading)}
       >
         <input
