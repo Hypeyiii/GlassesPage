@@ -266,6 +266,18 @@ const Navbar = () => {
               </div>
             )}
           </li>
+          <NavLink
+            to={"/Dashboard"}
+            id="nav-item"
+            className="flex flex-row gap-x-1 items-center text-xl font-bold relative"
+          >
+            {isLogged && userData?.role === "Admin" && (
+              <>
+                <GrConfigure className="size-6" />
+                <h1>Dashboard</h1>
+              </>
+            )}
+          </NavLink>
         </div>
       </>
     </>
