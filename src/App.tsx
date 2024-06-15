@@ -20,13 +20,13 @@ import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import { useContext } from "react";
 import { AuthContext } from "./UI/Context/authContext";
-import { STRIPE_SECRET_KEY } from "./config.js";
 import Dashboard from "./UI/Pages/Dashboard";
 import DashboardProducts from "./UI/Pages/DashbordProducts.js";
 import ProductEdit from "./UI/Pages/ProductEdit.js";
 import ProductCreate from "./UI/Pages/ProductCreate";
 import DashboardUsers from "./UI/Pages/DashboardUsers";
 import useUsers from "./UI/Hooks/useUsers.js";
+import { STRIPE_SECRET_KEY } from "./config";
 
 export default function App() {
   const { isLogged } = useContext(AuthContext);
@@ -66,18 +66,15 @@ export default function App() {
                 path="/Dashboard/Products"
                 element={<DashboardProducts />}
               />
-               <Route
+              <Route
                 path="/Dashboard/Products/Edit/:id"
                 element={<ProductEdit />}
               />
-               <Route
+              <Route
                 path="/Dashboard/Products/Create"
                 element={<ProductCreate />}
               />
-               <Route
-                path="/Dashboard/Users"
-                element={<DashboardUsers />}
-              />
+              <Route path="/Dashboard/Users" element={<DashboardUsers />} />
             </>
           )}
         </Route>
