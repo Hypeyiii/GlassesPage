@@ -11,10 +11,13 @@ const LoggedInForm = () => {
 
   return (
     <div className="text-black dark:text-white flex flex-col justify-center items-center gap-2 h-full rounded-tr-xl rounded-br-xl w-full">
-      <h1 className="text-sm md:text-xl text-black">Iniciar sesión</h1>
+      <h1 className="text-sm text-black dark:text-white md:text-2xl">Iniciar sesión</h1>
+      <p className="text-xs text-black dark:text-white md:text-base">
+        ¡Si eres propietario de una cuenta inicia sesión para disfrutar de ofertas exclusivas dentro de nuestra tienda!
+      </p>
       <form
         onSubmit={(e) => handleLogin(e, setLoading)}
-        className="flex flex-col gap-3 text-white dark:text-black [&>input]:px-4 [&>input]:py-2 [&>input]:rounded-full [&>input]:border-[1px] [&>input]:border-black/50"
+        className="flex flex-col w-[50%] gap-3 text-white dark:text-black [&>input]:px-4 [&>input]:py-2 [&>input]:rounded-full [&>input]:border-[1px] [&>input]:border-black/50"
       >
         <input
           className="bg-gray-200 dark:bg-white"
