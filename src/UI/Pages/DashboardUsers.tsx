@@ -100,18 +100,6 @@ const DashboardProducts = () => {
                 </tr>
               ))}
           </tbody>
-          <tfoot>
-            <tr>
-              <td colSpan={8}>
-                <Link
-                  to="Create"
-                  className="bg-green-500 hover:bg-green-600 transition-all text-white block text-center h-full w-full py-4"
-                >
-                  Crear
-                </Link>
-              </td>
-            </tr>
-          </tfoot>
         </table>
       )}
     </div>
