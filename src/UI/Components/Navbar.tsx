@@ -51,7 +51,7 @@ const Navbar = () => {
                 <BiMenu className="size-5" onClick={toggleMenu} />
               )}
               <NavLink to={"/"}>
-                <TextAnimated text={"Glasses"} fontSize="28px" />
+                <TextAnimated text={"LensMania"} fontSize="28px" />
               </NavLink>
               <NavLink
                 to={"/Cart"}
@@ -67,7 +67,7 @@ const Navbar = () => {
             <>
               {" "}
               <NavLink to={"/"}>
-                <TextAnimated text={"Glasses"} fontSize="32px" />
+                <TextAnimated text={"LensMania"} fontSize="32px" />
               </NavLink>
               <div
                 className="relative h-full flex flex-row gap-4 items-center justify-center transition font-semibold cursor-pointer"
