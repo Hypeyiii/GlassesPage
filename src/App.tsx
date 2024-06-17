@@ -26,7 +26,6 @@ import ProductEdit from "./UI/Pages/ProductEdit";
 import ProductCreate from "./UI/Pages/ProductCreate";
 import DashboardUsers from "./UI/Pages/DashboardUsers";
 import useUsers from "./UI/Hooks/useUsers";
-import UsersCreate from "./UI/Pages/UsersCreate";
 import UsersEdit from "./UI/Pages/UsersEdit";
 export default function App() {
   const { isLogged } = useContext(AuthContext);
@@ -77,7 +76,6 @@ export default function App() {
                 element={<ProductCreate />}
               />
               <Route path="/Dashboard/Users" element={<DashboardUsers />} />
-              <Route path="/Dashboard/Users/Create" element={<UsersCreate />} />
               <Route path="/Dashboard/Users/Edit/:id" element={<UsersEdit />} />
             </>
           )}
