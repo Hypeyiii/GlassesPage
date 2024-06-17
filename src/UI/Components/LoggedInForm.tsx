@@ -17,7 +17,7 @@ const LoggedInForm = () => {
       </p>
       <form
         onSubmit={(e) => handleLogin(e, setLoading)}
-        className="flex flex-col w-[50%] gap-3 text-white dark:text-black [&>input]:px-4 [&>input]:py-2 [&>input]:rounded-full [&>input]:border-[1px] [&>input]:border-black/50"
+        className="flex flex-col gap-3 w-full md:w-[50%] text-white dark:text-black [&>input]:px-4 [&>input]:py-2 [&>input]:rounded-full [&>input]:border-[1px] [&>input]:border-black/50"
       >
         <input
           className="bg-gray-200 dark:bg-white"
