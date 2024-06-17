@@ -10,6 +10,7 @@ import { Products } from "../Interface/Products";
 
 export default function Details() {
   const [copy, setCopy] = useState(false);
+  const [addedToCart, setAddedToCart] = useState(false); // Nueva variable de estado
   const [product, setProduct] = useState<Products | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
@@ -21,7 +22,7 @@ export default function Details() {
     window.history.back();
   };
 
-  const { addToCart, isOnCart, allProducts } = useCart();
+  const { addToCart, allProducts } = useCart();
   const { addToFav, allFavProducts } = useFav();
 
   useEffect(() => {
@@ -57,6 +58,7 @@ export default function Details() {
 
   const productFav = allFavProducts.find((p) => p.id.toString() === productId);
   const productCart = allProducts.find((p) => p.id.toString() === productId);
+
   const similarProducts = products.filter(
     (item) => item.shape === product?.shape && item.id !== product?.id
   );
@@ -66,12 +68,24 @@ export default function Details() {
     navigator.clipboard.writeText(window.location.href);
   };
 
+  const onAddToCart = (product: Products) => {
+    addToCart(product);
+    setAddedToCart(true);
+  };
+
   useEffect(() => {
     const timer = setTimeout(() => {
       setCopy(false);
     }, 3000);
     return () => clearTimeout(timer);
   }, [copy]);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setAddedToCart(false);
+    }, 3000);
+    return () => clearTimeout(timer);
+  }, [addedToCart]);
 
   if (loading) {
     return (
@@ -170,7 +184,7 @@ export default function Details() {
                 <button
                   className="bg-black/60 hover:bg-black transition dark:bg-white/80 dark:hover:bg-white text-white dark:text-black text-xs 
                   font-medium py-2 px-6 rounded-full"
-                  onClick={() => addToCart(product)}
+                  onClick={() => onAddToCart(product)}
                 >
                   {productCart ? "En el carrito!" : "Añadir al carrito"}
                 </button>
@@ -225,17 +239,16 @@ export default function Details() {
           </Link>
         ))}
       </div>
-
-      {isOnCart && (
-        <NotificationAdded
-          isAdded={isOnCart}
-          addedText={"Añadido al carrito correctamente"}
-        />
-      )}
       {copy && (
         <NotificationAdded
           isAdded={copy}
           addedText={"Enlace copiado al portapapeles"}
+        />
+      )}
+      {addedToCart && (
+        <NotificationAdded
+          isAdded={addedToCart}
+          addedText={"Producto añadido al carrito"}
         />
       )}
     </>
