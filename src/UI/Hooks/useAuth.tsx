@@ -14,10 +14,13 @@ const useAuth = () => {
   useEffect(() => {
     const verifyAuthentication = async () => {
       try {
-        const response = await fetch("https://glasses-page-api-rest-production.up.railway.app/users/verify", {
-          method: "GET",
-          credentials: "include",
-        });
+        const response = await fetch(
+          "https://glasses-page-api-rest-production.up.railway.app/users/verify",
+          {
+            method: "GET",
+            credentials: "include",
+          }
+        );
 
         if (!response.ok) {
           throw new Error("No autenticado");
@@ -48,14 +51,17 @@ const useAuth = () => {
     setLoading(true);
     setError("");
     try {
-      const response = await fetch("https://glasses-page-api-rest-production.up.railway.app/users/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ username, email, password }),
-        credentials: "include",
-      });
+      const response = await fetch(
+        "https://glasses-page-api-rest-production.up.railway.app/users/register",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ username, email, password }),
+          credentials: "include",
+        }
+      );
       const data = await response.json();
 
       if (!response.ok) {
@@ -78,14 +84,17 @@ const useAuth = () => {
 
     try {
       setLoading(true);
-      const response = await fetch("https://glasses-page-api-rest-production.up.railway.app/users/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, password }),
-        credentials: "include",
-      });
+      const response = await fetch(
+        "https://glasses-page-api-rest-production.up.railway.app/users/login",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email, password }),
+          credentials: "include",
+        }
+      );
 
       const data = await response.json();
 
@@ -97,30 +106,29 @@ const useAuth = () => {
       setIsLogged(true);
       setLoading(false);
     } catch (error) {
-      console.log(error)
+      console.log(error);
       setError("Credenciales inválidas");
       setLoading(false);
     }
   };
 
-  const logout = async (setLoading: (arg0: boolean) => void) => {
+  const logout = async () => {
     try {
-      setLoading(true);
-      const response = await fetch("https://glasses-page-api-rest-production.up.railway.app/users/logout", {
-        method: "GET",
-        credentials: "include",
-      });
+      const response = await fetch(
+        "https://glasses-page-api-rest-production.up.railway.app/users/logout",
+        {
+          method: "GET",
+          credentials: "include",
+        }
+      );
 
       if (!response.ok) {
-        setLoading(false);
         throw new Error("Error al cerrar sesión");
       }
 
       setIsLogged(false);
       setUser(null);
-      setLoading(false);
     } catch (error) {
-      setLoading(false);
       console.error("Error al cerrar sesión", error);
     }
   };
