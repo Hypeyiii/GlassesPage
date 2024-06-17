@@ -23,6 +23,7 @@ export function CartProvider({ children }: Cart) {
   const [countProducts, setCountProducts] = useState<number>(0);
   const [isOnCart, setIsOnCart] = useState<boolean>(false);
   const [showCartPreview, setShowCartPreview] = useState<boolean>(false);
+  
   return(
     <CartContext.Provider
       value={{

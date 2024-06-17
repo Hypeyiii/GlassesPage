@@ -2,7 +2,7 @@ import React, { createContext, useState, ReactNode } from "react";
 
 export interface User {
   email: string | null;
-  uid: string;
+  id: string;
 }
 
 interface AuthContextProps {

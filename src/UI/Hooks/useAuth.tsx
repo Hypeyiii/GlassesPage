@@ -1,14 +1,12 @@
 import { useState, useContext, useEffect } from "react";
 import { AuthContext } from "../Context/authContext";
 import { useSubmit } from "./useSubmit";
-import { Users } from "../Interface/Users";
 
 const useAuth = () => {
-  const { setIsLogged } = useContext(AuthContext);
+  const { setIsLogged, user, setUser } = useContext(AuthContext);
 
   const { username, password, email } = useSubmit();
 
-  const [user, setUser] = useState<Users | null>(null);
   const [error, setError] = useState("");
 
   useEffect(() => {
