@@ -71,7 +71,7 @@ const Checkout: React.FC = () => {
 
       const { id } = paymentMethod;
 
-      const response = await axios.post("http://localhost:5000/checkout", {
+      const response = await axios.post("https://glasses-page-api-rest-production.up.railway.app/checkout", {
         id,
         amount: total * 100,
         email: email,
