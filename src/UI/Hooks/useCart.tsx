@@ -33,22 +33,21 @@ export function useCart() {
   useEffect(() => {
     const storedProducts = getAllStorageProducts();
     setAllProducts(storedProducts);
-    
-    // Calculate countProducts from updated allProducts
-    const totalCount = storedProducts.reduce((acc, curr) => acc + curr.quantity, 0);
+
+    const totalCount = storedProducts.reduce(
+      (acc, curr) => acc + curr.quantity,
+      0
+    );
     setCountProducts(totalCount);
-
-    // Calculate total price from updated allProducts if needed
-    // const totalPrice = storedProducts.reduce((acc, curr) => acc + curr.price * curr.quantity, 0);
-    // setTotal(totalPrice);
-
   }, [setAllProducts, setCountProducts]);
 
   const updateLocalStorage = (products: Products[]): void => {
     localStorage.setItem("cart", JSON.stringify(products));
   };
 
-  const calculateTotals = (products: Products[]): { total: number; count: number } => {
+  const calculateTotals = (
+    products: Products[]
+  ): { total: number; count: number } => {
     let totalPrice = 0;
     let totalCount = 0;
 
@@ -65,20 +64,20 @@ export function useCart() {
     setIsOnCart(true);
 
     const updatedProducts = [...allProducts];
-    const existingProductIndex = updatedProducts.findIndex((p) => p.id === product.id);
+    const existingProductIndex = updatedProducts.findIndex(
+      (p) => p.id === product.id
+    );
 
     if (existingProductIndex !== -1) {
-      // Product already exists in cart, update quantity
       updatedProducts[existingProductIndex].quantity++;
     } else {
-      // Product is new in cart, add it
       updatedProducts.push({ ...product, quantity: 1 });
     }
 
     setAllProducts(updatedProducts);
     const { total: updatedTotal } = calculateTotals(updatedProducts);
     setTotal(updatedTotal);
-    setCountProducts(countProducts + 1); // Increment countProducts by 1
+    setCountProducts(countProducts + 1);
 
     updateLocalStorage(updatedProducts);
   };
@@ -88,7 +87,7 @@ export function useCart() {
     setAllProducts(updatedProducts);
     const { total: updatedTotal } = calculateTotals(updatedProducts);
     setTotal(updatedTotal);
-    setCountProducts(countProducts - product.quantity); // Decrement countProducts by product quantity
+    setCountProducts(countProducts - product.quantity);
 
     updateLocalStorage(updatedProducts);
   };
@@ -104,7 +103,7 @@ export function useCart() {
     setAllProducts(updatedProducts);
     const { total: updatedTotal } = calculateTotals(updatedProducts);
     setTotal(updatedTotal);
-    setCountProducts(countProducts + 1); // Increment countProducts by 1
+    setCountProducts(countProducts + 1);
 
     updateLocalStorage(updatedProducts);
   };
@@ -120,9 +119,14 @@ export function useCart() {
     setAllProducts(updatedProducts);
     const { total: updatedTotal } = calculateTotals(updatedProducts);
     setTotal(updatedTotal);
-    setCountProducts(countProducts - 1); // Decrement countProducts by 1
+    setCountProducts(countProducts - 1);
 
     updateLocalStorage(updatedProducts);
+  };
+
+  const cleanStorage = () => {
+    setAllProducts([]);
+    setCountProducts(0);
   };
 
   useEffect(() => {
@@ -145,5 +149,6 @@ export function useCart() {
     substractProduct,
     showCartPreview,
     setShowCartPreview,
+    cleanStorage,
   };
 }

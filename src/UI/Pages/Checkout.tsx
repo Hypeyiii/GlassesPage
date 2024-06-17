@@ -27,7 +27,7 @@ const Checkout: React.FC = () => {
 
   const stripe = useStripe();
   const elements = useElements();
-  const { total, allProducts, setAllProducts, setCountProducts } = useCart();
+  const { total, allProducts, cleanStorage } = useCart();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -89,8 +89,7 @@ const Checkout: React.FC = () => {
       setPaymentSuccess(true);
       console.log("Payment successful:", response.data);
 
-      setAllProducts([]);
-      setCountProducts(0);
+      cleanStorage();
     } catch (err) {
       setError(
         "Ocurrió un error al procesar el pago. Por favor, inténtelo de nuevo."
