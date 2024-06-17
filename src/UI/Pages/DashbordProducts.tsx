@@ -17,7 +17,7 @@ const DashboardProducts = () => {
     const fetchProducts = async () => {
       setLoading(true);
       try {
-        const response = await fetch("http://localhost:5000/glasses", {
+        const response = await fetch("https://glasses-page-api-rest-production.up.railway.app/glasses", {
           method: "GET",
           credentials: "include",
           headers: {
@@ -81,26 +81,26 @@ const DashboardProducts = () => {
                   <td className="py-3 border-[0.5px] border-collapse border-black dark:border-white hidden md:table-cell">
                     {product.id}
                   </td>
-                  <td className="py-3 border-[0.5px] border-collapse border-black dark:border-white text-[10px] ">
+                  <td className="py-3 border-[0.5px] border-collapse border-black dark:border-white text-[10px] md:text-base ">
                     {product.brand}
                   </td>
-                  <td className="py-3 border-[0.5px] border-collapse border-black dark:border-white text-[10px] ">
+                  <td className="py-3 border-[0.5px] border-collapse border-black dark:border-white text-[10px] md:text-base ">
                     {product.description}
                   </td>
-                  <td className="py-3 border-[0.5px] border-collapse border-black dark:border-white text-[10px] ">
+                  <td className="py-3 border-[0.5px] border-collapse border-black dark:border-white text-[10px] md:text-base ">
                     {product.price}
                   </td>
-                  <td className="py-3 border-[0.5px] border-collapse border-black dark:border-white text-[10px] ">
+                  <td className="py-3 border-[0.5px] border-collapse border-black dark:border-white text-[10px] md:text-base ">
                     {product.stock}
                   </td>
-                  <td className="size-16 md:size-28 py-3 border-[0.5px] border-collapse border-black dark:border-white text-[10px] ">
+                  <td className="size-16 md:size-28 py-3 border-[0.5px] border-collapse border-black dark:border-white text-[10px] md:text-base ">
                     <img
                       src={product.image}
                       alt={product.brand}
                       className="w-[80%] h-auto m-auto"
                     />
                   </td>
-                  <td className="py-1 md:py-3 border-[0.5px] border-collapse border-black dark:border-white text-[10px] ">
+                  <td className="py-1 md:py-3 border-[0.5px] border-collapse border-black dark:border-white text-[10px] md:text-base ">
                     <button
                       className="bg-red-500 rounded-full p-1 text-white md:p-1 text-xs"
                       onClick={() => handleDelete(product.id)}
@@ -108,7 +108,7 @@ const DashboardProducts = () => {
                       <RxCross1 className="size-3 md:size-6" />
                     </button>
                   </td>
-                  <td className="py-1 md:py-3 border-[0.5px] border-collapse border-black dark:border-white text-[10px] ">
+                  <td className="py-1 md:py-3 border-[0.5px] border-collapse border-black dark:border-white text-[10px] md:text-base ">
                     <Link
                       to={`Edit/${product.id}`}
                       className="text-blue-500 md:p-1 text-xs"

@@ -12,7 +12,7 @@ export default function useUsers() {
   useEffect(() => {
     try {
       setLoading(true);
-      fetch("http://localhost:5000/users")
+      fetch("https://glasses-page-api-rest-production.up.railway.app/users")
         .then((response) => response.json())
         .then((data) => {
           console.log(data);
@@ -28,7 +28,7 @@ export default function useUsers() {
   const handleDelete = async (id: string) => {
     try {
       setLoading(true);
-      await fetch(`http://localhost:5000/users/${id}`, {
+      await fetch(`https://glasses-page-api-rest-production.up.railway.app/users/${id}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
@@ -46,7 +46,7 @@ export default function useUsers() {
       if (user?.id) {
         try {
           const response = await fetch(
-            `http://localhost:5000/users/${user.id}`,
+            `https://glasses-page-api-rest-production.up.railway.app/users/${user.id}`,
             {
               method: "GET",
               credentials: "include",

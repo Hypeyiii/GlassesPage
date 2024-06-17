@@ -14,7 +14,7 @@ const useAuth = () => {
   useEffect(() => {
     const verifyAuthentication = async () => {
       try {
-        const response = await fetch("http://localhost:5000/users/verify", {
+        const response = await fetch("https://glasses-page-api-rest-production.up.railway.app/users/verify", {
           method: "GET",
           credentials: "include",
         });
@@ -48,7 +48,7 @@ const useAuth = () => {
     setLoading(true);
     setError("");
     try {
-      const response = await fetch("http://localhost:5000/users/register", {
+      const response = await fetch("https://glasses-page-api-rest-production.up.railway.app/users/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -78,7 +78,7 @@ const useAuth = () => {
 
     try {
       setLoading(true);
-      const response = await fetch("http://localhost:5000/users/login", {
+      const response = await fetch("https://glasses-page-api-rest-production.up.railway.app/users/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -106,7 +106,7 @@ const useAuth = () => {
   const logout = async (setLoading: (arg0: boolean) => void) => {
     try {
       setLoading(true);
-      const response = await fetch("http://localhost:5000/users/logout", {
+      const response = await fetch("https://glasses-page-api-rest-production.up.railway.app/users/logout", {
         method: "GET",
         credentials: "include",
       });

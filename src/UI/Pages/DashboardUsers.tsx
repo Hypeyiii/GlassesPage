@@ -14,7 +14,7 @@ const DashboardProducts = () => {
     const fetchUsers = async () => {
       setLoading(true);
       try {
-        const response = await fetch("http://localhost:5000/users", {
+        const response = await fetch("https://glasses-page-api-rest-production.up.railway.app/users", {
           method: "GET",
           credentials: "include",
           headers: {

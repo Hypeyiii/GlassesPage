@@ -8,7 +8,7 @@ export default function useProducts() {
   useEffect(() => {
     try {
       setLoading(true);
-      fetch("http://localhost:5000/glasses")
+      fetch("https://glasses-page-api-rest-production.up.railway.app/glasses")
         .then((response) => response.json())
         .then((data) => {
           console.log(data);
@@ -24,7 +24,7 @@ export default function useProducts() {
   const handleDelete = async (id: string) => {
     try {
       setLoading(true);
-      await fetch(`http://localhost:5000/glasses/${id}`, {
+      await fetch(`https://glasses-page-api-rest-production.up.railway.app/glasses/${id}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",

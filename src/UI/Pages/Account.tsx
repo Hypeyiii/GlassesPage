@@ -11,7 +11,7 @@ const Account = () => {
 
   useEffect(() => {
     try {
-      fetch(`http://localhost:5000/users/${user?.id}`, {
+      fetch(`https://glasses-page-api-rest-production.up.railway.app/users/${user?.id}`, {
         method: "GET",
         credentials: "include",
         headers: {

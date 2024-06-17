@@ -13,7 +13,7 @@ const ProductEdit = () => {
     const getProduct = async () => {
       try {
         setLoading(true);
-        const response = await fetch(`http://localhost:5000/glasses/${id}`, {
+        const response = await fetch(`https://glasses-page-api-rest-production.up.railway.app/glasses/${id}`, {
           method: "GET",
           credentials: "include",
           headers: {
@@ -34,7 +34,7 @@ const ProductEdit = () => {
   const handleEdit = async () => {
     try {
       setLoading(true);
-      await fetch(`http://localhost:5000/glasses/${id}`, {
+      await fetch(`https://glasses-page-api-rest-production.up.railway.app/glasses/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

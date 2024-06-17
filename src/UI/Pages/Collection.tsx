@@ -27,7 +27,7 @@ export default function Collection() {
       setError("");
       try {
         const response = await fetch(
-          `http://localhost:5000/glasses?filter=${section}`
+          `https://glasses-page-api-rest-production.up.railway.app/glasses?filter=${section}`
         );
         if (!response.ok) {
           throw new Error("Error en la carga de productos");

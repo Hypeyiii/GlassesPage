@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Products } from "../Interface/Products";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
 const ProductCreate = () => {
   const [product, setProduct] = useState<Products>({
@@ -23,13 +24,16 @@ const ProductCreate = () => {
   const handleCreate = async () => {
     try {
       setLoading(true);
-      await fetch(`http://localhost:5000/glasses`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(product),
-      });
+      await fetch(
+        `https://glasses-page-api-rest-production.up.railway.app/glasses`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(product),
+        }
+      );
       setSuccess("Producto creado correctamente!");
       setLoading(false);
     } catch (error) {
@@ -39,10 +43,29 @@ const ProductCreate = () => {
     }
   };
 
+  const handleClean = () => {
+    setProduct({
+      id: "",
+      total: 0,
+      countProducts: 0,
+      brand: "",
+      description: "",
+      category: "",
+      genre: "",
+      shape: "",
+      color: "",
+      price: 0,
+      image: "",
+      quantity: 0,
+      stock: 0,
+    });
+    setSuccess("");
+  };
+
   if (loading) {
     return (
-      <div className="text-black dark:text-white flex w-screen h-auto m-auto">
-        Loading...
+      <div className="flex flex-col gap-2 justify-center items-center h-full mt-5">
+        <AiOutlineLoading3Quarters className="spin size-32 md:size-52 text-black dark:text-white" />
       </div>
     );
   }
@@ -149,7 +172,11 @@ const ProductCreate = () => {
           }
         />
       </span>
-      <button onClick={handleCreate}>Create</button>
+      {success ? (
+        <button onClick={handleClean} className="bg-black text-white dark:bg-white dark:text-black px-4 py-2 font-semibold rounded-sm">Create New</button>
+      ) : (
+        <button onClick={handleCreate} className="bg-black text-white dark:bg-white dark:text-black px-4 py-2 font-semibold rounded-sm">Create</button>
+      )}
     </div>
   );
 };

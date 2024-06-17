@@ -30,7 +30,7 @@ export default function Details() {
       setError("");
       try {
         const response = await fetch(
-          `http://localhost:5000/glasses/${productId}`
+          `https://glasses-page-api-rest-production.up.railway.app/glasses/${productId}`
         );
         if (!response.ok) {
           throw new Error("Error en la carga de productos");
