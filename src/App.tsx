@@ -32,7 +32,7 @@ export default function App() {
   const { userData } = useUsers();
 
   const stripePromise = loadStripe(
-    "pk_test_51OkKmsBlx8QfT450Ul1ORZbvVVbcd0KEcWAPLHj5mP9P6BORvJ47mS9WFgDoC9ytYntZqMdNL3ITReBzaOkB3NOu00FOmepwfm"
+    "pk_live_51OkKmsBlx8QfT450rGFixmdq58EMMJQtpbq890dAr0dkfV08ONgmz9sEYpxdqAzVbERUI9Jwu6Bz5ww7nwY1xWqL00jCpZQ5Mp"
   );
 
   const router = createBrowserRouter(
