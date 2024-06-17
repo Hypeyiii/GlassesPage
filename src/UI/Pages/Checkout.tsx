@@ -1,16 +1,30 @@
+import { useState } from "react";
 import { useStripe, useElements, CardElement } from "@stripe/react-stripe-js";
 import axios from "axios";
-import { useState } from "react";
-import { FaStripe, FaStripeS } from "react-icons/fa6";
+import { FaStripe, FaStripeS } from "react-icons/fa";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { CiCircleCheck } from "react-icons/ci";
 import { useCart } from "../Hooks/useCart";
 import Confetti from "react-confetti";
 
-const Checkout = () => {
+interface Metadata {
+  name: string;
+  email: string;
+  phoneNumber: string;
+  lastName: string;
+}
+
+const Checkout: React.FC = () => {
   const [paymentSuccess, setPaymentSuccess] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
+  const [error, setError] = useState<string | null>(null);
+  const [metadata, setMetadata] = useState<Metadata>({
+    name: "",
+    email: "",
+    phoneNumber: "",
+    lastName: "",
+  });
+
   const stripe = useStripe();
   const elements = useElements();
   const { total, allProducts, setAllProducts, setCountProducts } = useCart();
@@ -18,17 +32,11 @@ const Checkout = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
-    setError("");
+    setError(null);
 
-    const { name, email, phoneNumber, lastName } = e.currentTarget;
-    if (
-      !stripe ||
-      !elements ||
-      !name.valueOf ||
-      !email.value ||
-      !phoneNumber.value ||
-      !lastName.value
-    ) {
+    const { name, lastName, email, phoneNumber } = metadata;
+
+    if (!stripe || !elements || !name || !lastName || !email || !phoneNumber) {
       setLoading(false);
       setError("Todos los campos son obligatorios.");
       return;
@@ -62,26 +70,16 @@ const Checkout = () => {
       }
 
       const { id } = paymentMethod;
-      console.log("Sending payment request:", {
-        id,
-        amount: total * 100,
-        email: email.value,
-        name: name.valueOf,
-        lastName: lastName.value,
-        phoneNumber: phoneNumber.value,
-        allProducts: allProducts.map((product) => product.brand).join(", "),
-        customerId: email.value,
-      });
 
       const response = await axios.post("http://localhost:5000/checkout", {
         id,
         amount: total * 100,
-        email: email.value,
-        name: name.valueOf,
-        lastName: lastName.value,
-        phoneNumber: phoneNumber.value,
+        email: email,
+        name: name,
+        lastName: lastName,
+        phoneNumber: phoneNumber,
         allProducts: allProducts.map((product) => product.brand).join(", "),
-        customerId: email.value,
+        customerId: email,
       });
 
       if (response.status !== 200) {
@@ -90,6 +88,7 @@ const Checkout = () => {
 
       setPaymentSuccess(true);
       console.log("Payment successful:", response.data);
+
       setAllProducts([]);
       setCountProducts(0);
     } catch (err) {
@@ -102,6 +101,13 @@ const Checkout = () => {
     setLoading(false);
   };
 
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setMetadata((prevMetadata) => ({
+      ...prevMetadata,
+      [name]: value,
+    }));
+  };
   return (
     <>
       {paymentSuccess && (
@@ -193,8 +199,9 @@ const Checkout = () => {
                       </p>
                       <input
                         type="text"
+                        onChange={handleInputChange}
                         name="name"
-                        placeholder=""
+                        value={metadata.name}
                         className="rounded-lg border-black/30 shadow-black/20 dark:shadow-white/20 dark:bg-white/80 shadow-lg w-full text-white dark:text-black p-2"
                       />
                     </div>
@@ -204,8 +211,9 @@ const Checkout = () => {
                       </p>
                       <input
                         type="text"
+                        onChange={handleInputChange}
                         name="lastName"
-                        placeholder=""
+                        value={metadata.lastName}
                         className="rounded-lg border-black/30 shadow-black/20 dark:shadow-white/20 dark:bg-white/80 shadow-lg w-full text-white dark:text-black p-2"
                       />
                     </div>
@@ -217,8 +225,9 @@ const Checkout = () => {
                       </p>
                       <input
                         type="text"
+                        onChange={handleInputChange}
                         name="phoneNumber"
-                        placeholder=""
+                        value={metadata.phoneNumber}
                         className="rounded-lg border-black/30 shadow-black/20 dark:shadow-white/20 dark:bg-white/80 shadow-lg w-full text-white dark:text-black p-2"
                       />
                     </div>
@@ -228,7 +237,8 @@ const Checkout = () => {
                       </p>
                       <input
                         type="email"
-                        placeholder=""
+                        value={metadata.email}
+                        onChange={handleInputChange}
                         name="email"
                         className="rounded-lg border-black/30 shadow-black/20 dark:shadow-white/20 dark:bg-white/80 shadow-lg w-full text-white dark:text-black p-2"
                       />
