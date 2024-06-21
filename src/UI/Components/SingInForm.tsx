@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useSubmit } from "../Hooks/useSubmit";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
-import useAuth from "../Hooks/useAuth";
+import { useAuth } from "../Hooks/useAuth";
 
 const SignInForm = () => {
   const { username, setUsername, email, password, setEmail, setPassword } =

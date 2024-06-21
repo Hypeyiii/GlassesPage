@@ -6,9 +6,9 @@ import { useCart } from "../Hooks/useCart";
 import { useFav } from "../Hooks/useFav";
 import { useFilters } from "../Hooks/useFilters";
 import { FaFilterCircleXmark } from "react-icons/fa6";
-import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { useState, useEffect, useContext } from "react";
 import { FiltersContext } from "../Context/filtersContext";
+import LoadingSpin from "../Design-System/loading-spin";
 
 export default function Collection() {
   const { addToCart } = useCart();
@@ -34,9 +34,9 @@ export default function Collection() {
         }
         const data = await response.json();
         setProducts(data);
+        setLoading(false);
       } catch (error) {
         setError("No se pudieron cargar los productos");
-      } finally {
         setLoading(false);
       }
     };
@@ -84,10 +84,13 @@ export default function Collection() {
       )}
       {loading ? (
         <div className="col-span-1 md:col-span-3 flex flex-col gap-4 mx-auto justify-center text-center items-center w-[85%] h-full text-black dark:text-white">
-          <h1 className="col-span-1 md:col-span-3 text-xl">
-            Intentando cargar productos...
-          </h1>
-          <AiOutlineLoading3Quarters className="spin size-24 col-span-1 md:col-span-3" />
+          <LoadingSpin
+            smallSize={100}
+            mediumSize={200}
+            gMediumSize={150}
+            gSmallSize={100}
+            text=""
+          />
         </div>
       ) : products.length > 0 ? (
         filteredProducts.length > 0 ? (

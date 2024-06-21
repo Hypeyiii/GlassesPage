@@ -1,5 +1,5 @@
 import { Link, useParams } from "react-router-dom";
-import { AiFillHeart, AiOutlineLoading3Quarters } from "react-icons/ai";
+import { AiFillHeart } from "react-icons/ai";
 import NotificationAdded from "../Design-System/NotificationAdded";
 import { useCart } from "../Hooks/useCart";
 import { useFav } from "../Hooks/useFav";
@@ -7,10 +7,11 @@ import { useEffect, useState } from "react";
 import { BiLeftArrowAlt } from "react-icons/bi";
 import useProducts from "../Hooks/useProducts";
 import { Products } from "../Interface/Products";
+import LoadingSpin from "../Design-System/loading-spin";
 
 export default function Details() {
   const [copy, setCopy] = useState(false);
-  const [addedToCart, setAddedToCart] = useState(false); // Nueva variable de estado
+  const [addedToCart, setAddedToCart] = useState(false);
   const [product, setProduct] = useState<Products | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
@@ -89,10 +90,15 @@ export default function Details() {
 
   if (loading) {
     return (
-      <div className="text-black dark:text-white w-full h-full flex flex-col gap-y-3 justify-center items-center">
-        <h1 className="text-2xl">Intentando conseguir el producto...</h1>
-        Espere un momento
-        <AiOutlineLoading3Quarters className="spin text-4xl size-32 text-black dark:text-white" />
+      <div className="text-black dark:text-white w-full h-full flex flex-col gap-y-3 justify-center items-center text-center">
+        <h1 className="text-base md:text-2xl mb-5">Intentando conseguir el producto...</h1>
+        <LoadingSpin
+          smallSize={100}
+          mediumSize={200}
+          gSmallSize={75}
+          gMediumSize={150}
+          text=""
+        />
       </div>
     );
   }

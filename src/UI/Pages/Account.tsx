@@ -1,4 +1,4 @@
-import useAuth from "../Hooks/useAuth";
+import { useAuth } from "../Hooks/useAuth";
 import { useEffect, useState } from "react";
 import { Users } from "../Interface/Users";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
