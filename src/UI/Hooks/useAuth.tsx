@@ -2,7 +2,7 @@ import { useState, useContext, useEffect } from "react";
 import { AuthContext } from "../Context/authContext";
 import { useSubmit } from "./useSubmit";
 
-const useAuth = () => {
+export const useAuth = () => {
   const { setIsLogged, user, setUser } = useContext(AuthContext);
 
   const { username, password, email } = useSubmit();
@@ -21,17 +21,17 @@ const useAuth = () => {
         );
 
         if (!response.ok) {
-          throw new Error("No autenticado");
-        }
-
-        const data = await response.json();
-        console.log("Usuario autenticado", data);
-
-        if (data) {
-          setUser(data.data);
-          setIsLogged(true);
+          setError("Error en la conexión");
         } else {
-          throw new Error("Datos de usuario inválidos");
+          const data = await response.json();
+          console.log("Usuario autenticado", data);
+
+          if (data) {
+            setUser(data.data);
+            setIsLogged(true);
+          } else {
+            throw new Error("Datos de usuario inválidos");
+          }
         }
       } catch (error) {
         console.error("Error al verificar la autenticación", error);
@@ -39,7 +39,7 @@ const useAuth = () => {
     };
 
     verifyAuthentication();
-  }, [setIsLogged]);
+  }, [setIsLogged, setUser]);
 
   const handleRegister = async (
     e: React.FormEvent<HTMLFormElement>,
@@ -98,14 +98,19 @@ const useAuth = () => {
 
       if (!response.ok) {
         setLoading(false);
-        throw new Error(data.error || "Error al iniciar sesión");
+        if (email.length === 0) {
+          setError("El email es requerido");
+        }
+
+        setError("Credenciales invalidas");
       }
 
-      setIsLogged(true);
-      setLoading(false);
+      if (data) {
+        setIsLogged(true);
+        setLoading(false);
+      }
     } catch (error) {
-      console.log(error);
-      setError("Credenciales inválidas");
+      setError("Error en la conexión");
       setLoading(false);
     }
   };
@@ -127,11 +132,9 @@ const useAuth = () => {
       setIsLogged(false);
       setUser(null);
     } catch (error) {
-      console.error("Error al cerrar sesión", error);
+      setError("Error al salir de la sesión");
     }
   };
 
   return { user, logout, handleLogin, handleRegister, error };
 };
-
-export default useAuth;

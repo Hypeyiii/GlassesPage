@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Users } from "../Interface/Users";
-import useAuth from "./useAuth";
+import { useAuth } from "./useAuth";
 
 export default function useUsers() {
   const { user } = useAuth();
@@ -28,12 +28,15 @@ export default function useUsers() {
   const handleDelete = async (id: string) => {
     try {
       setLoading(true);
-      await fetch(`https://glasses-page-api-rest-production.up.railway.app/users/${id}`, {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      await fetch(
+        `https://glasses-page-api-rest-production.up.railway.app/users/${id}`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
       setLoading(false);
     } catch (error) {
       console.error("Error al eliminar producto", error);
