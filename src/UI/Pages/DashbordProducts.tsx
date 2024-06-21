@@ -1,48 +1,25 @@
-import { useEffect, useState } from "react";
 import useProducts from "../Hooks/useProducts";
 import "../Components/Animations.css";
 import { Link } from "react-router-dom";
-import { Products } from "../Interface/Products";
-import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { RxCross1 } from "react-icons/rx";
 import { BiEdit } from "react-icons/bi";
+import LoadingSpin from "../Design-System/loading-spin";
 
 const DashboardProducts = () => {
-  const [products, setProducts] = useState<Products[]>([]);
-  const [loading, setLoading] = useState(false);
-
-  const { handleDelete } = useProducts();
-
-  useEffect(() => {
-    const fetchProducts = async () => {
-      setLoading(true);
-      try {
-        const response = await fetch("https://glasses-page-api-rest-production.up.railway.app/glasses", {
-          method: "GET",
-          credentials: "include",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
-        const data = await response.json();
-        setProducts(data);
-      } catch (error) {
-        console.error("Error al obtener productos", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchProducts();
-  }, []);
+  const { handleDelete, products, loading } = useProducts();
 
   return (
     <div className="mt-32 text-black dark:text-white md:w-[90%] w-[85%] mx-auto px-3">
       <h1 className="text-center text-2xl">Dashboard Products</h1>
       {loading ? (
-        <div className="flex flex-col gap-2 justify-center items-center h-full mt-5">
-          Loading...
-          <AiOutlineLoading3Quarters className="spin size-32 md:size-52" />
+        <div className="flex flex-col gap-2 justify-center items-center h-full mt-10">
+          <LoadingSpin
+            smallSize={100}
+            mediumSize={200}
+            gMediumSize={150}
+            gSmallSize={100}
+            text=""
+          />
         </div>
       ) : (
         <table className="w-full text-center mt-5 border-[0.5px] border-collapse border-white m-auto">

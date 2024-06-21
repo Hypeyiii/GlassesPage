@@ -2,36 +2,9 @@ import "../Components/Animations.css";
 import { Link } from "react-router-dom";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import useUsers from "../Hooks/useUsers";
-import { useEffect, useState } from "react";
-import { Users } from "../Interface/Users";
 
 const DashboardProducts = () => {
-  const { handleDelete } = useUsers();
-  const [users, setUsers] = useState<Users[]>([]);
-  const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    const fetchUsers = async () => {
-      setLoading(true);
-      try {
-        const response = await fetch("https://glasses-page-api-rest-production.up.railway.app/users", {
-          method: "GET",
-          credentials: "include",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
-        const data = await response.json();
-        setUsers(data);
-      } catch (error) {
-        console.error("Error al obtener productos", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchUsers();
-  }, []);
+  const { handleDelete, users, loading } = useUsers();
 
   return (
     <div className="mt-32 text-black dark:text-white w-[85%] mx-auto">

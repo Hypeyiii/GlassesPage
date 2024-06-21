@@ -44,7 +44,6 @@ const ProductEdit = () => {
       setSuccess("Producto editado correctamente!");
       setLoading(false);
     } catch (error) {
-      console.error("Error al editar producto", error);
       setLoading(false);
       setSuccess("Error al editar producto");
     }
