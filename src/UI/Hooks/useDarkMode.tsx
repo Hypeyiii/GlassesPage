@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 
 export function useDarkMode() {
   const [isDarkModeOn, setIsDarkModeOn] = useState(false);
+  
   const toggleColorScheme = () => {
     document.querySelector("body")?.classList.toggle("dark");
     setIsDarkModeOn(!isDarkModeOn);
