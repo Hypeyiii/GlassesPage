@@ -41,7 +41,7 @@ const Navbar = () => {
     <>
       <div className="absolute top-0 w-full z-50 bg-gray-200 dark:bg-black/30 border-b-[1px] border-black/10 dark:border-white/20">
         <div
-          className={`w-[80%] md:w-[70%] mx-auto flex flex-row justify-between items-center text-black/80 dark:text-white/80 py-4`}
+          className={`w-[80%] md:w-[70%] mx-auto flex flex-row justify-between items-center text-black/80 dark:text-white/80`}
         >
           {isMobile ? (
             <>
@@ -70,12 +70,12 @@ const Navbar = () => {
                 <TextAnimated text={"LensMania"} fontSize="32px" />
               </NavLink>
               <div
-                className="relative h-full flex flex-row gap-4 items-center justify-center transition font-semibold cursor-pointer"
+                className="relative h-full flex flex-row gap-4 items-center justify-center transition font-semibold cursor-pointer py-6"
                 onMouseEnter={() => setShowCollectionMenu(true)}
                 onMouseLeave={() => setShowCollectionMenu(false)}
                 onClick={() => setShowCollectionMenu(!showCollectionMenu)}
               >
-                <div className="flex flex-row gap-1 items-center h-full py-4 px-2">
+                <div className="flex flex-row gap-1 items-center h-full px-2">
                   <p>Colecciones</p>
                   <FaAngleDown
                     className={`${
@@ -86,10 +86,10 @@ const Navbar = () => {
                 <div
                   className={`${
                     showCollectionMenu
-                      ? "visible scale-in-center"
-                      : "invisible scale-out-center"
-                  } absolute transition-all right-[-20px] text-black dark:text-white top-[50px] m-auto flex flex-col w-fit
-                    text-nowrap bg-white dark:bg-black border border-black dark:border-white rounded-lg`}
+                      ? "visible fade-in"
+                      : "invisible fade-out"
+                  } absolute transition-all right-[-20px] text-black dark:text-white top-[70px] m-auto flex flex-col w-fit
+                    text-nowrap bg-white dark:bg-black border border-black dark:border-white rounded-lg shadow-lg `}
                 >
                   <NavLink
                     id="nav-collection"
