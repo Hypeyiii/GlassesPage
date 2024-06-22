@@ -4,10 +4,10 @@ import { useSubmit } from "./useSubmit";
 
 export const useAuth = () => {
   const { setIsLogged, user, setUser } = useContext(AuthContext);
-
   const { username, password, email } = useSubmit();
 
-  const [error, setError] = useState("");
+  const [error, setError] = useState<string>("");
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const verifyAuthentication = async () => {
@@ -21,7 +21,7 @@ export const useAuth = () => {
         );
 
         if (!response.ok) {
-          setError("Error en la conexión");
+          // setError("Error en la conexión");
         } else {
           const data = await response.json();
           console.log("Usuario autenticado", data);
@@ -41,14 +41,16 @@ export const useAuth = () => {
     verifyAuthentication();
   }, [setIsLogged, setUser]);
 
-  const handleRegister = async (
-    e: React.FormEvent<HTMLFormElement>,
-    setLoading: (arg0: boolean) => void
-  ) => {
+  const handleRegister = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
     setError("");
     try {
+      if (!username || !email || !password) {
+        setError("Todos los campos son obligatorios");
+        throw new Error("Todos los campos son obligatorios");
+      }
+ 
       const response = await fetch(
         "https://glasses-page-api-rest-production.up.railway.app/users/register",
         {
@@ -60,28 +62,36 @@ export const useAuth = () => {
           credentials: "include",
         }
       );
+ 
       const data = await response.json();
-
+ 
       if (!response.ok) {
-        throw new Error(data.error || "Error al registrarse");
+        throw new Error("Error al registrarse");
       }
-
+ 
+      console.log("Usuario registrado", data);
       setIsLogged(true);
     } catch (error) {
-      setError("Error al registrarse");
+      if (error instanceof Error) {
+        setError(error.message);
+      } else {
+        setError("Ocurrió un error desconocido");
+      }
     } finally {
       setLoading(false);
     }
   };
+ 
 
-  const handleLogin = async (
-    e: React.FormEvent<HTMLFormElement>,
-    setLoading: (arg0: boolean) => void
-  ) => {
+  const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
+    setLoading(true);
+    setError("");
     try {
-      setLoading(true);
+      if (!email || !password) {
+        throw new Error("El email y la contraseña son obligatorios");
+      }
+
       const response = await fetch(
         "https://glasses-page-api-rest-production.up.railway.app/users/login",
         {
@@ -97,20 +107,17 @@ export const useAuth = () => {
       const data = await response.json();
 
       if (!response.ok) {
-        setLoading(false);
-        if (email.length === 0) {
-          setError("El email es requerido");
-        }
-
-        setError("Credenciales invalidas");
+        throw new Error(data.message || "Credenciales inválidas");
       }
 
-      if (data) {
-        setIsLogged(true);
-        setLoading(false);
-      }
+      setIsLogged(true);
     } catch (error) {
-      setError("Error en la conexión");
+      if (error instanceof Error) {
+        setError(error.message);
+      } else {
+        setError("Ocurrió un error desconocido");
+      }
+    }finally {
       setLoading(false);
     }
   };
@@ -136,5 +143,17 @@ export const useAuth = () => {
     }
   };
 
-  return { user, logout, handleLogin, handleRegister, error };
+  useEffect(() => {
+    let timer: NodeJS.Timeout;
+    if (error) {
+      timer = setTimeout(() => {
+        setError("");
+      }, 3000);
+    }
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [error]);
+
+  return { user, logout, handleLogin, handleRegister, error, loading };
 };

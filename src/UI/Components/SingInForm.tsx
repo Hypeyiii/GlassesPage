@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import { useSubmit } from "../Hooks/useSubmit";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { useAuth } from "../Hooks/useAuth";
@@ -6,22 +5,8 @@ import { useAuth } from "../Hooks/useAuth";
 const SignInForm = () => {
   const { username, setUsername, email, password, setEmail, setPassword } =
     useSubmit();
-  const [error, setError] = useState<string>("");
-  const [loading, setLoading] = useState<boolean>(false);
 
-  const { handleRegister } = useAuth();
-
-  useEffect(() => {
-    let timer: NodeJS.Timeout;
-    if (error) {
-      timer = setTimeout(() => {
-        setError("");
-      }, 5000);
-    }
-    return () => {
-      clearTimeout(timer);
-    };
-  }, [error]);
+  const { handleRegister, loading, error } = useAuth();
 
   return (
     <div className="text-black dark:text-white flex flex-col justify-center items-center gap-2 w-full h-full rounded-tr-xl rounded-br-xl">
@@ -34,7 +19,7 @@ const SignInForm = () => {
       </div>
       <form
         className="flex flex-col gap-3 w-full md:w-[50%] text-white dark:text-black [&>input]:px-4 [&>input]:py-2 [&>input]:rounded-full [&>input]:border-[1px] [&>input]:border-black/50"
-        onSubmit={(e) => handleRegister(e, setLoading)}
+        onSubmit={(e) => handleRegister(e)}
       >
         <input
           className="bg-gray-200 dark:bg-white"

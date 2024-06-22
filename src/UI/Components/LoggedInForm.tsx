@@ -1,13 +1,10 @@
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { useAuth } from "../Hooks/useAuth";
 import { useSubmit } from "../Hooks/useSubmit";
-import { useState } from "react";
 
 const LoggedInForm = () => {
-  const [loading, setLoading] = useState<boolean>(false);
-
   const { email, password, setEmail, setPassword } = useSubmit();
-  const { handleLogin, error } = useAuth();
+  const { handleLogin, error, loading } = useAuth();
 
   return (
     <div className="text-black dark:text-white flex flex-col justify-center items-center gap-2 h-full rounded-tr-xl rounded-br-xl w-full">
@@ -19,7 +16,7 @@ const LoggedInForm = () => {
         ofertas exclusivas dentro de nuestra tienda!
       </p>
       <form
-        onSubmit={(e) => handleLogin(e, setLoading)}
+        onSubmit={handleLogin}
         className="flex flex-col gap-3 w-full md:w-[50%] text-white dark:text-black [&>input]:px-4 [&>input]:py-2 [&>input]:rounded-full [&>input]:border-[1px] [&>input]:border-black/50"
       >
         <input
