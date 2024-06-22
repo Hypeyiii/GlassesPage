@@ -29,6 +29,10 @@ const Checkout: React.FC = () => {
   const elements = useElements();
   const { total, allProducts, cleanStorage } = useCart();
 
+  const productDetails = allProducts
+    .map((product) => `(${product.quantity}) ${product.brand}`)
+    .join(", ");
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
@@ -71,16 +75,19 @@ const Checkout: React.FC = () => {
 
       const { id } = paymentMethod;
 
-      const response = await axios.post("https://glasses-page-api-rest-production.up.railway.app/checkout", {
-        id,
-        amount: total * 100,
-        email: email,
-        name: name,
-        lastName: lastName,
-        phoneNumber: phoneNumber,
-        allProducts: allProducts.map((product) => product.brand).join(", "),
-        customerId: email,
-      });
+      const response = await axios.post(
+        "https://glasses-page-api-rest-production.up.railway.app/checkout",
+        {
+          id,
+          amount: total * 100,
+          email: email,
+          name: name,
+          lastName: lastName,
+          phoneNumber: phoneNumber,
+          allProducts: productDetails,
+          customerId: email,
+        }
+      );
 
       if (response.status !== 200) {
         throw new Error(`Server responded with status ${response.status}`);
@@ -136,9 +143,9 @@ const Checkout: React.FC = () => {
                 Los pagos y transacciones en{" "}
                 <span
                   className="text-pink-300 animate-text-gradient bg-clip-text text-transparent 
-                    bg-gradient-to-r from-[#fff] via-[#000] to-[#f3f3f3] bg-[200%_auto]"
+                    bg-gradient-to-r from-pink-500 to-purple-500 transition-all duration-700 ease-in-out"
                 >
-                  Glasses
+                  Lensmania
                 </span>{" "}
                 son procesados y asegurados por{" "}
                 <a

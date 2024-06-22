@@ -15,7 +15,6 @@ export default function useUsers() {
       fetch("https://glasses-page-api-rest-production.up.railway.app/users")
         .then((response) => response.json())
         .then((data) => {
-          console.log(data);
           setUsers(data);
           setLoading(false);
         });
