@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { Users } from "../Interface/Users";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import "../Components/Animations.css";
+import { Link } from "react-router-dom";
 
 const Account = () => {
   const { logout, user } = useAuth();
@@ -52,19 +53,24 @@ const Account = () => {
       ) : (
         <>
           <h2 className="text-lg font-bold">Datos de usuario</h2>
-          <p>ID de usuario: {userData?.id}</p>
           <p>Nombre de usuario: {userData?.username}</p>
           <p>Correo electrónico: {userData?.email}</p>
-          <p>Rol: {userData?.role}</p>
         </>
       )}
       <hr className="my-4" />
-      <button
-        className="px-4 py-2 border rounded-xl m-auto flex flex-row gap-1 items-center"
-        onClick={() => logout()}
-      >
-        Cerrar Sesión
-      </button>
+      <section className="w-full flex flex-row gap-3 justify-center items-center m-auto">
+        <button
+          className="px-4 py-2 border rounded-xl border-black dark:border-white dark:text-white dark:bg-black bg-white hover:text-white hover:bg-black transition-all duration-300 ease-in-out dark:hover:bg-white dark:hover:text-black"
+          onClick={() => logout()}
+        >
+          Cerrar Sesión
+        </button>
+        <Link to="/Orders">
+          <button className="px-4 py-2 border rounded-xl border-black dark:border-white dark:text-white dark:bg-black bg-white hover:text-white hover:bg-black transition-all duration-300 ease-in-out dark:hover:bg-white dark:hover:text-black">
+            Ver mis pedidos
+          </button>
+        </Link>
+      </section>
     </div>
   );
 };
