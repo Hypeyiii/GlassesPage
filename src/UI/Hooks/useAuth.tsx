@@ -21,11 +21,10 @@ export const useAuth = () => {
         );
 
         if (!response.ok) {
-          // setError("Error en la conexión");
+          // setError("Error en la verificación de autenticación");
         } else {
           const data = await response.json();
-
-          if (data) {
+          if (data && data.data) {
             setUser(data.data);
             setIsLogged(true);
           } else {
@@ -33,7 +32,7 @@ export const useAuth = () => {
           }
         }
       } catch (error) {
-        console.error("Error al verificar la autenticación", error);
+        // console.error("Error al verificar la autenticación", error);
       }
     };
 
@@ -46,7 +45,6 @@ export const useAuth = () => {
     setError("");
     try {
       if (!username || !email || !password) {
-        setError("Todos los campos son obligatorios");
         throw new Error("Todos los campos son obligatorios");
       }
 
@@ -69,6 +67,7 @@ export const useAuth = () => {
       }
 
       console.log("Usuario registrado", data);
+      setUser(data.user); // Asegúrate de guardar el usuario en el contexto
       setIsLogged(true);
     } catch (error) {
       if (error instanceof Error) {
@@ -108,6 +107,7 @@ export const useAuth = () => {
         throw new Error(data.message || "Credenciales inválidas");
       }
 
+      setUser(data.user);
       setIsLogged(true);
     } catch (error) {
       if (error instanceof Error) {
