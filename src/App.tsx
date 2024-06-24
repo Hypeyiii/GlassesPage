@@ -27,9 +27,13 @@ import ProductCreate from "./UI/Pages/ProductCreate";
 import DashboardUsers from "./UI/Pages/DashboardUsers";
 import useUsers from "./UI/Hooks/useUsers";
 import UsersEdit from "./UI/Pages/UsersEdit";
+import Orders from "./UI/Pages/Orders";
+import OrderDetails from "./UI/Pages/OrderDetails";
 export default function App() {
   const { isLogged } = useContext(AuthContext);
   const { userData } = useUsers();
+
+  // pk_test_51OkKmsBlx8QfT450Ul1ORZbvVVbcd0KEcWAPLHj5mP9P6BORvJ47mS9WFgDoC9ytYntZqMdNL3ITReBzaOkB3NOu00FOpmewfm
 
   const stripePromise = loadStripe(
     "pk_live_51OkKmsBlx8QfT450rGFixmdq58EMMJQtpbq890dAr0dkfV08ONgmz9sEYpxdqAzVbERUI9Jwu6Bz5ww7nwY1xWqL00jCpZQ5Mp"
@@ -48,7 +52,13 @@ export default function App() {
           <Route path="collection/:section" element={<Collection />} />
           <Route path=":category/Product/:id" element={<Details />} />
           <Route path="*" element={<ErrorPage />} />
-          {isLogged && <Route path="User" element={<Loggin />} />}
+          {isLogged && (
+            <>
+              <Route path="User" element={<Loggin />} />{" "}
+              <Route path="/Orders" element={<Orders />} />
+              <Route path="/Orders/:id" element={<OrderDetails />} />
+            </>
+          )}
           <Route path="Sing-In" element={<SingIn />} />
           <Route path="My-account" element={<MyAccount />} />
           <Route
@@ -59,6 +69,7 @@ export default function App() {
               </Elements>
             }
           />
+
           <Route path="/search/:term" element={<Search />} />
           {userData?.role === "Admin" && (
             <>
