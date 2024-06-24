@@ -6,6 +6,7 @@ import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { CiCircleCheck } from "react-icons/ci";
 import { useCart } from "../Hooks/useCart";
 import Confetti from "react-confetti";
+import { useAuth } from "../Hooks/useAuth";
 
 interface Metadata {
   name: string;
@@ -25,6 +26,8 @@ const Checkout: React.FC = () => {
     lastName: "",
   });
 
+  const { user } = useAuth();
+
   const stripe = useStripe();
   const elements = useElements();
   const { total, allProducts, cleanStorage } = useCart();
@@ -32,6 +35,11 @@ const Checkout: React.FC = () => {
   const productDetails = allProducts
     .map((product) => `(${product.quantity}) ${product.brand}`)
     .join(", ");
+
+  const products = allProducts.map((product) => ({
+    productId: product.id,
+    quantity: product.quantity,
+  }));
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -75,19 +83,16 @@ const Checkout: React.FC = () => {
 
       const { id } = paymentMethod;
 
-      const response = await axios.post(
-        "https://glasses-page-api-rest-production.up.railway.app/checkout",
-        {
-          id,
-          amount: total * 100,
-          email: email,
-          name: name,
-          lastName: lastName,
-          phoneNumber: phoneNumber,
-          allProducts: productDetails,
-          customerId: email,
-        }
-      );
+      const response = await axios.post("https://glasses-page-api-rest-production.up.railway.app/checkout", {
+        id,
+        amount: total * 100,
+        email: email,
+        name: name,
+        lastName: lastName,
+        phoneNumber: phoneNumber,
+        allProducts: productDetails,
+        customerId: email,
+      });
 
       if (response.status !== 200) {
         throw new Error(`Server responded with status ${response.status}`);
@@ -104,6 +109,29 @@ const Checkout: React.FC = () => {
       console.error("Payment error:", err);
     }
 
+    try {
+      const response = await fetch(
+        "https://glasses-page-api-rest-production.up.railway.app/orders",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            userId: user?.id,
+            products: products,
+          }),
+        }
+      );
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || "Error while sending order to server");
+      }
+    } catch (err) {
+      console.error("Error while sending order to server:", err);
+    }
+
     setLoading(false);
   };
 
@@ -114,6 +142,7 @@ const Checkout: React.FC = () => {
       [name]: value,
     }));
   };
+
   return (
     <>
       {paymentSuccess && (
